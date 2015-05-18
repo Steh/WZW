@@ -1,5 +1,5 @@
 from django.db import models
-
+import string, random
 
 # Create your models here.
 
@@ -14,16 +14,25 @@ class Person(models.Model):
 
 
 class Group(models.Model):
-    name = models.CharField(
-        max_length=128,
-        blank=False
-    )
+    name = models.CharField(max_length=128, blank=False)
     lastLogon = models.DateField('Last Logon', auto_now=True, blank=False)
     email = models.EmailField(blank=True)
     pwd = models.CharField(max_length=32, blank=True)
 
     def __str__(self):              # __unicode__ on Python 2
         return self.name
+
+    def create_token():
+        token = ''
+        for x in range(0, 4):
+            token += ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(4))
+            if x <= 2:
+                token += '-'
+
+        return token
+
+    token = property(create_token())
+
 
 
 class Expenses(models.Model):

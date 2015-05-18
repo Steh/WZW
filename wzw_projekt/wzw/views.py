@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.views.generic import View
 from django.template import loader
-
+from wzw.models import Group
 
 class Index(View):
 
@@ -16,8 +16,14 @@ class Index(View):
 
         return HttpResponse('result post')
 
-class Group(View):
+class GroupDetail(View):
 
-    def get(self, request):
-        
-        return HttpResponse('test %s' % request)
+    def get(self, request, token):
+        group = Group.objects.get(token=token)
+
+        return HttpResponse(group)
+
+    # Ergebnis bei POST
+    def post(self, request):
+
+        return HttpResponse('result post')
