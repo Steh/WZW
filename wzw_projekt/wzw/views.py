@@ -15,3 +15,9 @@ class Index(View):
     def post(self, request):
 
         return HttpResponse('result post')
+
+class Group(View):
+
+    def get(self, request):
+        
+        return HttpResponse('test %s' % request)

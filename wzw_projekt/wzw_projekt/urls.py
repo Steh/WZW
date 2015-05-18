@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from wzw.views import Index
+from wzw.views import Index, Group
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^([0-9a-zA-Z]{4}[-]){3}[0-9a-zA-Z]{4}', Group.as_view()),
     url(r'^$', Index.as_view()),
 ]
