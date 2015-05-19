@@ -21,9 +21,12 @@ class GroupDetail(View):
     def get(self, request, token):
         group = Group.objects.get(token=token)
 
+        ''' aktualisiert lastLogon'''
+        group.save()
+
         return HttpResponse(group)
 
-    # Ergebnis bei POST
+    ''' Ergebnis bei POST '''
     def post(self, request):
 
         return HttpResponse('result post')
