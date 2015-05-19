@@ -1,5 +1,4 @@
 from django.db import models
-import string, random
 from functions import create_token
 
 # Create your models here.
@@ -15,6 +14,7 @@ class Person(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=128, blank=False)
+    token = model.CharField(max_length=19, editable=False)
     lastLogon = models.DateField('Last Logon', auto_now=True, blank=False)
     email = models.EmailField(blank=True)
     pwd = models.CharField(max_length=32, blank=True)
@@ -22,9 +22,10 @@ class Group(models.Model):
     def __str__(self):              # __unicode__ on Python 2
         return self.name
 
-    token = property(create_token())
-
-
+    def save(self, *args, **kwargs):
+        if self.pk:
+            self.token = property(create_token())
+         super(Post, self).save(*args, **kwargs)
 
 class Expenses(models.Model):
     name = models.CharField(max_length=64, blank=False)
