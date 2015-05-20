@@ -19,9 +19,13 @@ class Index(View):
 class GroupDetail(View):
 
     def get(self, request, token):
-        group = Group.objects.get(token=token)
+        # aufrufen der Gruppe
+        try:
+            group = Group.objects.get(token=token)
+        except:
+            return HttpResponse('Gruppe nicht vorhanden (' + token + ')')
 
-        ''' aktualisiert lastLogon'''
+        # aktualisiert lastLogon
         group.save()
 
         return HttpResponse(group)

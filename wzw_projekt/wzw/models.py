@@ -1,11 +1,8 @@
 from django.db import models
-from functions import *
+from wzw.functions import create_token
 
 class Person(models.Model):
-    name = models.CharField(
-        max_length=64,
-        blank=False,
-    )
+    name = models.CharField(max_length=64,blank=False)
 
     def __str__(self):              # __unicode__ on Python 2
         return self.name
@@ -16,21 +13,14 @@ class Group(models.Model):
     lastLogon = models.DateField('Last Logon', auto_now=True, blank=False)
 
     def __str__(self):              # __unicode__ on Python 2
-        return self.name
+        return self.token
 
+    # override original save methode
+    #     if no primary key is available (only by new objects)
+    #     token will be generated
     def save(self, *args, **kwargs):
         if not self.pk:
-            token_existing = True
-            while token_existing:
-                token = create_token()
-
-                ## wenn gruppe existiert wird die schleife erneut ausgefuehrt
-                ## wenn nicht wird ein fehler geworfen und die Variable auf False gesetzt
-                try:
-                    Group.objects.get(token=token)
-                    token_existing = True
-                except Group.DoesNotExist:
-                    token_existing = False
+            token = create_token()
             self.token = token
 
         super(Group, self).save(*args, **kwargs)
