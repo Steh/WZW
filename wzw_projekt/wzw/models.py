@@ -8,7 +8,7 @@ class Person(models.Model):
         return self.name
 
 class Group(models.Model):
-    name = models.CharField(max_length=128, blank=True)
+    name = models.CharField(max_length=32, blank=True)
     token = models.CharField(max_length=19, editable=False, unique=True)
     lastLogon = models.DateField('Last Logon', auto_now=True, blank=False)
 

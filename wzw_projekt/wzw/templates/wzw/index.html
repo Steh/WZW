@@ -3,6 +3,18 @@
 {% block title %}{{ block.super }} - Startseite{% endblock %}
 
 {% block content %}
-<h2>Alle Gruppen</h2>
+<h2>Neue Gruppe erstellen</h2>
+    <form id="new_group" method="post">
+        {% csrf_token %}
+        {{ form_create }}
+        <input type="submit" value="Submit" name="new_group" />
+    </form>
+
+<h2>Gruppe anzeigen</h2>
+    <form id="open_group" method="post">
+        {% csrf_token %}
+        {{ form_open }}
+        <input type="submit" value="Submit" name="open_group" />
+    </form>
 
 {% endblock %}
