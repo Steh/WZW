@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Group, Expenses, Person
+from .models import Group, Expense, Person
 
 
 class GroupAdmin(admin.ModelAdmin):
@@ -10,4 +10,4 @@ class GroupAdmin(admin.ModelAdmin):
 
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Person)
-admin.site.register(Expenses)
+admin.site.register(Expense)

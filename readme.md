@@ -9,3 +9,6 @@ admin
 https://docs.djangoproject.com/en/1.8/topics/class-based-views/intro/
 
 ## Templates
+
+## ModelForms
+https://docs.djangoproject.com/en/1.8/topics/forms/modelforms/

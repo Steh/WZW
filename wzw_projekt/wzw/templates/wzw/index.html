@@ -6,14 +6,14 @@
 <h2>Neue Gruppe erstellen</h2>
     <form id="new_group" method="post">
         {% csrf_token %}
-        {{ form_create }}
+        {{ form_new_group }}
         <input type="submit" value="Submit" name="new_group" />
     </form>
 
 <h2>Gruppe anzeigen</h2>
     <form id="open_group" method="post">
         {% csrf_token %}
-        {{ form_open }}
+        {{ form_open_group }}
         <input type="submit" value="Submit" name="open_group" />
     </form>
 

@@ -2,16 +2,8 @@ from django.db import models
 
 from wzw.functions import create_token
 
-
-class Person(models.Model):
-    name = models.CharField(max_length=64, blank=False)
-
-    def __str__(self):  # __unicode__ on Python 2
-        return self.name
-
-
 class Group(models.Model):
-    name = models.CharField(max_length=32, blank=True)
+    name = models.CharField(max_length=32, blank=True, default='')
     token = models.CharField(max_length=19, editable=False, unique=True)
     lastLogon = models.DateField('Last Logon', auto_now=True, blank=False)
 
@@ -28,8 +20,14 @@ class Group(models.Model):
 
         super(Group, self).save(*args, **kwargs)
 
+class Person(models.Model):
+    name = models.CharField(max_length=64, blank=False)
+    group = models.ForeignKey(Group)
 
-class Expenses(models.Model):
+    def __str__(self):  # __unicode__ on Python 2
+        return self.name
+
+class Expense(models.Model):
     name = models.CharField(max_length=64, blank=False)
     description = models.CharField(max_length=256, blank=True)
     owner = models.ForeignKey(Person, related_name='costOwner')

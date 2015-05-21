@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Startseite{% endblock %}
+
+{% block content %}
+    <h2>Neue Person erstellen</h2>
+        <form id="new_person" method="post">
+            {% csrf_token %}
+            {{ form_new_person }}
+            <input type="submit" value="Submit" name="new_person" />
+        </form>
+    <h2>Neue Ausgabe erstellen</h2>
+        <form id="new_expense" method="post">
+            {% csrf_token %}
+            {{ form_new_expense }}
+            <input type="submit" value="Submit" name="new_expense" />
+        </form>
+
+    <h2>Gruppen name ändern</h2>
+        <form id="new_expense" method="post">
+            {% csrf_token %}
+            {{ form_change_group }}
+            <input type="submit" value="Submit" name="change_group" />
+        </form>
+
+{% endblock %}
