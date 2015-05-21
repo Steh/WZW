@@ -1,6 +1,9 @@
+import datetime
+
 from django.db import models
 
 from wzw.functions import create_token
+
 
 class Group(models.Model):
     name = models.CharField(max_length=32, blank=True, default='')
@@ -49,9 +52,9 @@ class Expense(models.Model):
     description = models.CharField(max_length=256, blank=True)
     owner = models.ForeignKey(Person, related_name='costOwner')
     group = models.ForeignKey(Group)
-    createDate = models.DateField('date published')
-    debitDate = models.DateField('date debited', blank=True)
-    costPersons = models.ManyToManyField(Person, blank=True)
+    createDate = models.DateField('date published', default=datetime.datetime.now().date())
+    debitDate = models.DateField('date debited', blank=True, default=datetime.datetime.now().date())
+    costPersons = models.ManyToManyField(Person, blank=True, verbose_name='costPerson_PersonId')
     cost = models.FloatField(blank=False)
 
     def __str__(self):  # __unicode__ on Python 2
