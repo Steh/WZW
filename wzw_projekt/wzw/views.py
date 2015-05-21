@@ -2,20 +2,23 @@ from django.http import HttpResponse
 from django.views.generic import View
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+
 from wzw.forms import newGroupForm, openGroupForm
 from wzw.models import Group
 
-class Index(View):
 
+class Index(View):
     # Ergebnis bei GET
-    def get(self, request):
+    @staticmethod
+    def get(request):
 
         form_create = newGroupForm()
         form_open = openGroupForm()
         return render(request, 'Wzw/index.html', {'form_create': form_create, 'form_open': form_open})
 
     # Ergebnis bei POST
-    def post(self, request):
+    @staticmethod
+    def post(request):
         if 'new_group' in request.POST:
             form = newGroupForm(request.POST)
 
@@ -38,8 +41,8 @@ class Index(View):
 
 
 class GroupDetail(View):
-
-    def get(self, request, token):
+    @staticmethod
+    def get(request, token):
         # aufrufen der Gruppe
         try:
             group = Group.objects.get(token=token)
@@ -52,6 +55,8 @@ class GroupDetail(View):
         return HttpResponse(group)
 
     ''' Ergebnis bei POST '''
-    def post(self, request):
+
+    @staticmethod
+    def post(request):
 
         return HttpResponse('result post')

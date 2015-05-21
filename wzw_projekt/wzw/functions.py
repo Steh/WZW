@@ -1,6 +1,8 @@
 import random
 import string
+
 from wzw.models import *
+
 
 def create_token():
     token = ''
@@ -9,6 +11,7 @@ def create_token():
         if x <= 2:
             token += '-'
     return token
+
 
 # wenn gruppe existiert wird die schleife erneut ausgefuehrt
 # wenn nicht wird ein fehler geworfen und die Variable auf False gesetzt

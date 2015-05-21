@@ -1,29 +1,33 @@
 from django.db import models
+
 from wzw.functions import create_token
 
-class Person(models.Model):
-    name = models.CharField(max_length=64,blank=False)
 
-    def __str__(self):              # __unicode__ on Python 2
+class Person(models.Model):
+    name = models.CharField(max_length=64, blank=False)
+
+    def __str__(self):  # __unicode__ on Python 2
         return self.name
+
 
 class Group(models.Model):
     name = models.CharField(max_length=32, blank=True)
     token = models.CharField(max_length=19, editable=False, unique=True)
     lastLogon = models.DateField('Last Logon', auto_now=True, blank=False)
 
-    def __str__(self):              # __unicode__ on Python 2
+    def __str__(self):  # __unicode__ on Python 2
         return self.token
 
     # override original save methode
-    #     if no primary key is available (only by new objects)
-    #     token will be generated
+    # if no primary key is available (only by new objects)
+    # token will be generated
     def save(self, *args, **kwargs):
         if not self.pk:
             token = create_token()
             self.token = token
 
         super(Group, self).save(*args, **kwargs)
+
 
 class Expenses(models.Model):
     name = models.CharField(max_length=64, blank=False)
@@ -35,5 +39,5 @@ class Expenses(models.Model):
     costPersons = models.ManyToManyField(Person, blank=True)
     cost = models.FloatField(blank=False)
 
-    def __str__(self):              # __unicode__ on Python 2
+    def __str__(self):  # __unicode__ on Python 2
         return self.name
