@@ -23,6 +23,12 @@ class Group(models.Model):
     # ueberschreibt die loeschen methode
     # dadurch werden auch alle kosten + personen geloescht
     def delete(self, using=None):
+        '''
+        1. loeschen aller Personen die zu dieser Gruppe gehoeren
+        2. loeschen aller Personen die zu dieser Gruppe gehoeren
+        3. loeschen der Gruppe
+
+        '''
         person = Person.objects.filter(group=self)
         person.delete()
 

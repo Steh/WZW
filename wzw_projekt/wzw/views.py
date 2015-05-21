@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 
 from wzw.forms import newGroupForm, openGroupForm, newExpenseForm, newPersonForm, changeGroupName
-from wzw.models import Group, Person
+from wzw.models import Group, Person, Expense
 
 
 class Index(View):
@@ -49,12 +49,20 @@ class GroupDetail(View):
         # aktualisiert lastLogon
         group.save()
 
+        person = Person.objects.filter(group=group)
+        expense = Expense.objects.filter(group=group)
+
         # Formulare erstellen
         form_change_group = changeGroupName(initial={'name': group.name}, )
-        form_new_expense = newExpenseForm(initial={'group': group.id}, persons_group=group)
-        form_new_person = newPersonForm(initial={'group': group.id})
 
-        return render(request, 'Wzw/groupDetails.html', {'form_new_expense': form_new_expense, 'form_new_person': form_new_person, 'form_change_group': form_change_group})
+
+        form_new_expense = newExpenseForm(initial={'group': group.id}, )
+        form_new_expense.fields['costPersons'].queryset = person
+        form_new_expense.fields['owner'].queryset = person
+
+        form_new_person = newPersonForm(initial={'group': group.id}, )
+
+        return render(request, 'Wzw/groupDetails.html', {'form_new_expense': form_new_expense, 'form_new_person': form_new_person, 'form_change_group': form_change_group, 'person': person, 'expense': expense})
 
     ''' Ergebnis bei POST '''
 
@@ -64,8 +72,7 @@ class GroupDetail(View):
             form = newPersonForm(request.POST)
 
             if form.is_valid():
-                person = form.save()
-
+                form.save()
 
         if 'new_expense' in request.POST:
             form = newExpenseForm(request.POST)

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "wzw/base.html" %}
 
 {% block title %}{{ block.super }} - Startseite{% endblock %}
 
@@ -8,7 +8,7 @@
         <form id="new_person" method="post">
             {% csrf_token %}
             {{ form_new_person.as_p }}
-            </p><input type="submit" value="Submit" name="new_person" />
+            <input type="submit" value="Submit" name="new_person" />
         </form>
     <h2>Neue Ausgabe erstellen</h2>
         <form id="new_expense" method="post">
@@ -29,5 +29,23 @@
             {% csrf_token %}
             <input type="submit" value="Submit" name="delete_group" />
         </form>
+
+    <h2>Personen</h2>
+    {% if person %}
+        {% for p in person %}
+          <p>{{ p }}</p>
+        {% endfor %}
+    {% else %}
+        <p>Keine Ausgabe erstellt</p>
+    {% endif %}
+
+    <h2>Ausgaben</h2>
+    {% if expense %}
+        {% for e in expense %}
+              <p>{{ e }}</p>
+        {% endfor %}
+    {% else %}
+        <p>Keine Ausgabe erstellt</p>
+    {% endif %}
 
 {% endblock %}
