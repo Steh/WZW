@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 
 from wzw.forms import newGroupForm, openGroupForm, newExpenseForm, newPersonForm, changeGroupName
-from wzw.models import Group
+from wzw.models import Group, Person
 
 
 class Index(View):
@@ -49,9 +49,11 @@ class GroupDetail(View):
         # aktualisiert lastLogon
         group.save()
 
-        form_change_group  = changeGroupName(initial={'name': group.name})
-        form_new_expense = newExpenseForm(initial={'group':group.id})
-        form_new_person = newPersonForm(initial={'group':group.id})
+        # Formulare erstellen
+        form_change_group = changeGroupName(initial={'name': group.name}, )
+        form_new_expense = newExpenseForm(initial={'group': group.id}, persons_group=group)
+        form_new_person = newPersonForm(initial={'group': group.id})
+
         return render(request, 'Wzw/groupDetails.html', {'form_new_expense': form_new_expense, 'form_new_person': form_new_person, 'form_change_group': form_change_group})
 
     ''' Ergebnis bei POST '''
@@ -62,7 +64,8 @@ class GroupDetail(View):
             form = newPersonForm(request.POST)
 
             if form.is_valid():
-                form.save()
+                person = form.save()
+
 
         if 'new_expense' in request.POST:
             form = newExpenseForm(request.POST)
@@ -77,5 +80,9 @@ class GroupDetail(View):
             if form.is_valid():
                 form.save()
 
+        if 'delete_group' in request.POST:
+            group = get_object_or_404(Group, token=token)
+            group.delete()
+            return HttpResponse('Gruppe wurde geloescht ' + token)
 
         return HttpResponseRedirect('/group/' + token)

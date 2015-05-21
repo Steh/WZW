@@ -20,6 +20,17 @@ class Group(models.Model):
 
         super(Group, self).save(*args, **kwargs)
 
+    # ueberschreibt die loeschen methode
+    # dadurch werden auch alle kosten + personen geloescht
+    def delete(self, using=None):
+        person = Person.objects.filter(group=self)
+        person.delete()
+
+        expense = Expense.objects.filter(group=self)
+        expense.delete()
+
+        super(Group, self).delete()
+
 class Person(models.Model):
     name = models.CharField(max_length=64, blank=False)
     group = models.ForeignKey(Group)

@@ -3,24 +3,31 @@
 {% block title %}{{ block.super }} - Startseite{% endblock %}
 
 {% block content %}
+    {{ message }}
     <h2>Neue Person erstellen</h2>
         <form id="new_person" method="post">
             {% csrf_token %}
-            {{ form_new_person }}
-            <input type="submit" value="Submit" name="new_person" />
+            {{ form_new_person.as_p }}
+            </p><input type="submit" value="Submit" name="new_person" />
         </form>
     <h2>Neue Ausgabe erstellen</h2>
         <form id="new_expense" method="post">
             {% csrf_token %}
-            {{ form_new_expense }}
+            {{ form_new_expense.as_p }}
             <input type="submit" value="Submit" name="new_expense" />
         </form>
 
     <h2>Gruppen name ändern</h2>
         <form id="new_expense" method="post">
             {% csrf_token %}
-            {{ form_change_group }}
+            {{ form_change_group.as_p }}
             <input type="submit" value="Submit" name="change_group" />
+        </form>
+
+    <h2>Gruppen löschen</h2>
+        <form id="delete_group" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Submit" name="delete_group" />
         </form>
 
 {% endblock %}
