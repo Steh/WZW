@@ -3,7 +3,7 @@ from django.views.generic import View
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 
-from wzw.forms import NewGroupForm, OpenGroupForm, NewExpenseForm, NewPersonForm, ChangeGroup, DeletePersonForm
+from wzw.forms import NewGroupForm, OpenGroupForm, NewExpenseForm, NewPersonForm, ChangeGroup
 from wzw.models import Group, Person, Expense
 
 
@@ -102,6 +102,7 @@ class EditGroup(View):
 
 
 class EditPerson(View):
+
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
@@ -110,10 +111,10 @@ class EditPerson(View):
         person = Person.objects.filter(group=group)
 
         form_new_person = NewPersonForm(initial={'group': group.id}, )
-        form_delete_person = DeletePersonForm()
 
-        context = {'form': form_new_person, 'form1': form_delete_person, 'person': person}
+        context = {'form': form_new_person, 'person': person}
         return render(request, 'wzw/editPerson.html', context)
+
 
     @staticmethod
     def post(request, token):
@@ -134,14 +135,13 @@ class EditPerson(View):
                 return HttpResponse('irgendwas geht schief')
 
         if 'delete_person' in request.POST:
-            form = DeletePersonForm(request.POST)
+            data = request.POST['person_id']
+            person = get_object_or_404(Person, id=data)
+            person.delete()
 
-            if form.is_valid():
+            return HttpResponseRedirect('/group/' + (( group.token )) + '/editPerson/')
 
-                person = get_object_or_404(Person, id=form.id)
-                return HttpResponse(person)
-            else:
-                return HttpResponse('neeee')
+        return HttpResponse('sollte nicht so sein')
 
 
 class EditExpense(View):
