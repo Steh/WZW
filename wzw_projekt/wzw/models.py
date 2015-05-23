@@ -40,12 +40,14 @@ class Group(models.Model):
 
         super(Group, self).delete()
 
+
 class Person(models.Model):
     name = models.CharField(max_length=64, blank=False)
     group = models.ForeignKey(Group)
 
     def __str__(self):  # __unicode__ on Python 2
         return self.name
+
 
 class Expense(models.Model):
     name = models.CharField(max_length=64, blank=False)
