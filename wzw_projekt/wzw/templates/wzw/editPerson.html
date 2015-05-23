@@ -1,0 +1,48 @@
+{% extends "wzw/base.html" %}
+
+{% block title %}{{ block.super }} - Startseite{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h2>Personen</h2>
+
+        <h3>Neue Person erstellen</h3>
+
+        <div class="col-md-12">
+            <form id="new_person" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="anlegen" name="new_person"/>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <h3>Personen anzeigen</h3>
+
+        <div class="col-md-12">
+            {% if person %}
+                <table>
+                <tr>
+                    <th>Name</th><th>loeschen</th><th>bearbeiten</th>
+                </tr>
+                {% for p in person %}
+                    <tr>
+                        <td>
+                            {{ p }}
+                        </td>
+                        <td>
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form1.id | default:p.id }}
+                                <input type="submit" value="löschen" name="delete_person"/>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <p>Du hast noch keine Personen angelegt.</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

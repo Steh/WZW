@@ -7,7 +7,6 @@ from wzw.functions import create_token
 
 
 class GroupTests(TestCase):
-
     def test_createGroup(self):
         """
         erstellt Gruppe mit und ohne name
@@ -21,8 +20,8 @@ class GroupTests(TestCase):
         token = create_token()
         self.assertTrue(re.match("^([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}$)", token))
 
-class FormTests(TestCase):
 
+class FormTests(TestCase):
     def setUp(self):
         nameGruppe = 'Test Gruppe'
         group = Group.objects.create(name=nameGruppe)

@@ -1,0 +1,55 @@
+{% extends "wzw/base.html" %}
+
+{% block title %}{{ block.super }} - {{ group.name }} {% endblock %}
+
+
+{% block content %}
+    {{ message }}
+    <div class="row">
+        <div class="col-lg-4">
+            <a class="btn btn-primary btn-lg" href="/group/{{ group.token }}/editGroup/">Gruppen Einstellungen</a>
+        </div>
+        <div class="col-lg-4">
+            <a class="btn btn-primary btn-lg" href="/group/{{ group.token }}/editPerson/">Personen</a>
+        </div>
+        <div class="col-lg-4">
+            <a class="btn btn-primary btn-lg" href="/group/{{ group.token }}/editExpense/">Ausgaben</a>
+        </div>
+    </div>
+    <div class="row">
+        <h1>{{ group.name | default:'Gruppenname' }}</h1>
+        <p>{{ group.description  | default:"Beschreibung"  }}</p>
+    </div>
+
+    <div class="row">
+        <h2>Neue Ausgabe erstellen</h2>
+
+        <div class="col-md-12">
+            {% if person %}
+                <form id="new_expense" method="post">
+                    {% csrf_token %}
+                    {{ form_new_expense.as_p }}
+                    <input type="submit" value="Submit" name="new_expense"/>
+                </form>
+            {% else %}
+                <p>Du musst erst eine Personen erstellen um Ausgaben zu erfassen.</p>
+            {% endif %}
+        </div>
+
+        <div class="row">
+            <h2>Ausgaben</h2>
+
+            <div class="col-md-12">
+                {% if expense %}
+                    {% for e in expense %}
+                        <p>{{ e }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Keine Ausgabe erstellt</p>
+                {% endif %}
+            </div>
+        </div>
+
+
+
+{% endblock %}
