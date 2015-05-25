@@ -23,7 +23,9 @@
             {% if person %}
                 <table>
                 <tr>
-                    <th>Name</th><th>loeschen</th><th>bearbeiten</th>
+                    <th>Name</th>
+                    <th>loeschen</th>
+                    <th>bearbeiten</th>
                 </tr>
                 {% for p in person %}
                     <tr>
@@ -33,8 +35,8 @@
                         <td>
                             <form method="post">
                                 {% csrf_token %}
-                                <input type="hidden" name="person_id" value="{{ p.id }}" >
-                                <input type="submit" value="löschen" name="delete_person" />
+                                <input type="hidden" name="person_id" value="{{ p.id }}">
+                                <input type="submit" value="löschen" name="delete_person"/>
                             </form>
                         </td>
                     </tr>

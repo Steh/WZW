@@ -14,12 +14,14 @@
         </div>
         <div class="col-lg-4">
 
-            <a class="btn btn-primary btn-lg {% if person.count < 1  %} disabled {% endif %}" href="/group/{{ group.token }}/editExpense/">Ausgaben</a>
+            <a class="btn btn-primary btn-lg {% if person.count < 1 %} disabled {% endif %}"
+               href="/group/{{ group.token }}/editExpense/">Ausgaben</a>
         </div>
     </div>
     <div class="row">
         <h1>{{ group.name | default:'Gruppenname' }}</h1>
-        <p>{{ group.description  | default:"Beschreibung"  }}</p>
+
+        <p>{{ group.description  | default:"Beschreibung" }}</p>
     </div>
 
     <div class="row">

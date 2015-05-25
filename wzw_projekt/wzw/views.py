@@ -45,22 +45,21 @@ class GroupDetail(View):
         group.save()
 
         expense = Expense.objects.filter(group=group)
+        person = Person.objects.filter(group=group)
 
         # Formulare erstellen
         form_change_group = ChangeGroup(initial={'name': group.name}, )
-        person = Person.objects.filter(group=group)
 
         form_new_expense = NewExpenseForm(initial={'group': group.id}, )
         form_new_expense.fields['costPersons'].queryset = person
         form_new_expense.fields['owner'].queryset = person
 
-
-
         return render(request, 'Wzw/detailsGroup.html',
                       {'form_new_expense': form_new_expense,
-                       'form_change_group': form_change_group, 'expense': expense, 'group': group})
-
-    ''' Ergebnis bei POST '''
+                       'form_change_group': form_change_group,
+                       'expense': expense,
+                       'group': group,
+                       'person': person})
 
     @staticmethod
     def post(request, token):
@@ -102,7 +101,6 @@ class EditGroup(View):
 
 
 class EditPerson(View):
-
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
