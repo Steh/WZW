@@ -1,6 +1,7 @@
 {% extends "wzw/base.html" %}
 
 {% block title %}{{ block.super }} - Startseite{% endblock %}
+{% block homeurl  %} /group/{{ group.token }} {% endblock %}
 
 {% block content %}
     <div class="row">

@@ -8,7 +8,6 @@ from wzw.models import Group, Person, Expense
 
 
 class Index(View):
-    # Ergebnis bei GET
     @staticmethod
     def get(request):
 
@@ -16,10 +15,8 @@ class Index(View):
         form_open_group = OpenGroupForm()
         return render(request, 'Wzw/index.html', {'form_new_group': form_new_group, 'form_open_group': form_open_group})
 
-    # Ergebnis bei POST
     @staticmethod
     def post(request):
-
         if 'new_group' in request.POST:
             group = Group.objects.create()
             return HttpResponseRedirect('/group/' + group.token)
@@ -31,17 +28,15 @@ class Index(View):
                 token = form.cleaned_data['group_token']
                 return HttpResponseRedirect('/group/' + token)
 
-        return HttpResponse('geht nicht')
+        # TODO richtig machen
+        return HttpResponseRedirect('/')
 
 
-class GroupDetail(View):
+class GroupIndex(View):
     @staticmethod
     def get(request, token):
 
-        # Aufrufen der Gruppe ueber den token
         group = get_object_or_404(Group, token=token)
-
-        # aktualisiert lastLogon
         group.save()
 
         expense = Expense.objects.filter(group=group)
@@ -72,7 +67,7 @@ class GroupDetail(View):
         return HttpResponseRedirect('/group/' + token)
 
 
-class EditGroup(View):
+class GroupDetail(View):
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
@@ -100,7 +95,7 @@ class EditGroup(View):
             return HttpResponse('Gruppe wurde geloescht ' + token)
 
 
-class EditPerson(View):
+class PersonDetail(View):
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
@@ -110,7 +105,7 @@ class EditPerson(View):
 
         form_new_person = NewPersonForm(initial={'group': group.id}, )
 
-        context = {'form': form_new_person, 'person': person}
+        context = {'form': form_new_person, 'person': person, 'group': group}
         return render(request, 'wzw/editPerson.html', context)
 
 
@@ -130,6 +125,7 @@ class EditPerson(View):
                 return render(request, 'wzw/editPerson.html', {'form': form, 'person': person})
 
             else:
+                # TODO vernuenftige rueckgabe
                 return HttpResponse('irgendwas geht schief')
 
         if 'delete_person' in request.POST:
@@ -142,11 +138,12 @@ class EditPerson(View):
         return HttpResponse('sollte nicht so sein')
 
 
-class EditExpense(View):
+class ExpenseDetail(View):
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
 
         form = ChangeGroup()
-        return render(request, 'wzw/editGroup.html', {'form': form})
+        context = {'form': form, 'group': group}
+        return render(request, 'wzw/editGroup.html', context)

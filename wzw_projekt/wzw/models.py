@@ -54,8 +54,8 @@ class Expense(models.Model):
     description = models.CharField(max_length=256, blank=True)
     owner = models.ForeignKey(Person, related_name='costOwner')
     group = models.ForeignKey(Group)
-    createDate = models.DateField('date published', default=timezone.now())
-    debitDate = models.DateField('date debited', blank=True, default=timezone.now())
+    createDate = models.DateField('date published', default=timezone.now)
+    debitDate = models.DateField('date debited', blank=True, default=timezone.now)
     costPersons = models.ManyToManyField(Person, blank=True, verbose_name='costPerson_PersonId')
     cost = models.FloatField(blank=False)
 

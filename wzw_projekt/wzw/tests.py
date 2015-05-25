@@ -30,3 +30,5 @@ class FormTests(TestCase):
         expense = Expense.objects.create(name='ausgabe', owner=person1, group=group, cost='4.5')
         expense.costPersons.add(person1, person2)
         expense.save()
+
+    # TODO write tests for FORMS
