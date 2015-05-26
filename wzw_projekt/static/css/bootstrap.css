@@ -723,6 +723,7 @@ th {
     content: "\e090";
 }
 
+.glyphicon-ar-left:before {
     content: "\e091";
 }
 
