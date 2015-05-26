@@ -42,7 +42,6 @@ class GroupIndex(View):
         expense = Expense.objects.filter(group=group)
         person = Person.objects.filter(group=group)
 
-        # Formulare erstellen
         form_change_group = ChangeGroup(initial={'name': group.name}, )
 
         form_new_expense = NewExpenseForm(initial={'group': group.id}, )
@@ -56,15 +55,7 @@ class GroupIndex(View):
                        'group': group,
                        'person': person})
 
-    @staticmethod
-    def post(request, token):
-        if 'new_expense' in request.POST:
-            form = NewExpenseForm(request.POST)
 
-            if form.is_valid():
-                form.save()
-
-        return HttpResponseRedirect('/group/' + token)
 
 
 class GroupDetail(View):
@@ -74,12 +65,15 @@ class GroupDetail(View):
         group.save()
 
         form = ChangeGroup()
-        return render(request, 'wzw/editGroup.html', {'form': form})
+        context = {'form': form, 'group': group}
+        return render(request, 'wzw/editGroup.html', context)
 
     @staticmethod
     def post(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
         if 'change_group' in request.POST:
-            group = get_object_or_404(Group, token=token)
             form = ChangeGroup(instance=group, data=request.POST)
 
             if form.is_valid():
@@ -87,10 +81,10 @@ class GroupDetail(View):
 
             else:
                 message = 'Eingabe war nicht gueltig'
-                return render(request, 'wzw/editGroup.html', {'form': form, 'message': message})
+                context = {'form': form, 'message': message, 'group': group}
+                return render(request, 'wzw/editGroup.html', context)
 
         if 'delete_group' in request.POST:
-            group = get_object_or_404(Group, token=token)
             group.delete()
             return HttpResponse('Gruppe wurde geloescht ' + token)
 
@@ -122,7 +116,8 @@ class PersonDetail(View):
 
                 person = Person.objects.filter(group=group)
 
-                return render(request, 'wzw/editPerson.html', {'form': form, 'person': person})
+                context = {'form': form, 'person': person, 'group': group}
+                return render(request, 'wzw/editPerson.html', context)
 
             else:
                 # TODO vernuenftige rueckgabe
@@ -138,12 +133,121 @@ class PersonDetail(View):
         return HttpResponse('sollte nicht so sein')
 
 
-class ExpenseDetail(View):
+class ExpenseView(View):
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
 
-        form = ChangeGroup()
-        context = {'form': form, 'group': group}
-        return render(request, 'wzw/editGroup.html', context)
+        expense = Expense.objects.filter(group=group)
+        person = Person.objects.filter(group=group)
+
+        form_new_expense = NewExpenseForm(initial={'group': group.id}, )
+        form_new_expense.fields['costPersons'].queryset = person
+        form_new_expense.fields['owner'].queryset = person
+
+        return render(request, 'Wzw/expense.html',
+                      {'form': form_new_expense,
+                       'expense': expense,
+                       'group': group,
+                       'person': person})
+
+    @staticmethod
+    def post(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        if 'new_expense' in request.POST:
+            form = NewExpenseForm(request.POST)
+
+            if form.is_valid():
+                form.save()
+
+        if 'edit_expense' in request.POST:
+            data = request.POST['expense_id']
+
+            expense = get_object_or_404(Expense, id=data)
+            expenses = Expense.objects.filter(group=group)
+            person = Person.objects.filter(group=group)
+
+            form = NewExpenseForm(instance=expense)
+            form.fields['costPersons'].queryset = person
+            form.fields['owner'].queryset = person
+
+            context = {'form_change_expense': form, 'expense': expenses, 'group': group, 'person': person}
+
+            return render(request, 'Wzw/expense.html', context)
+
+        return HttpResponseRedirect('/group/' + token + '/expense/')
+
+class NewExpenseView(View):
+    @staticmethod
+    def get(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        person = Person.objects.filter(group=group)
+
+        form = NewExpenseForm(initial={'group': group.id}, )
+        form.fields['costPersons'].queryset = person
+        form.fields['owner'].queryset = person
+
+        context = {'form': form, 'group': group, 'person': person}
+        return render(request, 'Wzw/newExpense.html', context)
+
+    @staticmethod
+    def post(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        if 'new_expense' in request.POST:
+            form = NewExpenseForm(request.POST)
+
+            if form.is_valid():
+                form.save()
+
+            return HttpResponseRedirect('/group/' + token + '/expense/')
+
+class EditExpenseView(View):
+    #   Bei GET   request: Auflistung aller Ausgaben
+    #   Bei POST  request: wenn gueltige ID uebergeben wurde, kann die Ausgabe bearbeitet werden, sonst 404
+    @staticmethod
+    def get(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        return HttpResponseRedirect('/group/' + token + '/expense/')
+
+    @staticmethod
+    def post(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        # Wenn Formular auf der Seite ausgefuehrt wurde
+        # TODO verbessern eingabe mehrere Personen
+        if 'apply_edit_expense' in request.POST:
+            form = NewExpenseForm(data=request.POST)
+
+            if form.is_valid():
+                form.save()
+            else:
+                # TODO FORM EditExpenseView form not valid
+                return
+
+        else:
+            data = request.POST['expense_id']
+
+            expense = get_object_or_404(Expense, id=data)
+            expenses = Expense.objects.filter(group=group)
+            person = Person.objects.filter(group=group)
+
+            form = NewExpenseForm(instance=expense)
+            form.fields['costPersons'].queryset = person
+            form.fields['owner'].queryset = person
+
+            context = {'form': form, 'expense': expenses, 'group': group, 'person': person}
+
+            return render(request, 'Wzw/editExpense.html', context)
+
+        # default return
+        return HttpResponseRedirect('/group/' + token + '/expense/')

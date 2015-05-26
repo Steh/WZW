@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from wzw.views import Index, GroupIndex, GroupDetail, ExpenseDetail, PersonDetail
+from wzw.views import Index, GroupIndex, GroupDetail, ExpenseView, PersonDetail, NewExpenseView, EditExpenseView
 
 
 urlpatterns = [
@@ -24,8 +24,12 @@ urlpatterns = [
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/editGroup/$', GroupDetail.as_view()),
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/editPerson/$',
         PersonDetail.as_view()),
-    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/editExpense/$',
-        ExpenseDetail.as_view()),
+    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/$',
+        ExpenseView.as_view()),
+    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/new$',
+        NewExpenseView.as_view()),
+    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/edit$',
+        EditExpenseView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', Index.as_view()),
 ]

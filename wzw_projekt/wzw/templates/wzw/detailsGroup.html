@@ -44,12 +44,25 @@
 
             <div class="col-md-12">
                 {% if expense %}
-                    {% for e in expense %}
-                        <p>{{ e }}</p>
-                    {% endfor %}
-                {% else %}
-                    <p>Keine Ausgabe erstellt</p>
-                {% endif %}
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Name</th>
+                            <th>Besitzer</th>
+                            <th>Kosten</th>
+
+                        </tr>
+                        {% for e in expense %}
+                            <tr>
+                                <td>{{ e.name }}</td>
+                                <td>{{ e.owner }}</td>
+                                <td>{{ e.cost }}</td>
+                                <td>{{ e.costPersons }}</td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    {% else %}
+                        <p>Keine Ausgabe erstellt</p>
+                    {% endif %}
             </div>
         </div>
 
