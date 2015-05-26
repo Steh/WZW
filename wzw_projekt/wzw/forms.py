@@ -15,7 +15,7 @@ class ChangeGroup(forms.ModelForm):
 
 
 class OpenGroupForm(forms.Form):
-    group_token = forms.CharField(label='Gruppen Token', max_length=19, required=True)
+    group_token = forms.CharField(label='Token', max_length=19, required=True)
 
 
 class NewExpenseForm(forms.ModelForm):

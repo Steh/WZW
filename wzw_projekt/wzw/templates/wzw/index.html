@@ -3,42 +3,83 @@
 {% block title %}{{ block.super }} - Startseite{% endblock %}
 
 {% block content %}
-    <h1>Wer zahlt was</h1>
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Neue Gruppe erstellen</h2>
+    <div class="container marketing">
+        <div class="jumbotron">
+            <h1>Wer zahlt was?</h1>
+            <p class="lead">
+                Jeder kennt es:</br>
+                Gemeinsame Gruppenausfl&uuml;ge und damit verbundenen Geldausgaben!
+                Ob im Urlaub oder f&uuml;r die Wochenendfestivals!
+                Das kann schonmal kompliziert werden."</br>
+                </br>
+                Das neue Tool "Wer zahlt was?" hilft euch bei folgenden Fragestellungen.
+            </p>
+                <ul>
+                    <li>Wer hat f&uuml;r was Geld vorgestreckt?</li>
+                    <li>Hatte Jan nicht Geld an Stefan verliehen?</li>
+                    <li>Wer zahlt denn nun am Ende welchen Betrag?</li>
+                </ul></br>
+            <p class="lead">
+                "Wer zahlt was?" verspricht Abhilfe und l&auml;sst jeden Teilnehmer seine Ausgaben in wenigen Schritten eintragen.
+                Am Ende berechnet das Tool f&uuml;r jeden Gruppenteilnehmer die offenen Kosten gegen&uuml;ber den Anderen.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Gruppe erstellen</h2>
+                <form id="new_group" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-primary btn-lg" type="submit" value="Los geht's" name="new_group"/>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h2>oder</h2>
+            </div>
+            <div class="col-md-4">
+                <h2>Gruppe anzeigen</h2>
+                <form id="open_group" method="post">
+                    {% csrf_token %}
+                    {{ form_open_group }}
+                    <input class="btn btn-primary btn-lg" type="submit" value="Eintreten" name="open_group"/>
+                </form>
+            </div>
+        </div>
 
-            <form id="new_group" method="post">
-                {% csrf_token %}
-                <input class="btn btn-primary btn-lg" type="submit" value="Neue Gruppe erstellen" name="new_group"/>
-            </form>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2>Hier ein Beispiel!</h2>
+                <p class="text_beispiel">
+                    Gruppeurlaub mit Micha, Stefan und Jan. Stefan leiht Micha f&uuml;r eine Taxifahrt etwas Geld und Jan &uuml;bernimmt zun&auml;chst f&uuml;r Micha, Stefan und sich die Kosten f&uuml;r den Flug.
+                </p>
+            </div>
+            <div class="col-md-5">
+                <h2>Bild1</h2>
+            </div>
         </div>
-        <div class="col-md-6">
-            <h2>Gruppe anzeigen</h2>
-
-            <form id="open_group" method="post">
-                {% csrf_token %}
-                {{ form_open_group }}
-                <input type="submit" value="Submit" name="open_group"/>
-            </form>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-5">
+                <h2>Bild2</h2>
+            </div>
+            <div class="col-md-7">
+                <h2>Kostenaufstellung</h2>
+                <p class="text_beispiel">
+                    Nach dem Urlaub gilt es herauszufinden: Was schulden sich Micha, Stefan und Jan?
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <h2>Was ist das hier eigentlich?</h2>
-
-            {% lorem 3 p %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Bild1</h2>
-        </div>
-        <div class="col-md-4">
-            <h2>Bild2</h2>
-        </div>
-        <div class="col-md-4">
-            <h2>Bild3</h2>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2>Schulden begleichen</h2>
+                <p class="text_beispiel">
+                    Diese Problematik m&ouml;chten wir mit "Wer zahlt was?" l&ouml;sen.
+                </p>
+            </div>
+            <div class="col-md-5">
+                <h2>Bild3</h2>
+            </div>
         </div>
     </div>
 
