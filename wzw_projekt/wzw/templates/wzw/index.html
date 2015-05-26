@@ -3,15 +3,23 @@
 {% block title %}{{ block.super }} - Startseite{% endblock %}
 
 {% block content %}
-    <h1>Wer zahlt was</h1>
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Neue Gruppe erstellen</h2>
-
-            <form id="new_group" method="post">
-                {% csrf_token %}
-                <input class="btn btn-primary btn-lg" type="submit" value="Neue Gruppe erstellen" name="new_group"/>
-            </form>
+            <h1>Wer zahlt was?</h1>
+            <p class="lead">
+                Jeder kennt es:</br>
+                Gemeinsame Gruppenausfl&uuml;ge und damit verbundenen Geldausgaben!
+                Ob im Urlaub oder f&uuml;r die Wochenendfestivals!
+                Das kann schonmal kompliziert werden."</br>
+                </br>
+                Das neue Tool "Wer zahlt was?" hilft euch bei folgenden Fragestellungen.
+            </p>
+                <ul>
+                    <li>Wer hat f&uuml;r was Geld vorgestreckt?</li>
+                    <li>Hatte Jan nicht Geld an Stefan verliehen?</li>
+                    <li>Wer zahlt denn nun am Ende welchen Betrag?</li>
+                </ul></br>
+            <p class="lead">
+                "Wer zahlt was?" verspricht Abhilfe und l&auml;sst jeden Teilnehmer seine Ausgaben in wenigen Schritten eintragen.
+                Am Ende berechnet das Tool f&uuml;r jeden Gruppenteilnehmer die offenen Kosten gegen&uuml;ber den Anderen.
         </div>
         <div class="col-md-6">
             <h2>Gruppe anzeigen</h2>
