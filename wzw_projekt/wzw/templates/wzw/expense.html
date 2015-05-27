@@ -4,27 +4,10 @@
 {% block homeurl %} # {% endblock %}
 
 {% block content %}
-
-    <div class="row">
-        <div class="col-lg-4">
-            <a class="btn btn-primary btn-lg" href="/group/{{ group.token }}/editGroup/">Gruppen Einstellungen</a>
-        </div>
-        <div class="col-lg-4">
-            <a class="btn btn-primary btn-lg" href="/group/{{ group.token }}/editPerson/">Personen</a>
-        </div>
-        <div class="col-lg-4">
-
-            <a class="btn btn-primary btn-lg {% if person.count < 1 %} disabled {% endif %}"
-               href="/group/{{ group.token }}/expense/">Ausgaben</a>
-        </div>
-    </div>
     <div class="row">
         <h1>Ausgabe</h1>
     </div>
-    <a href="new"><button>Neue Ausgabe</button></a>
     <div class="row">
-        <h2>Ausgaben</h2>
-
         <div class="col-md-12">
             {% if expense %}
                 <table class="table table-striped">

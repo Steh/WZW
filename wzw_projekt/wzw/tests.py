@@ -23,8 +23,8 @@ class GroupTests(TestCase):
 
 class FormTests(TestCase):
     def setUp(self):
-        nameGruppe = 'Test Gruppe'
-        group = Group.objects.create(name=nameGruppe)
+        namegruppe = 'Test Gruppe'
+        group = Group.objects.create(name=namegruppe)
         person1 = Person.objects.create(name='person1', group=group)
         person2 = Person.objects.create(name='person2', group=group)
         expense = Expense.objects.create(name='ausgabe', owner=person1, group=group, cost='4.5')

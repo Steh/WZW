@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
-from wzw.forms import NewGroupForm, OpenGroupForm, ExpenseForm, NewPersonForm, ChangeGroup
+from wzw.forms import GroupForm, OpenGroupForm, ExpenseForm, NewPersonForm, ChangeGroup
 from wzw.models import Group, Person, Expense
 
 
@@ -12,7 +12,7 @@ class Index(View):
     @staticmethod
     def get(request):
 
-        form_new_group = NewGroupForm()
+        form_new_group = GroupForm()
         form_open_group = OpenGroupForm()
         return render(request, 'Wzw/index.html', {'form_new_group': form_new_group, 'form_open_group': form_open_group})
 
@@ -49,7 +49,7 @@ class GroupIndex(View):
         form_new_expense.fields['costPersons'].queryset = person
         form_new_expense.fields['owner'].queryset = person
 
-        return render(request, 'Wzw/detailsGroup.html',
+        return render(request, 'Wzw/group.html',
                       {'form_new_expense': form_new_expense,
                        'form_change_group': form_change_group,
                        'expense': expense,
@@ -57,7 +57,7 @@ class GroupIndex(View):
                        'person': person})
 
 
-class GroupDetail(View):
+class GroupView(View):
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
@@ -81,14 +81,14 @@ class GroupDetail(View):
             else:
                 message = 'Eingabe war nicht gueltig'
                 context = {'form': form, 'message': message, 'group': group}
-                return render(request, 'wzw/group.html', context)
+                return render(request, 'wzw/editGroup.html', context)
 
         if 'delete_group' in request.POST:
             group.delete()
             return HttpResponse('Gruppe wurde geloescht ' + token)
 
 
-class PersonDetail(View):
+class PersonView(View):
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
@@ -100,7 +100,6 @@ class PersonDetail(View):
 
         context = {'form': form_new_person, 'person': person, 'group': group}
         return render(request, 'wzw/person.html', context)
-
 
     @staticmethod
     def post(request, token):
@@ -127,9 +126,101 @@ class PersonDetail(View):
             person = get_object_or_404(Person, id=data)
             person.delete()
 
-            return HttpResponseRedirect('/group/' + (( group.token )) + '/editPerson/')
+            return HttpResponseRedirect('/group/' + group.token + '/editPerson/')
 
         return HttpResponse('sollte nicht so sein')
+
+
+class NewGroupView(View):
+    @staticmethod
+    def get(request, token):
+        return
+
+    @staticmethod
+    def post(request, token):
+        return
+
+
+class EditGroupView(View):
+    @staticmethod
+    def get(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        form = ChangeGroup(instance=group)
+        context = {'group': group, 'form': form}
+        return render(request, 'wzw\editGroup.html', context)
+
+    @staticmethod
+    def post(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        if 'edit_group' in request.POST:
+            form = ChangeGroup(instance=group, data=request.POST)
+
+            if form.is_valid():
+                form.save()
+                messages.info(request, 'Gruppe wurde angepasst')
+
+            else:
+                messages.warning(request, 'Gruppe KONNTE NICHT angepasst werden')
+
+        return HttpResponseRedirect('/group/' + group.token + '/group/')
+
+
+class DeleteGroupView(View):
+    @staticmethod
+    def get(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        context = {'group': group}
+        return render(request, 'wzw/deleteGroup.html', context)
+
+    @staticmethod
+    def post(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        if 'apply_delete_group' in request.POST:
+
+            group.delete()
+            messages.info(request, 'Gruppe wurde erfolgreich geloescht')
+            return HttpResponseRedirect('/')
+
+        messages.warning(request, 'Es wurde keine Gruppe uebergeben')
+        return HttpResponseRedirect('/group/' + group.token + '/group/')
+
+
+class NewPersonView(View):
+    @staticmethod
+    def get(request, token):
+        return
+
+    @staticmethod
+    def post(request, token):
+        return
+
+
+class EditPersonView(View):
+    @staticmethod
+    def get(request, token):
+        return
+
+    @staticmethod
+    def post(request, token):
+        return
+
+
+class DeletePersonView(View):
+    @staticmethod
+    def get(request, token):
+        return
+
+    @staticmethod
+    def post(request, token):
+        return
 
 
 class ExpenseView(View):
@@ -210,7 +301,6 @@ class NewExpenseView(View):
                 # TODO Aktion bei Fehlerhafter eingabe
                 messages.warning(request, 'Ausgabe konnte nicht angelegt werden')
 
-
             return HttpResponseRedirect('/group/' + token + '/expense/')
 
 
@@ -261,7 +351,7 @@ class EditExpenseView(View):
                 expense.save()
 
                 # TODO MEssage bauen
-                #messages.INFO(request, "Ausgabe wurde geaendert: " + expense.name)
+                # messages.INFO(request, "Ausgabe wurde geaendert: " + expense.name)
                 return HttpResponseRedirect('/group/' + group.token + '/expense')
 
             else:

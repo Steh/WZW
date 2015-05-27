@@ -3,7 +3,7 @@ from django import forms
 from wzw.models import Expense, Person, Group
 
 
-class NewGroupForm(forms.Form):
+class GroupForm(forms.Form):
     name = forms.CharField(max_length=32)
     description = forms.CharField(max_length=128)
 

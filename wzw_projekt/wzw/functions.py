@@ -16,10 +16,10 @@ def create_token():
 # wenn gruppe existiert wird die schleife erneut ausgefuehrt
 # wenn nicht wird ein fehler geworfen und die Variable auf False gesetzt
 def token_existing(token):
-    '''token der getestet werden soll'''
+    """token der getestet werden soll"""
     try:
         Group.objects.get(token=token)
-        token_existing = True
+        tokenexisting = True
     except Group.DoesNotExist:
-        token_existing = False
-    return token_existing
+        tokenexisting = False
+    return tokenexisting

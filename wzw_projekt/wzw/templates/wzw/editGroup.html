@@ -4,6 +4,7 @@
 {% block homeurl  %} /group/{{ group.token }} {% endblock %}
 
 {% block content %}
+
     <div class="row">
         <h2>Gruppe</h2>
 
@@ -13,15 +14,9 @@
             <form id="new_expense" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <input type="submit" value="Submit" name="change_group"/>
+                <input type="submit" value="Submit" name="edit_group"/>
             </form>
         </div>
     </div>
-
-    <h3>Gruppen löschen</h3>
-    <form id="delete_group" method="post">
-        {% csrf_token %}
-        <input type="submit" value="Submit" name="delete_group"/>
-    </form>
 
 {% endblock %}
