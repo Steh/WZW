@@ -34,13 +34,6 @@
                         <input type="submit" value="Submit" name="new_expense" />
                     </form>
                 {% endif %}
-                {% if form_change_expense %}
-                    <form id="new_expense" method="post">
-                        {% csrf_token %}
-                        {{ form_change_expense.as_p }}
-                        <input type="submit" value="Submit" name="change_expense" />
-                    </form>
-                {% endif %}
             {% else %}
                 <p>Du musst erst eine Personen erstellen um Ausgaben zu erfassen.</p>
             {% endif %}

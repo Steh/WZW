@@ -30,6 +30,7 @@
                     <form id="new_expense" method="post">
                         {% csrf_token %}
                         {{ form.as_p }}
+                        <input type='text' value="{{ expense.id }}" name="expense_id" id="expense_id" hidden="true"/>
                         <input type="submit" value="Submit" name="apply_edit_expense" />
                     </form>
             {% else %}

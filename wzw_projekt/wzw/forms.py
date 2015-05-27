@@ -18,11 +18,11 @@ class OpenGroupForm(forms.Form):
     group_token = forms.CharField(label='Token', max_length=19, required=True)
 
 
-class NewExpenseForm(forms.ModelForm):
+class ExpenseForm(forms.ModelForm):
     class Meta:
         model = Expense
         widgets = {'group': forms.HiddenInput()}
-        exclude = ()
+        exclude = {'createDate'}
 
 
 class NewPersonForm(forms.ModelForm):

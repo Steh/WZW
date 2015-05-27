@@ -4,7 +4,7 @@
 {% block homeurl %} # {% endblock %}
 
 {% block content %}
-    {{ message }}
+
     <div class="row">
         <div class="col-lg-4">
             <a class="btn btn-primary btn-lg" href="/group/{{ group.token }}/editGroup/">Gruppen Einstellungen</a>
@@ -22,7 +22,6 @@
         <h1>Ausgabe</h1>
     </div>
     <a href="new"><button>Neue Ausgabe</button></a>
-
     <div class="row">
         <h2>Ausgaben</h2>
 
@@ -51,10 +50,10 @@
                                 </form>
                             </td>
                             <td>
-                                <form method="post">
+                                <form method="post" action="delete">
                                     {% csrf_token %}
                                     <input type="text" hidden="true" value="{{ e.id }}" name="expense_id"/>
-                                    <input type="submit" value="bearbeiten" name="edit_expense"/>
+                                    <input type="submit" value="löschen" name="delete_expense"/>
                                 </form>
                             </td>
                         </tr>
