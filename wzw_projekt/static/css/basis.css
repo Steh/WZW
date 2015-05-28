@@ -63,3 +63,12 @@ hr {
     font-weight: normal;
     font-size: 35px;
 }
+
+.orange {
+    color: #FF8C00;
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}

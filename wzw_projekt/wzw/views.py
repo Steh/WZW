@@ -20,7 +20,7 @@ class Index(View):
     def post(request):
         if 'new_group' in request.POST:
             group = Group.objects.create()
-            return HttpResponseRedirect('group/' + group.token + '/group/edit')
+            return HttpResponseRedirect('group/' + group.token + '/group/new')
 
         if 'open_group' in request.POST:
             form = OpenGroupForm(request.POST)
@@ -90,11 +90,30 @@ class GroupView(View):
 class NewGroupView(View):
     @staticmethod
     def get(request, token):
-        return
+        group = get_object_or_404(Group, token=token)
+        group.save()
 
+        form = ChangeGroup(instance=group)
+        context = {'group': group, 'form': form}
+        return render(request, 'wzw/addGroup.html', context)
+
+    #TODO schauen, warum hier nicht der Gruppenname und die Beschreibung übergeben werden
     @staticmethod
     def post(request, token):
-        return
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        if 'edit_group' in request.POST:
+            form = ChangeGroup(instance=group, data=request.POST)
+
+            if form.is_valid():
+                form.save()
+                messages.info(request, 'Gruppe wurde erstellt')
+
+            else:
+                messages.warning(request, 'Gruppe KONNTE NICHT erstellt werden')
+
+        return HttpResponseRedirect('/group/' + group.token + '/group/')
 
 
 class EditGroupView(View):
@@ -105,7 +124,7 @@ class EditGroupView(View):
 
         form = ChangeGroup(instance=group)
         context = {'group': group, 'form': form}
-        return render(request, 'wzw\editGroup.html', context)
+        return render(request, 'wzw/editGroup.html', context)
 
     @staticmethod
     def post(request, token):

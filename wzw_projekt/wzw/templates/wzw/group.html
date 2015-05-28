@@ -6,11 +6,10 @@
 {% block content %}
     <div class="container marketing">
         <div class="jumbotron">
-            <h2>Gruppenname: {{ group.name | default:'Gruppenname' }}</h2>
-            <p class="left">Gruppenbeschreibung: {{ group.description  | default:"Beschreibung" }}</p>
+            <h2><span class="orange">Gruppenname:</span> "{{ group.name | default:'Gruppenname' }}"</h2>
+            <p class="left"><span class="italic" >Gruppenbeschreibung:</span> {{ group.description  | default:"Beschreibung" }}</p>
 
-            <h2>Hier finden Sie Ihre gesamten Ausgaben</h2>
-            <div class="col-md-12">
+            <h2 class="orange">Ausgabenübersicht</h2>
                 {% if expense %}
                     <table class="table table-striped">
                         <tr>
@@ -29,9 +28,8 @@
                         {% endfor %}
                         </table>
                     {% else %}
-                        <p class="left">Keine Ausgabe erstellt</p>
+                        <p class="left">Sie haben noch keine Ausgabe erstellt.</p>
                     {% endif %}
-            </div>
         </div>
     </div>
 

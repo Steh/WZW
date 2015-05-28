@@ -6,8 +6,8 @@
 {% block content %}
     <div class="container marketing">
         <div class="jumbotron">
-            <h2>Personen</h2>
-            <h3>Neue Person erstellen</h3>
+            <h2 class="orange">Person</h2>
+            <h3>neue Person erstellen</h3>
             <form id="new_person" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
