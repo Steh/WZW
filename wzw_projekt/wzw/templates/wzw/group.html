@@ -11,20 +11,6 @@
     </div>
 
     <div class="row">
-        <h2>Neue Ausgabe erstellen</h2>
-
-        <div class="col-md-12">
-            {% if person %}
-                <form id="new_expense" method="post">
-                    {% csrf_token %}
-                    {{ form_new_expense.as_p }}
-                    <input type="submit" value="Submit" name="new_expense"/>
-                </form>
-            {% else %}
-                <p>Du musst erst eine Personen erstellen um Ausgaben zu erfassen.</p>
-            {% endif %}
-        </div>
-
         <div class="row">
             <h2>Ausgaben</h2>
 
@@ -35,15 +21,15 @@
                             <th>Name</th>
                             <th>Besitzer</th>
                             <th>Kosten</th>
-
+                            <th>Teilhaber</th>
                         </tr>
                         {% for e in expense %}
-                            <tr>
-                                <td>{{ e.name }}</td>
-                                <td>{{ e.owner }}</td>
-                                <td>{{ e.cost }}</td>
-                                <td>{{ e.costPersons }}</td>
-                            </tr>
+                        <tr>
+                            <td>{{ e.name }}</td>
+                            <td>{{ e.owner }}</td>
+                            <td>{{ e.cost }}</td>
+                            <td>{{ e.costPersons }}</td>
+                        </tr>
                         {% endfor %}
                         </table>
                     {% else %}
@@ -51,7 +37,5 @@
                     {% endif %}
             </div>
         </div>
-
-
 
 {% endblock %}

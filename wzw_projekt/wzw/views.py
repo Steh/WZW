@@ -36,7 +36,6 @@ class Index(View):
 class GroupIndex(View):
     @staticmethod
     def get(request, token):
-
         group = get_object_or_404(Group, token=token)
         group.save()
 
@@ -86,49 +85,6 @@ class GroupView(View):
         if 'delete_group' in request.POST:
             group.delete()
             return HttpResponse('Gruppe wurde geloescht ' + token)
-
-
-class PersonView(View):
-    @staticmethod
-    def get(request, token):
-        group = get_object_or_404(Group, token=token)
-        group.save()
-
-        person = Person.objects.filter(group=group)
-
-        form_new_person = NewPersonForm(initial={'group': group.id}, )
-
-        context = {'form': form_new_person, 'person': person, 'group': group}
-        return render(request, 'wzw/person.html', context)
-
-    @staticmethod
-    def post(request, token):
-        group = get_object_or_404(Group, token=token)
-        group.save()
-
-        if 'new_person' in request.POST:
-            form = NewPersonForm(request.POST)
-
-            if form.is_valid():
-                form.save()
-
-                person = Person.objects.filter(group=group)
-
-                context = {'form': form, 'person': person, 'group': group}
-                return render(request, 'wzw/person.html', context)
-
-            else:
-                # TODO vernuenftige rueckgabe
-                return HttpResponse('irgendwas geht schief')
-
-        if 'delete_person' in request.POST:
-            data = request.POST['person_id']
-            person = get_object_or_404(Person, id=data)
-            person.delete()
-
-            return HttpResponseRedirect('/group/' + group.token + '/editPerson/')
-
-        return HttpResponse('sollte nicht so sein')
 
 
 class NewGroupView(View):
@@ -184,7 +140,6 @@ class DeleteGroupView(View):
         group.save()
 
         if 'apply_delete_group' in request.POST:
-
             group.delete()
             messages.info(request, 'Gruppe wurde erfolgreich geloescht')
             return HttpResponseRedirect('/')
@@ -193,34 +148,148 @@ class DeleteGroupView(View):
         return HttpResponseRedirect('/group/' + group.token + '/group/')
 
 
-class NewPersonView(View):
+class PersonView(View):
     @staticmethod
     def get(request, token):
-        return
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        person = Person.objects.filter(group=group)
+
+        context = {'person': person, 'group': group}
+        return render(request, 'wzw/person.html', context)
 
     @staticmethod
     def post(request, token):
-        return
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        messages.warning(request, 'POST hier nicht zulaessig')
+        return HttpResponseRedirect('/group/' + group.token + '/person/')
+
+
+class NewPersonView(View):
+    @staticmethod
+    def get(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        person = Person.objects.filter(group=group)
+        form = NewPersonForm(initial={'group': group.id})
+
+        context = {'form': form, 'person': person, 'group': group}
+        return render(request, 'wzw/newPerson.html', context)
+
+    @staticmethod
+    def post(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        form = NewPersonForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'Person wurde angelegt')
+        else:
+            messages.warning(request, 'Person konnte nicht angelegt werden')
+
+        return HttpResponseRedirect('/group/' + group.token + '/person/')
 
 
 class EditPersonView(View):
     @staticmethod
     def get(request, token):
-        return
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        messages.info(request, 'Es wurde keine Person uebergeben')
+        return HttpResponseRedirect('/group/' + group.token + '/person/')
 
     @staticmethod
     def post(request, token):
-        return
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        person_id = request.POST['person_id']
+        person = get_object_or_404(Person, id=person_id)
+
+        if 'change_person' in request.POST:
+
+            form = NewPersonForm(instance=person)
+            context = {'form': form, 'person': person}
+
+            return render(request, 'wzw/editPerson.html', context)
+
+        elif 'apply_change_person' in request.POST:
+
+            form = NewPersonForm(instance=person, data=request.POST)
+
+            if form.is_valid():
+                form.save()
+
+                messages.info(request, 'Person wurde angepasst')
+                return HttpResponseRedirect('/group/' + group.token + '/person/')
+            else:
+                messages.warning(request, 'Aenderungen konnten nicht durchgefuehrt werden')
+                return HttpResponseRedirect('/group/' + group.token + '/person/')
+
+        # default
+        else:
+            group = get_object_or_404(Group, token=token)
+            group.save()
+
+            messages.info(request, 'Es wurde keine Person uebergeben')
+            return HttpResponseRedirect('/group/' + group.token + '/person/')
 
 
 class DeletePersonView(View):
     @staticmethod
     def get(request, token):
-        return
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        messages.info(request, 'Es wurde keine Person uebergeben')
+        return HttpResponseRedirect('/group/' + group.token + '/person/')
 
     @staticmethod
     def post(request, token):
-        return
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        person_id = request.POST['person_id']
+        person = get_object_or_404(Person, id=person_id)
+
+        if 'delete_person' in request.POST:
+            expenseowner = Expense.objects.filter(owner=person)
+            expensecostperson = Expense.objects.filter(costPersons=person)
+
+            context = {'person': person,
+                       'group': group,
+                       'expenseowner': expenseowner,
+                       'expensecostperson': expensecostperson}
+            return render(request, 'wzw/deletePerson.html', context)
+
+        elif 'apply_delete_person' in request.POST:
+
+            form = NewPersonForm(instance=person, data=request.POST)
+
+            if form.is_valid():
+                form.save()
+
+                messages.info(request, 'Person wurde angepasst')
+                return HttpResponseRedirect('/group/' + group.token + '/person/')
+            else:
+                messages.warning(request, 'Aenderungen konnten nicht durchgefuehrt werden')
+                return HttpResponseRedirect('/group/' + group.token + '/person/')
+
+        # default
+        else:
+            group = get_object_or_404(Group, token=token)
+            group.save()
+
+            messages.info(request, 'Es wurde keine Person uebergeben')
+            return HttpResponseRedirect('/group/' + group.token + '/person/')
+
 
 
 class ExpenseView(View):
@@ -337,11 +406,11 @@ class EditExpenseView(View):
             return render(request, 'Wzw/editExpense.html', context)
 
         elif 'apply_edit_expense' in request.POST:
-            expenseid = request.POST['expense_id']
+            id = request.POST['expense_id']
             form = ExpenseForm(request.POST)
 
             if form.is_valid():
-                expense = get_object_or_404(Expense, id=expenseid)
+                expense = get_object_or_404(Expense, id=id)
                 expense.name = form.cleaned_data['name']
                 expense.description = form.cleaned_data['description']
                 expense.debitDate = form.cleaned_data['debitDate']
@@ -383,14 +452,13 @@ class DeleteExpenseView(View):
         data = request.POST.get('expense_id')
         expense = get_object_or_404(Expense, id=data)
 
-        # bei aufruf durch loeschen Button
+        # bei Aufruf durch loeschen Button
         if 'delete_expense' in request.POST:
             context = {'expense': expense, 'group': group}
             return render(request, 'wzw/deleteExpense.html', context)
 
         # bei loeschbestaetigung
         if 'apply_delete_expense' in request.POST:
-            # TODO geht gerade nicht!!!
             messages.warning(request, "Ausgabe wurde erfolgreich geloescht: " + expense.name)
             expense.delete()
 

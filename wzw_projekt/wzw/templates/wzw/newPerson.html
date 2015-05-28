@@ -1,20 +1,19 @@
 {% extends "wzw/base.html" %}
 
 {% block title %}{{ block.super }} - Startseite{% endblock %}
-{% block homeurl %} /group/{{ group.token }} {% endblock %}
+{% block homeurl  %} /group/{{ group.token }} {% endblock %}
 
 {% block content %}
     <div class="row">
         <h2>Personen</h2>
 
-        <h3>Person aendern</h3>
+        <h3>Neue Person erstellen</h3>
 
         <div class="col-md-12">
             <form id="new_person" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <input type="hidden" name="person_id" value="{{ person.id }}">
-                <input type="submit" value="aendern" name="apply_change_person"/>
+                <input type="submit" value="anlegen" name="new_person"/>
             </form>
         </div>
     </div>
