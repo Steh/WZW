@@ -4,23 +4,24 @@
 {% block homeurl  %} # {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <h1>Neue Ausgabe</h1>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            {% if person %}
-                {% if form %}
-                    <form id="new_expense" method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <input type="submit" value="Submit" name="new_expense" />
-                    </form>
-                {% endif %}
-            {% else %}
-                <p>Du musst erst eine Personen erstellen um Ausgaben zu erfassen.</p>
-            {% endif %}
+    <div class="container marketing">
+        <div class="jumbotron">
+            <h1>Neue Ausgabe</h1>
+            <div class="row">
+                <div class="col-md-12">
+                    {% if person %}
+                        {% if form %}
+                            <form id="new_expense" method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="submit" value="Submit" name="new_expense" />
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <p>Du musst erst eine Personen erstellen um Ausgaben zu erfassen.</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 

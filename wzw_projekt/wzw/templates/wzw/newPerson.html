@@ -4,16 +4,14 @@
 {% block homeurl  %} /group/{{ group.token }} {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <h2>Personen</h2>
-
-        <h3>Neue Person erstellen</h3>
-
-        <div class="col-md-12">
+    <div class="container marketing">
+        <div class="jumbotron">
+            <h2>Personen</h2>
+            <h3>Neue Person erstellen</h3>
             <form id="new_person" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <input type="submit" value="anlegen" name="new_person"/>
+                <input class="btn btn-lg btn-success" type="submit" value="anlegen" name="new_person"/>
             </form>
         </div>
     </div>

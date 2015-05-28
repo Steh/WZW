@@ -4,16 +4,18 @@
 {% block homeurl %} /group/{{ group.token }} {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <h2>Gruppe</h2>
+    <div class="container marketing">
+        <div class="jumbotron">
+            <h2>Gruppe</h2>
 
-        <div class="col-md-12">
-
-            <h3>Gruppen löschen</h3>
-
-            <form id="delete_group" method="post">
-                {% csrf_token %}
-                <input type="submit" value="Submit" name="apply_delete_group"/>
-            </form>
+            <div class="col-md-12">
+                <h3>Gruppen löschen</h3>
+                <form id="delete_group" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Submit" name="apply_delete_group"/>
+                </form>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

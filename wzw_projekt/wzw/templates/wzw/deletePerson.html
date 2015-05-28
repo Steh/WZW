@@ -4,51 +4,51 @@
 {% block homeurl %} /group/{{ group.token }} {% endblock %}
 
 {% block content %}
-<div class="row">
-    <h2>Personen</h2>
-    <table class="table table-striped">
-        <tr>
-            <th>Name</th>
-            <td>{{ person.name }}</td>
-        </tr>
-        <tr>
-            <th>Owner</th>
-            {% if expenseowner %}
-                <td>{% for expense in expenseowner %}{{ expense.name }} {% endfor %}</td>
+    <div class="container marketing">
+        <div class="jumbotron">
+            <h2>Personen</h2>
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <td>{{ person.name }}</td>
+                </tr>
+                <tr>
+                    <th>Owner</th>
+                    {% if expenseowner %}
+                        <td>{% for expense in expenseowner %}{{ expense.name }} {% endfor %}</td>
+                    {% else %}
+                        <td>[[KEIN BESITZER VON KOSTEN]]</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Kosten Teilhaber</th>
+                    {% if expensecostperson %}
+                        <td>{% for expense in expensecostperson %}{{ expense.name }} {% endfor %}</td>
+                    {% else %}
+                        <td>[[KEIN TEILHABER VON KOSTEN]]</td>
+                    {% endif %}
+                </tr>
+            </table>
+            <h3>Person loeschen</h3>
+            {% if not expenseowner %}
+                <div class="col-md-12">
+                    <form id="new_person" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="person_id" value="{{ person.id }}">
+                        <input type="submit" value="Person loeschen" name="apply_delete_person"/>
+                    </form>
+                </div>
             {% else %}
-            <td>[[KEIN BESITZER VON KOSTEN]]</td>
+                <div class="col-md-12">
+                    <p>Person kann erst geloescht werden wenn sie kein Besitzer mehr von folgenden Kosten ist</p>
+                    <ul>
+                        {% for expense in expenseowner %}
+                            <li>{{  expense.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% endif %}
-        </tr>
-
-        <tr>
-            <th>Kosten Teilhaber</th>
-            {% if expensecostperson %}
-                <td>{% for expense in expensecostperson %}{{ expense.name }} {% endfor %}</td>
-            {% else %}
-                <td>[[KEIN TEILHABER VON KOSTEN]]</td>
-            {% endif %}
-        </tr>
-    </table>
-</div>
-
-<h3>Person loeschen</h3>
-{% if not expenseowner %}
-    <div class="col-md-12">
-        <form id="new_person" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="person_id" value="{{ person.id }}">
-            <input type="submit" value="Person loeschen" name="apply_delete_person"/>
-        </form>
+        </div>
     </div>
-{% else %}
-    <div class="col-md-12">
-        <p>Person kann erst geloescht werden wenn sie kein Besitzer mehr von folgenden Kosten ist</p>
-        <ul>
-            {% for expense in expenseowner %}
-                <li>{{  expense.name }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-{% endif %}
 
 {% endblock %}

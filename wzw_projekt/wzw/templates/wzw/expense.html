@@ -4,50 +4,48 @@
 {% block homeurl %} # {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <h1>Ausgabe</h1>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            {% if expense %}
-                <table class="table table-striped">
-                    <tr>
-                        <th>Name</th>
-                        <th>Besitzer</th>
-                        <th>Kosten</th>
-                        <th>angefallen</th>
-                        <th>bearbeiten</th>
-                        <th>löschen</th>
-                    </tr>
-                    {% for e in expense %}
+    <div class="container marketing">
+        <div class="jumbotron">
+            <h1>Ausgabe</h1>
+            <div class="col-md-12">
+                {% if expense %}
+                    <table class="table table-striped">
                         <tr>
-                            <td>{{ e.name }}</td>
-                            <td>{{ e.owner }}</td>
-                            <td>{{ e.cost }}</td>
-                            <td>{{ e.debitDate }}</td>
-                            <td>
-                                <form method="post" action="edit">
-                                    {% csrf_token %}
-                                    <input type="text" hidden="true" value="{{ e.id }}" name="expense_id"/>
-                                    <input type="submit" value="bearbeiten" name="edit_expense"/>
-                                </form>
-                            </td>
-                            <td>
-                                <form method="post" action="delete">
-                                    {% csrf_token %}
-                                    <input type="text" hidden="true" value="{{ e.id }}" name="expense_id"/>
-                                    <input type="submit" value="löschen" name="delete_expense"/>
-                                </form>
-                            </td>
+                            <th>Name</th>
+                            <th>Besitzer</th>
+                            <th>Kosten</th>
+                            <th>angefallen</th>
+                            <th>bearbeiten</th>
+                            <th>löschen</th>
                         </tr>
-                    {% endfor %}
-                </table>
-            {% else %}
-                <p>Keine Ausgabe erstellt</p>
-            {% endif %}
+                        {% for e in expense %}
+                            <tr>
+                                <td>{{ e.name }}</td>
+                                <td>{{ e.owner }}</td>
+                                <td>{{ e.cost }}</td>
+                                <td>{{ e.debitDate }}</td>
+                                <td>
+                                    <form method="post" action="edit">
+                                        {% csrf_token %}
+                                        <input type="text" hidden="true" value="{{ e.id }}" name="expense_id"/>
+                                        <input type="submit" value="bearbeiten" name="edit_expense"/>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post" action="delete">
+                                        {% csrf_token %}
+                                        <input type="text" hidden="true" value="{{ e.id }}" name="expense_id"/>
+                                        <input type="submit" value="löschen" name="delete_expense"/>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>Keine Ausgabe erstellt</p>
+                {% endif %}
+            </div>
         </div>
     </div>
-
-
 
 {% endblock %}

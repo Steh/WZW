@@ -20,7 +20,7 @@ class Index(View):
     def post(request):
         if 'new_group' in request.POST:
             group = Group.objects.create()
-            return HttpResponseRedirect('/group/' + group.token)
+            return HttpResponseRedirect('group/' + group.token + '/group/edit')
 
         if 'open_group' in request.POST:
             form = OpenGroupForm(request.POST)

@@ -1,7 +1,6 @@
 body {
     padding-top: 50px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
     line-height: 1.42857143;
     color: #333;
     display: block;
@@ -15,14 +14,14 @@ body {
     margin-top: 10px;
     margin-bottom: 60px;
     background-color: #eee;
-    text-align: center;
     border-bottom: 1px solid #e5e5e5;
 }
 
 .jumbotron h1 {
-    color: inherit;
+    color: #FF8C00;
     font-size: 63px;
     text-align: center;
+    font-weight: bold;
 }
 
 .jumbotron ul {
@@ -31,12 +30,36 @@ body {
     font-weight: 200;
     line-height: 1.3;
     list-style-position: inside;
-    text-align: center;
     list-style-type: circle;
+}
+
+.left {
+    text-align: left;
+}
+
+.wzw {
+    color: #FF8C00;
 }
 
 .row {
     margin-right: -15px;
     margin-left: -15px;
     text-align: center;
+}
+
+hr {
+    margin: 50px;
+    height: 5px;
+    border-top-color: #FF8C00;
+}
+
+.featurette-heading{
+    color: #5cb85c;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.col-md-4 h2 {
+    font-weight: normal;
+    font-size: 35px;
 }

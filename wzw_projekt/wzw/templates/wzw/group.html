@@ -4,16 +4,12 @@
 {% block homeurl  %} # {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <h1>{{ group.name | default:'Gruppenname' }}</h1>
+    <div class="container marketing">
+        <div class="jumbotron">
+            <h2>Gruppenname: {{ group.name | default:'Gruppenname' }}</h2>
+            <p class="left">Gruppenbeschreibung: {{ group.description  | default:"Beschreibung" }}</p>
 
-        <p>{{ group.description  | default:"Beschreibung" }}</p>
-    </div>
-
-    <div class="row">
-        <div class="row">
-            <h2>Ausgaben</h2>
-
+            <h2>Hier finden Sie Ihre gesamten Ausgaben</h2>
             <div class="col-md-12">
                 {% if expense %}
                     <table class="table table-striped">
@@ -33,9 +29,10 @@
                         {% endfor %}
                         </table>
                     {% else %}
-                        <p>Keine Ausgabe erstellt</p>
+                        <p class="left">Keine Ausgabe erstellt</p>
                     {% endif %}
             </div>
         </div>
+    </div>
 
 {% endblock %}
