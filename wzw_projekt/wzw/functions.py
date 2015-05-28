@@ -1,8 +1,6 @@
 import random
 import string
 
-from wzw.models import *
-
 
 def create_token():
     token = ''
@@ -15,11 +13,7 @@ def create_token():
 
 # wenn gruppe existiert wird die schleife erneut ausgefuehrt
 # wenn nicht wird ein fehler geworfen und die Variable auf False gesetzt
-def token_existing(token):
+def token_existing():
     """token der getestet werden soll"""
-    try:
-        Group.objects.get(token=token)
-        tokenexisting = True
-    except Group.DoesNotExist:
-        tokenexisting = False
-    return tokenexisting
+    # TODO
+    return

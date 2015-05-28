@@ -1872,7 +1872,7 @@ abbr[data-original-title] {
 blockquote {
     padding: 10px 20px;
     margin: 0 0 20px;
-    font-size: 17.5px;
+    font-size: 18px;
     border-left: 5px solid #eee;
 }
 
@@ -1965,7 +1965,7 @@ kbd kbd {
 
 pre {
     display: block;
-    padding: 9.5px;
+    padding: 10px;
     margin: 0 0 10px;
     font-size: 13px;
     line-height: 1.42857143;
@@ -3488,7 +3488,7 @@ select[multiple].form-group-lg .form-control {
 }
 
 .has-feedback .form-control {
-    padding-right: 42.5px;
+    padding-right: 43px;
 }
 
 .form-control-feedback {
@@ -3730,7 +3730,7 @@ select[multiple].form-group-lg .form-control {
 
 @media (min-width: 768px) {
     .form-horizontal .form-group-lg .control-label {
-        padding-top: 14.333333px;
+        padding-top: 14px;
     }
 }
 
@@ -5188,7 +5188,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-nav {
-    margin: 7.5px -15px;
+    margin: 8px -15px;
 }
 
 .navbar-nav > li > a {
@@ -7062,7 +7062,7 @@ button.close {
 }
 
 .modal-header {
-    min-height: 16.42857143px;
+    min-height: 16px;
     padding: 15px;
     border-bottom: 1px solid #e5e5e5;
 }

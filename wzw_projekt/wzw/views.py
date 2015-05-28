@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
-from wzw.forms import GroupForm, OpenGroupForm, ExpenseForm, NewPersonForm, ChangeGroup
+from wzw.forms import GroupForm, OpenGroupForm, ExpenseForm, PersonForm, ChangeGroup
 from wzw.models import Group, Person, Expense
 
 
@@ -194,7 +194,7 @@ class NewPersonView(View):
         group.save()
 
         person = Person.objects.filter(group=group)
-        form = NewPersonForm(initial={'group': group.id})
+        form = PersonForm(initial={'group': group.id})
 
         context = {'form': form, 'person': person, 'group': group}
         return render(request, 'wzw/newPerson.html', context)
@@ -204,7 +204,7 @@ class NewPersonView(View):
         group = get_object_or_404(Group, token=token)
         group.save()
 
-        form = NewPersonForm(request.POST)
+        form = PersonForm(request.POST)
 
         if form.is_valid():
             form.save()
@@ -234,14 +234,14 @@ class EditPersonView(View):
 
         if 'change_person' in request.POST:
 
-            form = NewPersonForm(instance=person)
+            form = PersonForm(instance=person)
             context = {'form': form, 'person': person}
 
             return render(request, 'wzw/editPerson.html', context)
 
         elif 'apply_change_person' in request.POST:
 
-            form = NewPersonForm(instance=person, data=request.POST)
+            form = PersonForm(instance=person, data=request.POST)
 
             if form.is_valid():
                 form.save()
@@ -290,7 +290,7 @@ class DeletePersonView(View):
 
         elif 'apply_delete_person' in request.POST:
 
-            form = NewPersonForm(instance=person, data=request.POST)
+            form = PersonForm(instance=person, data=request.POST)
 
             if form.is_valid():
                 form.save()
@@ -308,7 +308,6 @@ class DeletePersonView(View):
 
             messages.info(request, 'Es wurde keine Person uebergeben')
             return HttpResponseRedirect('/group/' + group.token + '/person/')
-
 
 
 class ExpenseView(View):
@@ -425,11 +424,11 @@ class EditExpenseView(View):
             return render(request, 'Wzw/editExpense.html', context)
 
         elif 'apply_edit_expense' in request.POST:
-            id = request.POST['expense_id']
+            expenseid = request.POST['expense_id']
             form = ExpenseForm(request.POST)
 
             if form.is_valid():
-                expense = get_object_or_404(Expense, id=id)
+                expense = get_object_or_404(Expense, id=expenseid)
                 expense.name = form.cleaned_data['name']
                 expense.description = form.cleaned_data['description']
                 expense.debitDate = form.cleaned_data['debitDate']

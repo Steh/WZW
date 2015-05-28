@@ -25,7 +25,7 @@ class ExpenseForm(forms.ModelForm):
         exclude = {'createDate'}
 
 
-class NewPersonForm(forms.ModelForm):
+class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
         widgets = {'group': forms.HiddenInput()}
