@@ -18,7 +18,6 @@ from django.contrib import admin
 
 from wzw.views import *
 
-
 urlpatterns = [
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/$', GroupIndex.as_view()),
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/editGroup/$', GroupView.as_view()),

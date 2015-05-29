@@ -20,7 +20,7 @@ class Index(View):
     def post(request):
         if 'new_group' in request.POST:
             group = Group.objects.create()
-            return HttpResponseRedirect('group/' + group.token + '/group/new')
+            return HttpResponseRedirect('group/' + group.token + '/group/new' )
 
         if 'open_group' in request.POST:
             form = OpenGroupForm(request.POST)
@@ -86,7 +86,7 @@ class GroupView(View):
             group.delete()
             return HttpResponse('Gruppe wurde geloescht ' + token)
 
-
+# TODO bisschen unglueglich gewaehlt, da man so die new group url immer aufrufen kann :)
 class NewGroupView(View):
     @staticmethod
     def get(request, token):
@@ -95,9 +95,9 @@ class NewGroupView(View):
 
         form = ChangeGroup(instance=group)
         context = {'group': group, 'form': form}
-        return render(request, 'wzw/addGroup.html', context)
+        return render(request, 'wzw/newGroup.html', context)
 
-    #TODO schauen, warum hier nicht der Gruppenname und die Beschreibung übergeben werden
+    #TODO schauen, warum hier nicht der Gruppenname und die Beschreibung uebergeben werden
     @staticmethod
     def post(request, token):
         group = get_object_or_404(Group, token=token)
@@ -113,7 +113,7 @@ class NewGroupView(View):
             else:
                 messages.warning(request, 'Gruppe KONNTE NICHT erstellt werden')
 
-        return HttpResponseRedirect('/group/' + group.token + '/group/')
+        return HttpResponseRedirect('/group/' + group.token )
 
 
 class EditGroupView(View):
@@ -289,16 +289,15 @@ class DeletePersonView(View):
             return render(request, 'wzw/deletePerson.html', context)
 
         elif 'apply_delete_person' in request.POST:
+            personid = person.id
+            personname = person.name
+            person.delete()
 
-            form = PersonForm(instance=person, data=request.POST)
-
-            if form.is_valid():
-                form.save()
-
-                messages.info(request, 'Person wurde angepasst')
+            if (Person.objects.filter(id=personid)).count() == 0:
+                messages.info(request, personname + ' wurde geloescht')
                 return HttpResponseRedirect('/group/' + group.token + '/person/')
             else:
-                messages.warning(request, 'Aenderungen konnten nicht durchgefuehrt werden')
+                messages.warning(request, 'Person konnte nicht geloescht werden')
                 return HttpResponseRedirect('/group/' + group.token + '/person/')
 
         # default

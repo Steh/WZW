@@ -1,0 +1,18 @@
+{% extends "wzw/base.html" %}
+
+{% block title %}{{ block.super }} - Startseite{% endblock %}
+
+{% block content %}
+    <div class="container marketing">
+        <div class="jumbotron">
+            <h2>Gruppe einrichten</h2>
+            <p>Bevor es los geht, kannst du hier noch einen Gruppennamen und eine kurze Beschreibung eintragen.</p>
+            <p>(geht aber auch ohne)</p>
+            <form id="create_group" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input class="btn btn-lg btn-success" type="submit" value="weiter" name="open_group"/>
+            </form>
+        </div>
+    </div>
+{% endblock %}
