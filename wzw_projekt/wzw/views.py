@@ -232,10 +232,15 @@ class EditPersonView(View):
         person_id = request.POST['person_id']
         person = get_object_or_404(Person, id=person_id)
 
+        personReport = person.personCostReport()
+
         if 'change_person' in request.POST:
 
             form = PersonForm(instance=person)
-            context = {'form': form, 'person': person}
+            context = {'form': form,
+                       'group': group,
+                       'person': person,
+                       'report': personReport}
 
             return render(request, 'wzw/editPerson.html', context)
 

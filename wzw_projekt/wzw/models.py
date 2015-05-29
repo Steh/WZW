@@ -43,6 +43,34 @@ class Person(models.Model):
     name = models.CharField(max_length=64, blank=False)
     group = models.ForeignKey(Group)
 
+    def personCostReport(self):
+        # nur die Kosten meiner Gruppe
+        groupexpenses = Expense.objects.filter(group=self.group)
+        grouppersons = Person.objects.filter(group=self.group)
+        personsarray = {}
+
+        # LISTE FUER AUSGABEN ERSTELLEN
+        for person in grouppersons:
+            personsarray[person.name] = 0
+
+        # GEHT ALLE AUSGABEN DER GRUPPE DURCH
+        for expense in groupexpenses:
+            # BERECHNET DEN KOSTENANTEIL
+            cost = expense.cost / (expense.costPersons.count())
+
+            # GEHT ALLE PERSONEN DER AUSGABE DURCH
+            for p in expense.costPersons.all():
+                # TODO geht noch nicht
+
+                if self == expense.owner:
+                    if p != self:
+                        personsarray[p.name] -= cost
+                else:
+                    if p == expense.owner:
+                        personsarray[p.name] += cost
+
+        return personsarray
+
     def __str__(self):  # __unicode__ on Python 2
         return self.name
 
