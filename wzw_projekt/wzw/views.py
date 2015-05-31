@@ -20,7 +20,7 @@ class Index(View):
     def post(request):
         if 'new_group' in request.POST:
             group = Group.objects.create()
-            return HttpResponseRedirect('group/' + group.token + '/group/new' )
+            return HttpResponseRedirect('group/' + group.token + '/group/new')
 
         if 'open_group' in request.POST:
             form = OpenGroupForm(request.POST)
@@ -86,6 +86,7 @@ class GroupView(View):
             group.delete()
             return HttpResponse('Gruppe wurde geloescht ' + token)
 
+
 # TODO bisschen unglueglich gewaehlt, da man so die new group url immer aufrufen kann :)
 class NewGroupView(View):
     @staticmethod
@@ -97,7 +98,7 @@ class NewGroupView(View):
         context = {'group': group, 'form': form}
         return render(request, 'wzw/newGroup.html', context)
 
-    #TODO schauen, warum hier nicht der Gruppenname und die Beschreibung uebergeben werden
+    # TODO schauen, warum hier nicht der Gruppenname und die Beschreibung uebergeben werden
     @staticmethod
     def post(request, token):
         group = get_object_or_404(Group, token=token)
@@ -113,7 +114,7 @@ class NewGroupView(View):
             else:
                 messages.warning(request, 'Gruppe KONNTE NICHT erstellt werden')
 
-        return HttpResponseRedirect('/group/' + group.token )
+        return HttpResponseRedirect('/group/' + group.token)
 
 
 class EditGroupView(View):
@@ -232,7 +233,7 @@ class EditPersonView(View):
         person_id = request.POST['person_id']
         person = get_object_or_404(Person, id=person_id)
 
-        personReport = person.personCostReport()
+        personReport = person.personcostreport()
 
         if 'change_person' in request.POST:
 
@@ -396,7 +397,7 @@ class NewExpenseView(View):
 
 
 class EditExpenseView(View):
-    #   Bei GET   request: Auflistung aller Ausgaben
+    # Bei GET   request: Auflistung aller Ausgaben
     #   Bei POST  request: wenn gueltige ID uebergeben wurde, kann die Ausgabe bearbeitet werden, sonst 404
     @staticmethod
     def get(request, token):

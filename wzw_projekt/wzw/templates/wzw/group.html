@@ -1,35 +1,58 @@
 {% extends "wzw/base.html" %}
 
 {% block title %}{{ block.super }} - {{ group.name }} {% endblock %}
-{% block homeurl  %} # {% endblock %}
+{% block homeurl %} # {% endblock %}
 
 {% block content %}
     <div class="container marketing">
         <div class="jumbotron">
             <h2><span class="orange">Gruppenname:</span> "{{ group.name | default:'Gruppenname' }}"</h2>
-            <p class="left"><span class="italic" >Gruppenbeschreibung:</span> {{ group.description  | default:"Beschreibung" }}</p>
+
+            <p class="left"><span
+                    class="italic">Gruppenbeschreibung:</span> {{ group.description  | default:"Beschreibung" }}</p>
 
             <h2 class="orange">Ausgabenübersicht</h2>
-                {% if expense %}
-                    <table class="table table-striped">
-                        <tr>
-                            <th>Name</th>
-                            <th>Besitzer</th>
-                            <th>Kosten</th>
-                            <th>Teilhaber</th>
-                        </tr>
-                        {% for e in expense %}
+            {% if expense %}
+                <table class="table table-striped">
+                    <tr>
+                        <th>Name</th>
+                        <th>Besitzer</th>
+                        <th>Kosten</th>
+                        <th>Teilhaber</th>
+                    </tr>
+                    {% for e in expense %}
                         <tr>
                             <td>{{ e.name }}</td>
                             <td>{{ e.owner }}</td>
                             <td>{{ e.cost }}</td>
                             <td>{{ e.costPersons }}</td>
                         </tr>
-                        {% endfor %}
-                        </table>
-                    {% else %}
-                        <p class="left">Sie haben noch keine Ausgabe erstellt.</p>
-                    {% endif %}
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p class="left">Sie haben noch keine Ausgabe erstellt.</p>
+            {% endif %}
+
+            <h2 class="orange">Abrechung Version 0.1</h2>
+
+            <p>Stefan {u'Jan': 15.0, u'Micha': -15.0} <br/>
+                Bedeutet das Stefan von Jan 15.00 € bekommt und er Micha 15.00 € Schuldet.</p>
+            {% if person %}
+                <table class="table table-striped">
+                    <tr>
+                        <th>Name</th>
+                        <th>Abrechung</th>
+                    </tr>
+
+                    {% for p in person %}
+                        <tr>
+                            <td>{{ p.name }}</td>
+                            <td>{{ p.report }}</td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            {% endif %}
         </div>
     </div>
 

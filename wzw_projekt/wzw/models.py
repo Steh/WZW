@@ -43,7 +43,7 @@ class Person(models.Model):
     name = models.CharField(max_length=64, blank=False)
     group = models.ForeignKey(Group)
 
-    def personCostReport(self):
+    def personcostreport(self):
         # nur die Kosten meiner Gruppe
         groupexpenses = Expense.objects.filter(group=self.group)
         grouppersons = Person.objects.filter(group=self.group)
@@ -51,6 +51,8 @@ class Person(models.Model):
 
         # LISTE FUER AUSGABEN ERSTELLEN
         for person in grouppersons:
+            if person == self:
+                continue
             personsarray[person.name] = 0
 
         # GEHT ALLE AUSGABEN DER GRUPPE DURCH
@@ -60,16 +62,19 @@ class Person(models.Model):
 
             # GEHT ALLE PERSONEN DER AUSGABE DURCH
             for p in expense.costPersons.all():
-                # TODO geht noch nicht
-
+                # TODO TESTEN
                 if self == expense.owner:
                     if p != self:
-                        personsarray[p.name] -= cost
-                else:
-                    if p == expense.owner:
                         personsarray[p.name] += cost
+                        continue
+                elif p == expense.owner:
+                    continue
 
+                elif p != self:
+                    personsarray[expense.owner.name] -= cost
         return personsarray
+
+    report = property(personcostreport)
 
     def __str__(self):  # __unicode__ on Python 2
         return self.name

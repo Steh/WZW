@@ -1,6 +1,6 @@
 body {
     padding-top: 50px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 1.42857143;
     color: #333;
     display: block;
@@ -53,7 +53,7 @@ hr {
     border-top-color: #FF8C00;
 }
 
-.featurette-heading{
+.featurette-heading {
     color: #5cb85c;
     font-weight: bold;
     font-size: 40px;
