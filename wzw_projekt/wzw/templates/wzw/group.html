@@ -25,7 +25,7 @@
                             <td>{{ e.name }}</td>
                             <td>{{ e.owner }}</td>
                             <td>{{ e.cost }}</td>
-                            <td>{{ e.costPersons }}</td>
+                            <td>{{ e.costPersons.count }}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -38,6 +38,7 @@
             <p>Stefan {u'Jan': 15.0, u'Micha': -15.0} <br/>
                 Bedeutet das Stefan von Jan 15.00 € bekommt und er Micha 15.00 € Schuldet.</p>
             {% if person %}
+                <h2>Version 1</h2>
                 <table class="table table-striped">
                     <tr>
                         <th>Name</th>
@@ -50,8 +51,41 @@
                             <td>{{ p.report }}</td>
                         </tr>
                     {% endfor %}
-
                 </table>
+                <h2>Version 2</h2>
+                <table class="table table-striped">
+                    {% for p in person %}
+                        <tr>
+                            <th>{{ p.name }}</th>
+                            <th>Erhält</th>
+                            <th>Schuldet</th>
+                        </tr>
+                        {% for k,v in p.report.items %}
+                            {% if v > 0 %}
+                            <tr>
+                                <td></td><td>{{ v }} an {{ k }}</td>
+                            </tr>
+                            {% endif %}
+                        {% endfor%}
+                    {% endfor %}
+                </table>
+                <h2>Version 3</h2>
+                {% for p in person %}
+                    <ul>
+                        {% for k,v in p.report.items %}
+                            {% if v > 0 %}
+                                 {% ifchanged %}<h3>{{ p.name }}</h3>{% endifchanged %}
+                            {% endif %}
+                        {% endfor %}
+                        <ul>
+                            {% for k,v in p.report.items %}
+                                    {% if v > 0 %}
+                                        <li>{{ v }} Euro an {{ k }}</li>
+                                    {% endif %}
+                            {% endfor%}
+                        </ul>
+                    </ul>
+                {% endfor %}
             {% endif %}
         </div>
     </div>

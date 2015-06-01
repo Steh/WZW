@@ -65,13 +65,13 @@ class Person(models.Model):
                 # TODO TESTEN
                 if self == expense.owner:
                     if p != self:
-                        personsarray[p.name] += cost
+                        personsarray[p.name] -= cost
                         continue
                 elif p == expense.owner:
                     continue
 
                 elif p != self:
-                    personsarray[expense.owner.name] -= cost
+                    personsarray[expense.owner.name] += cost
         return personsarray
 
     report = property(personcostreport)
