@@ -7,19 +7,20 @@ from django.contrib import messages
 from wzw.forms import GroupForm, OpenGroupForm, ExpenseForm, PersonForm, ChangeGroup
 from wzw.models import Group, Person, Expense
 
-
-class Index(View):
+class IndexView(View):
     @staticmethod
     def get(request):
 
         form_new_group = GroupForm()
         form_open_group = OpenGroupForm()
+        # TODO message uebergeben
         return render(request, 'Wzw/index.html', {'form_new_group': form_new_group, 'form_open_group': form_open_group})
 
     @staticmethod
     def post(request):
         if 'new_group' in request.POST:
             group = Group.objects.create()
+            # TODO message uebergeben
             return HttpResponseRedirect('group/' + group.token + '/group/new')
 
         if 'open_group' in request.POST:
@@ -27,13 +28,14 @@ class Index(View):
 
             if form.is_valid():
                 token = form.cleaned_data['group_token']
+                # TODO message uebergeben
                 return HttpResponseRedirect('/group/' + token)
 
-        # TODO richtig machen
+        # TODO message uebergeben
         return HttpResponseRedirect('/')
 
 
-class GroupIndex(View):
+class GroupIndexView(View):
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
@@ -216,6 +218,7 @@ class NewPersonView(View):
         return HttpResponseRedirect('/group/' + group.token + '/person/')
 
 
+# noinspection PyPep8Naming
 class EditPersonView(View):
     @staticmethod
     def get(request, token):
@@ -233,15 +236,12 @@ class EditPersonView(View):
         person_id = request.POST['person_id']
         person = get_object_or_404(Person, id=person_id)
 
-        personReport = person.personcostreport()
-
         if 'change_person' in request.POST:
 
             form = PersonForm(instance=person)
             context = {'form': form,
                        'group': group,
-                       'person': person,
-                       'report': personReport}
+                       'person': person}
 
             return render(request, 'wzw/editPerson.html', context)
 

@@ -1,19 +1,33 @@
 import random
 import string
 
+'''
+Funktion um einen Token zu erstellen
+:returns Token
+'''
+
 
 def create_token():
-    token = ''
-    for x in range(0, 4):
-        token += ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(4))
-        if x <= 2:
-            token += '-'
+    unique = True
+    while unique:
+        token = ''
+        for x in range(0, 4):
+            token += ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(4))
+            if x <= 2:
+                token += '-'
+        unique = token_existing(token)
+
     return token
 
 
-# wenn gruppe existiert wird die schleife erneut ausgefuehrt
-# wenn nicht wird ein fehler geworfen und die Variable auf False gesetzt
-def token_existing():
+'''
+Wenn Gruppe mit Token bereits vorhanden, neuen Token generieren
+
+:returns boolean ob Gruppe existiert
+'''
+
+
+def token_existing(token):
     """token der getestet werden soll"""
-    # TODO
-    return
+    # TODO test ob Unique
+    return False

@@ -21,6 +21,7 @@ class GroupTests(TestCase):
         token = create_token()
         self.assertTrue(re.match("^([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}$)", token))
 
+
 class ReportTests(TestCase):
     def test_Report_Even(self):
         """
@@ -40,13 +41,13 @@ class ReportTests(TestCase):
         e1.costPersons.add(p1)
         e1.costPersons.add(p2)
         e1.costPersons.add(p3)
-        #TODO self.assertEqual(p1.report, '{u'p2': 10.0, u'p3': 10.0}', p1.report)
+        # TODO self.assertEqual(p1.report, '{u'p2': 10.0, u'p3': 10.0}', p1.report)
 
         e2 = Expense.objects.create(name='Ausgabe2', group=group, owner=p2, cost='30')
         e2.costPersons.add(p1)
         e2.costPersons.add(p2)
         e2.costPersons.add(p3)
-        #TODO self.assertEqual(p1.report, '{u'p2': 0.0, u'p3': 10.0}', p1.report)
+        # TODO self.assertEqual(p1.report, '{u'p2': 0.0, u'p3': 10.0}', p1.report)
 
         e3 = Expense.objects.create(name='Ausgabe3', group=group, owner=p3, cost='30')
         e3.costPersons.add(p1)
