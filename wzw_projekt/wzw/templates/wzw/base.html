@@ -30,21 +30,36 @@
             <ul class="nav navbar-nav">
                 {% if group %}
                     <li><a href="/group/{{ group.token }}">Meine Uebersicht</a></li>
+<<<<<<< HEAD
+                    <li><a href="/group/{{ group.token }}/group" class="dropdown-toggle" data-toggle="dropdown"
+                           role="button" aria-expanded="false">Gruppe<span class="caret"></span></a>
+=======
                     <li><a href="/group/{{ group.token }}/group" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Gruppe<span class="caret"></span></a>
+>>>>>>> master
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="/group/{{ group.token }}">Gruppe anzeigen</a></li>
                             <li><a href="/group/{{ group.token }}/group/edit">Gruppe editieren</a></li>
                             <li><a href="/group/{{ group.token }}/group/delete">Gruppe löschen</a></li>
                         </ul>
                     </li>
+<<<<<<< HEAD
+                    <li><a href="/group/{{ group.token }}/person" class="dropdown-toggle" data-toggle="dropdown"
+                           role="button" aria-expanded="false">Person<span class="caret"></span></a>
+=======
                     <li><a href="/group/{{ group.token }}/person" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Person<span class="caret"></span></a>
+>>>>>>> master
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="/group/{{ group.token }}/person/">Person anzeigen</a></li>
                             <li><a href="/group/{{ group.token }}/person/new">Person hinzufügen</a></li>
                             <!-- <li><a href="/group/{{ group.token }}/person/delete">Person löschen</a></li> -->
                         </ul>
                     </li>
+<<<<<<< HEAD
+                    <li><a href="/group/{{ group.token }}/expense" class="dropdown-toggle" data-toggle="dropdown"
+                           role="button" aria-expanded="false">Ausgaben<span class="caret"></span></a>
+=======
                     <li><a href="/group/{{ group.token }}/expense" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ausgaben<span class="caret"></span></a>
+>>>>>>> master
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="/group/{{ group.token }}/expense/">Ausgaben anzeigen</a></li>
                             <li><a href="/group/{{ group.token }}/expense/new">Ausgaben hinzufügen</a></li>

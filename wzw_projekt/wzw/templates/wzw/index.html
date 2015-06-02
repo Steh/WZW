@@ -6,6 +6,7 @@
     <div class="container marketing">
         <div class="jumbotron">
             <h1>Wer zahlt was?</h1>
+
             <p class="lead">
                 Gemeinsame Gruppenausfl&uuml;ge und damit verbundenen Geldausgaben!</br>
                 Ob im Urlaub oder f&uuml;r die Wochenendfestivals!
@@ -13,19 +14,23 @@
                 </br>
                 Das neue Tool "<span class="wzw">Wer zahlt was?</span>" hilft euch bei folgenden Fragestellungen.
             </p>
-                <ul>
-                    <li>Wer hat f&uuml;r was Geld vorgestreckt?</li>
-                    <li>Hatte Jan nicht Geld an Stefan verliehen?</li>
-                    <li>Wer zahlt denn nun am Ende welchen Betrag?</li>
-                </ul></br>
+            <ul>
+                <li>Wer hat f&uuml;r was Geld vorgestreckt?</li>
+                <li>Hatte Jan nicht Geld an Stefan verliehen?</li>
+                <li>Wer zahlt denn nun am Ende welchen Betrag?</li>
+            </ul>
+            </br>
             <p class="lead">
-                "<span class="wzw">Wer zahlt was?</span>" verspricht Abhilfe und l&auml;sst jeden Teilnehmer seine Ausgaben in wenigen Schritten eintragen.</br>
-                Am Ende berechnet das Tool f&uuml;r jeden Gruppenteilnehmer die offenen Kosten gegen&uuml;ber den Anderen.
+                "<span class="wzw">Wer zahlt was?</span>" verspricht Abhilfe und l&auml;sst jeden Teilnehmer seine
+                Ausgaben in wenigen Schritten eintragen.</br>
+                Am Ende berechnet das Tool f&uuml;r jeden Gruppenteilnehmer die offenen Kosten gegen&uuml;ber den
+                Anderen.
             </p>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <h2>Gruppe erstellen</h2>
+
                 <form id="new_group" method="post">
                     {% csrf_token %}
                     <input class="btn btn-lg btn-success" type="submit" value="Los geht's" name="new_group"/>
@@ -36,6 +41,7 @@
             </div>
             <div class="col-md-4">
                 <h2>Gruppe beitreten</h2>
+
                 <form id="open_group" method="post">
                     {% csrf_token %}
                     {{ form_open_group }}
@@ -44,41 +50,47 @@
             </div>
         </div>
     </div>
-        <hr>
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="featurette-heading">Hier ein Beispiel!</h2>
-                <p class="lead">
-                    Gruppenurlaub mit Micha, Stefan und Jan. Stefan leiht Micha f&uuml;r eine Taxifahrt etwas Geld und Jan &uuml;bernimmt zun&auml;chst f&uuml;r Micha, Stefan und sich die Kosten f&uuml;r den Flug.
-                </p>
-            </div>
-            <div class="col-md-5">
-                <img src="static/bilder/bild1.png" alt="Hier ein Beispiel!" title="Hier ein Beispiel!">
-            </div>
+    <hr>
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Hier ein Beispiel!</h2>
+
+            <p class="lead">
+                Gruppenurlaub mit Micha, Stefan und Jan. Stefan leiht Micha f&uuml;r eine Taxifahrt etwas Geld und
+                Jan &uuml;bernimmt zun&auml;chst f&uuml;r Micha, Stefan und sich die Kosten f&uuml;r den Flug.
+            </p>
         </div>
-        <hr>
-        <div class="row featurette">
-            <div class="col-md-5">
-                <img src="static/bilder/bild2.png" alt="Kostenaufstellung" title="Kostenaufstellung">
-            </div>
-            <div class="col-md-7">
-                <h2 class="featurette-heading">Kostenaufstellung</h2>
-                <p class="lead">
-                    Nach dem Urlaub gilt es herauszufinden: Was schulden sich Micha, Stefan und Jan? Wer hat eigentlich das meiste ausgegeben?
-                </p>
-            </div>
+        <div class="col-md-5">
+            <img src="static/bilder/bild1.png" alt="Hier ein Beispiel!" title="Hier ein Beispiel!">
         </div>
-        <hr>
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="featurette-heading">Schulden begleichen</h2>
-                <p class="lead">
-                    Diese Fragen m&ouml;chten wir mit "<span class="wzw">Wer zahlt was?</span>" l&ouml;sen.
-                </p>
-            </div>
-            <div class="col-md-5">
-                <img src="static/bilder/bild3.png" alt="Schulden begleichen" title="Schulden begleichen" width="500" height="400">
-            </div>
+    </div>
+    <hr>
+    <div class="row featurette">
+        <div class="col-md-5">
+            <img src="static/bilder/bild2.png" alt="Kostenaufstellung" title="Kostenaufstellung">
         </div>
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Kostenaufstellung</h2>
+
+            <p class="lead">
+                Nach dem Urlaub gilt es herauszufinden: Was schulden sich Micha, Stefan und Jan? Wer hat eigentlich das
+                meiste ausgegeben?
+            </p>
+        </div>
+    </div>
+    <hr>
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Schulden begleichen</h2>
+
+            <p class="lead">
+                Diese Fragen m&ouml;chten wir mit "<span class="wzw">Wer zahlt was?</span>" l&ouml;sen.
+            </p>
+        </div>
+        <div class="col-md-5">
+            <img src="static/bilder/bild3.png" alt="Schulden begleichen" title="Schulden begleichen" width="500"
+                 height="400">
+        </div>
+    </div>
 
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends "wzw/base.html" %}
 
 {% block title %}{{ block.super }} - {{ group.name }} {% endblock %}
-{% block homeurl  %} # {% endblock %}
+{% block homeurl %} # {% endblock %}
 
 {% block content %}
 
@@ -37,7 +37,9 @@
                     <input value='Ausgabe wirklich loeschen' type="submit" name="apply_delete_expense">
                 </form>
             </div>
-            <a href="/group/{{ group.token }}/expense/"><button>Abbrechen</button></a>
+            <a href="/group/{{ group.token }}/expense/">
+                <button>Abbrechen</button>
+            </a>
         </div>
     </div>
 

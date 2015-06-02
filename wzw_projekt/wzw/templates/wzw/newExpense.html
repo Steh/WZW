@@ -1,12 +1,13 @@
 {% extends "wzw/base.html" %}
 
 {% block title %}{{ block.super }} - {{ group.name }} {% endblock %}
-{% block homeurl  %} # {% endblock %}
+{% block homeurl %} # {% endblock %}
 
 {% block content %}
     <div class="container marketing">
         <div class="jumbotron">
             <h1>Neue Ausgabe</h1>
+
             <div class="row">
                 <div class="col-md-12">
                     {% if person %}
@@ -14,7 +15,7 @@
                             <form id="new_expense" method="post">
                                 {% csrf_token %}
                                 {{ form.as_p }}
-                                <input type="submit" value="Submit" name="new_expense" />
+                                <input type="submit" value="Submit" name="new_expense"/>
                             </form>
                         {% endif %}
                     {% else %}

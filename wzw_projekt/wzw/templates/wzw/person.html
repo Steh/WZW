@@ -1,44 +1,44 @@
 {% extends "wzw/base.html" %}
 
 {% block title %}{{ block.super }} - Startseite{% endblock %}
-{% block homeurl  %} /group/{{ group.token }} {% endblock %}
+{% block homeurl %} /group/{{ group.token }} {% endblock %}
 
 {% block content %}
     <div class="container marketing">
         <div class="jumbotron">
             <h3>Personen anzeigen</h3>
 
-                {% if person %}
-                    <table class="table table-striped">
+            {% if person %}
+                <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>l&ouml;schen</th>
+                    <th>bearbeiten</th>
+                </tr>
+                {% for p in person %}
                     <tr>
-                        <th>Name</th>
-                        <th>l&ouml;schen</th>
-                        <th>bearbeiten</th>
+                        <td>
+                            {{ p }}
+                        </td>
+                        <td>
+                            <form method="post" action="edit">
+                                {% csrf_token %}
+                                <input type="hidden" name="person_id" value="{{ p.id }}">
+                                <input type="submit" value="bearbeiten" name="change_person"/>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" action="delete">
+                                {% csrf_token %}
+                                <input type="hidden" name="person_id" value="{{ p.id }}">
+                                <input type="submit" value="löschen" name="delete_person"/>
+                            </form>
+                        </td>
                     </tr>
-                    {% for p in person %}
-                        <tr>
-                            <td>
-                                {{ p }}
-                            </td>
-                            <td>
-                                <form method="post" action="edit">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="person_id" value="{{ p.id }}">
-                                    <input type="submit" value="bearbeiten" name="change_person"/>
-                                </form>
-                            </td>
-                            <td>
-                                <form method="post" action="delete">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="person_id" value="{{ p.id }}">
-                                    <input type="submit" value="löschen" name="delete_person"/>
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                {% else %}
-                    <p>Du hast noch keine Personen angelegt.</p>
-                {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>Du hast noch keine Personen angelegt.</p>
+            {% endif %}
         </div>
     </div>
 

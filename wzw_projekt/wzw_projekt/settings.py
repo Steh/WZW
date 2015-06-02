@@ -37,7 +37,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'coverage',
     'wzw',
 )
 
@@ -91,7 +90,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'de-DE'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Berlin'
 
 USE_I18N = True
 

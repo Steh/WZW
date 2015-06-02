@@ -7,33 +7,39 @@ from django.contrib import messages
 from wzw.forms import GroupForm, OpenGroupForm, ExpenseForm, PersonForm, ChangeGroup
 from wzw.models import Group, Person, Expense
 
-
-class Index(View):
+class IndexView(View):
     @staticmethod
     def get(request):
 
         form_new_group = GroupForm()
         form_open_group = OpenGroupForm()
+        # TODO message uebergeben
         return render(request, 'Wzw/index.html', {'form_new_group': form_new_group, 'form_open_group': form_open_group})
 
     @staticmethod
     def post(request):
         if 'new_group' in request.POST:
             group = Group.objects.create()
+<<<<<<< HEAD
+            # TODO message uebergeben
+            return HttpResponseRedirect('group/' + group.token + '/group/new')
+=======
             return HttpResponseRedirect('group/' + group.token + '/group/new' )
+>>>>>>> master
 
         if 'open_group' in request.POST:
             form = OpenGroupForm(request.POST)
 
             if form.is_valid():
                 token = form.cleaned_data['group_token']
+                # TODO message uebergeben
                 return HttpResponseRedirect('/group/' + token)
 
-        # TODO richtig machen
+        # TODO message uebergeben
         return HttpResponseRedirect('/')
 
 
-class GroupIndex(View):
+class GroupIndexView(View):
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
@@ -86,6 +92,10 @@ class GroupView(View):
             group.delete()
             return HttpResponse('Gruppe wurde geloescht ' + token)
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 # TODO bisschen unglueglich gewaehlt, da man so die new group url immer aufrufen kann :)
 class NewGroupView(View):
     @staticmethod
@@ -97,7 +107,11 @@ class NewGroupView(View):
         context = {'group': group, 'form': form}
         return render(request, 'wzw/newGroup.html', context)
 
+<<<<<<< HEAD
+    # TODO schauen, warum hier nicht der Gruppenname und die Beschreibung uebergeben werden
+=======
     #TODO schauen, warum hier nicht der Gruppenname und die Beschreibung uebergeben werden
+>>>>>>> master
     @staticmethod
     def post(request, token):
         group = get_object_or_404(Group, token=token)
@@ -113,7 +127,11 @@ class NewGroupView(View):
             else:
                 messages.warning(request, 'Gruppe KONNTE NICHT erstellt werden')
 
+<<<<<<< HEAD
+        return HttpResponseRedirect('/group/' + group.token)
+=======
         return HttpResponseRedirect('/group/' + group.token )
+>>>>>>> master
 
 
 class EditGroupView(View):
@@ -215,6 +233,7 @@ class NewPersonView(View):
         return HttpResponseRedirect('/group/' + group.token + '/person/')
 
 
+# noinspection PyPep8Naming
 class EditPersonView(View):
     @staticmethod
     def get(request, token):
@@ -235,7 +254,9 @@ class EditPersonView(View):
         if 'change_person' in request.POST:
 
             form = PersonForm(instance=person)
-            context = {'form': form, 'person': person}
+            context = {'form': form,
+                       'group': group,
+                       'person': person}
 
             return render(request, 'wzw/editPerson.html', context)
 
@@ -391,7 +412,7 @@ class NewExpenseView(View):
 
 
 class EditExpenseView(View):
-    #   Bei GET   request: Auflistung aller Ausgaben
+    # Bei GET   request: Auflistung aller Ausgaben
     #   Bei POST  request: wenn gueltige ID uebergeben wurde, kann die Ausgabe bearbeitet werden, sonst 404
     @staticmethod
     def get(request, token):

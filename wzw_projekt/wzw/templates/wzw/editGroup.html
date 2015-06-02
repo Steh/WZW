@@ -1,11 +1,11 @@
 {% extends "wzw/base.html" %}
 
 {% block title %}{{ block.super }} - Startseite{% endblock %}
-{% block homeurl  %} /group/{{ group.token }} {% endblock %}
+{% block homeurl %} /group/{{ group.token }} {% endblock %}
 
 {% block content %}
 
-   <div class="container marketing">
+    <div class="container marketing">
         <div class="jumbotron">
             <h3>Hier können Sie Ihrer Gruppe einen originellen Namen geben und eine Gruppenbeschreibung bsp.:
                 "Unser Malle Urlaub" einfügen.</h3></br>
@@ -15,6 +15,6 @@
                 <input class="btn btn-lg btn-success" type="submit" value="Weiter" name="edit_group"/>
             </form>
         </div>
-   </div>
+    </div>
 
 {% endblock %}
