@@ -90,10 +90,6 @@ class GroupView(View):
             group.delete()
             return HttpResponse('Gruppe wurde geloescht ' + token)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 # TODO bisschen unglueglich gewaehlt, da man so die new group url immer aufrufen kann :)
 class NewGroupView(View):
     @staticmethod
@@ -105,11 +101,7 @@ class NewGroupView(View):
         context = {'group': group, 'form': form}
         return render(request, 'wzw/newGroup.html', context)
 
-<<<<<<< HEAD
-    # TODO schauen, warum hier nicht der Gruppenname und die Beschreibung uebergeben werden
-=======
     #TODO schauen, warum hier nicht der Gruppenname und die Beschreibung uebergeben werden
->>>>>>> master
     @staticmethod
     def post(request, token):
         group = get_object_or_404(Group, token=token)
@@ -125,11 +117,8 @@ class NewGroupView(View):
             else:
                 messages.warning(request, 'Gruppe KONNTE NICHT erstellt werden')
 
-<<<<<<< HEAD
         return HttpResponseRedirect('/group/' + group.token)
-=======
-        return HttpResponseRedirect('/group/' + group.token )
->>>>>>> master
+
 
 
 class EditGroupView(View):
