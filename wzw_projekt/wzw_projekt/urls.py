@@ -7,16 +7,14 @@ from wzw.views import GroupView, GroupIndexView, NewGroupView, EditGroupView, De
     IndexView
 
 urlpatterns = [
-<<<<<<< HEAD
     # Group VIEWS
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/$',
         GroupIndexView.as_view()),
-=======
+
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/$',
         GroupIndex.as_view()),
 
     # Group VIEWS
->>>>>>> master
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/group/$',
         GroupView.as_view()),
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/group/new$',
