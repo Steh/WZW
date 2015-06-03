@@ -3,6 +3,7 @@ from django.db import models
 
 from wzw.functions import create_token
 
+# TODO Beschreibung auf deutsch
 
 class Group(models.Model):
     name = models.CharField(max_length=32, blank=True, default='')
