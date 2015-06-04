@@ -1,3 +1,17 @@
+"""
+Datenmodele
+
+Attribute der Attribute:
+max_length:     maximale laenge
+blank:          Darf leer sein
+default:        Standart wert
+verbose_name:   Anzeige Name in Formularen
+help_text:      Hilfetext wird in Formularen angezeigt, dient als dokumentation der Felder
+auto_now:       Beim Speichern wird das aktuelle Datum gespeichert
+unique:         Muss eindeutig sein
+editable:       Bearbeitbar
+"""
+
 from django.utils import timezone
 from django.db import models
 
