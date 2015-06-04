@@ -8,10 +8,9 @@
         <div class="jumbotron">
             <h2><span class="orange">Gruppenname:</span> "{{ group.name | default:'Gruppenname' }}"</h2>
 
-            <p class="left"><span
-                    class="italic">Gruppenbeschreibung:</span> {{ group.description  | default:"Beschreibung" }}</p>
-            <h2><span class="orange">Gruppenname:</span> "{{ group.name | default:'Hier koennte dein Gruppenname stehen.' }}"</h2>
-            <p class="left"><span class="italic" >Gruppenbeschreibung:</span> {{ group.description  | default:"Hier koennte deine Beschreibung stehen." }}</p>
+            <p class="left">
+                <span class="italic">Gruppenbeschreibung:</span> {{ group.description  | default:"Beschreibung" }}
+            </p>
 
             <h2 class="orange">Ausgabenübersicht</h2>
             {% if expense %}

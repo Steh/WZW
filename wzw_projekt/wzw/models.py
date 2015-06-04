@@ -24,7 +24,7 @@ class Group(models.Model):
                                  blank=False,
                                  help_text="Gibt an wann die Gruppe das letzte mal aufgerufen wurde.(wird bei jedem Speichern aktualisiert)")
 
-    # Rückgabewert bei aufruf des Objekts
+    # Rueckgabewert bei aufruf des Objekts
     def __str__(self):  # __unicode__ on Python 2
         return self.token
 
@@ -107,7 +107,7 @@ class Person(models.Model):
 
     report = property(personcostreport)
 
-    # Rückgabewert bei aufruf des Objekts
+    # Rueckgabewert bei aufruf des Objekts
     def __str__(self):  # __unicode__ on Python 2
         return self.name
 
@@ -143,6 +143,6 @@ class Expense(models.Model):
                              verbose_name="Ausgabe",
                              help_text="Wert der Ausgabe")
 
-    # Rückgabewert bei aufruf des Objekts
+    # Rueckgabewert bei aufruf des Objekts
     def __str__(self):  # __unicode__ on Python 2
         return self.name
