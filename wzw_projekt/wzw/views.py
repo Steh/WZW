@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.views.generic import View
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.template import RequestContext
 
 from wzw.forms import GroupForm, OpenGroupForm, ExpenseForm, PersonForm, ChangeGroup
 from wzw.models import Group, Person, Expense
@@ -491,3 +492,12 @@ class DeleteExpenseView(View):
 
         messages.warning(request, 'Es wurde keine Ausgabe gefunden')
         return HttpResponseRedirect('/group/' + token + '/expense/')
+
+def impressum(request):
+    context = RequestContext(request)
+    return render_to_response('wzw/impressum.html', context)
+
+def about(request):
+    context = RequestContext(request)
+    return render_to_response('wzw/about.html', context)
+

@@ -1,10 +1,10 @@
-from django.conf.urls import include, url
+from django.conf.urls import include, url, patterns
 from django.contrib import admin
 
 from wzw.views import GroupView, GroupIndexView, NewGroupView, EditGroupView, DeleteGroupView, \
     PersonView, NewPersonView, DeletePersonView, EditPersonView, \
     ExpenseView, NewExpenseView, DeleteExpenseView, EditExpenseView, \
-    IndexView
+    IndexView, impressum, about
 
 urlpatterns = [
     # Group VIEWS
@@ -46,4 +46,12 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', IndexView.as_view()),
+    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/impressum/',
+        impressum, name='impressum'),
+    url(r'^group//impressum/',
+        impressum, name='impressum'),
+    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/about/',
+        about, name='about'),
+    url(r'^group//about/',
+        about, name='about'),
 ]
