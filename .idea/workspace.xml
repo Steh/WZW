@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c7d8787-72ad-49ff-a882-c3760e3bd042" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/about.html" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/about.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/base.html" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/static/css/basis.css" afterPath="$PROJECT_DIR$/wzw_projekt/static/css/basis.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/db.sqlite3" afterPath="$PROJECT_DIR$/wzw_projekt/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/group.html" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/group.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/impressum.html" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/impressum.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/models.py" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw_projekt/urls.py" afterPath="$PROJECT_DIR$/wzw_projekt/wzw_projekt/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/views.py" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WZW.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -62,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1126" max-vertical-offset="2108">
-              <caret line="530" column="0" selection-start-line="530" selection-start-column="0" selection-end-line="530" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.62095875" vertical-offset="1194" max-vertical-offset="2091">
+              <caret line="525" column="51" selection-start-line="525" selection-start-column="51" selection-end-line="525" selection-end-column="51" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
                 <element signature="e#434#1308#0" expanded="false" />
@@ -87,10 +78,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw_projekt/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41694537" vertical-offset="0" max-vertical-offset="1071">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1071">
               <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
@@ -160,8 +151,8 @@
         <option value="$PROJECT_DIR$/wzw_projekt/wzw/models.py" />
         <option value="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/group.html" />
         <option value="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/base.html" />
-        <option value="$PROJECT_DIR$/wzw_projekt/wzw/views.py" />
         <option value="$PROJECT_DIR$/wzw_projekt/wzw_projekt/urls.py" />
+        <option value="$PROJECT_DIR$/wzw_projekt/wzw/views.py" />
       </list>
     </option>
   </component>
@@ -952,10 +943,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw_projekt/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1071">
+          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1126" max-vertical-offset="2108">
-          <caret line="530" column="0" selection-start-line="530" selection-start-column="0" selection-end-line="530" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.62095875" vertical-offset="1194" max-vertical-offset="2091">
+          <caret line="525" column="51" selection-start-line="525" selection-start-column="51" selection-end-line="525" selection-end-column="51" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
             <element signature="e#434#1308#0" expanded="false" />
@@ -971,16 +972,6 @@
             <element signature="e#12095#13122#0" expanded="false" />
             <element signature="e#13158#15477#0" expanded="false" />
             <element signature="e#15515#16798#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw_projekt/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41694537" vertical-offset="0" max-vertical-offset="1071">
-          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>

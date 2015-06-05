@@ -493,14 +493,6 @@ class DeleteExpenseView(View):
         messages.warning(request, 'Es wurde keine Ausgabe gefunden')
         return HttpResponseRedirect('/group/' + token + '/expense/')
 
-def impressum(request):
-    context = RequestContext(request)
-    return render_to_response('wzw/impressum.html', context)
-
-def about(request):
-    context = RequestContext(request)
-    return render_to_response('wzw/about.html', context)
-
 class ImpressumView(View):
 
     @staticmethod
@@ -520,6 +512,10 @@ class ImpressumView(View):
 
         return HttpResponseRedirect('/group/' + group.token + '/impressum/')
 
+def impressum(request):
+    context = RequestContext(request)
+    return render_to_response('wzw/impressum.html', context)
+
 class AboutView(View):
 
     @staticmethod
@@ -538,3 +534,7 @@ class AboutView(View):
         group.save()
 
         return HttpResponseRedirect('/group/' + group.token + '/about/')
+
+def about(request):
+    context = RequestContext(request)
+    return render_to_response('wzw/about.html', context)
