@@ -22,7 +22,7 @@ class Group(models.Model):
                             blank=True,
                             default='',
                             verbose_name="Gruppenname",
-                            help_text="Name fuer die Gruppe (optional)")
+                            help_text="Name für die Gruppe (optional)")
     description = models.CharField(max_length=128,
                                    blank=True,
                                    default='',

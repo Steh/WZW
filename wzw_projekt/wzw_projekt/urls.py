@@ -4,17 +4,25 @@ from django.contrib import admin
 from wzw.views import GroupView, GroupIndexView, NewGroupView, EditGroupView, DeleteGroupView, \
     PersonView, NewPersonView, DeletePersonView, EditPersonView, \
     ExpenseView, NewExpenseView, DeleteExpenseView, EditExpenseView, \
-    IndexView, impressum, about
+    IndexView, impressum, about, ImpressumView, AboutView
 
 urlpatterns = [
+
+    # STARTSEITE, IMPRESSUM UND UEBER UNS  VIEW
+
+    url(r'^$', IndexView.as_view()),
+    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/impressum/',
+        ImpressumView.as_view()),
+    url(r'^group//impressum/',
+        impressum, name='impressum'),
+    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/about/',
+        AboutView.as_view()),
+    url(r'^group//about/',
+        about, name='about'),
+
     # Group VIEWS
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/$',
         GroupIndexView.as_view()),
-
-    # url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/$',
-    #    GroupIndex.as_view()),
-
-    # Group VIEWS
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/group/$',
         GroupView.as_view()),
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/group/new$',
@@ -34,7 +42,7 @@ urlpatterns = [
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/person/delete$',
         DeletePersonView.as_view()),
 
-    # AUSGABEN SEITEN
+    # AUSGABEN VIEW
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/$',
         ExpenseView.as_view()),
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/new$',
@@ -44,14 +52,6 @@ urlpatterns = [
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/delete$',
         DeleteExpenseView.as_view()),
 
+    # BACKEND VIEW
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', IndexView.as_view()),
-    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/impressum/',
-        impressum, name='impressum'),
-    url(r'^group//impressum/',
-        impressum, name='impressum'),
-    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/about/',
-        about, name='about'),
-    url(r'^group//about/',
-        about, name='about'),
 ]

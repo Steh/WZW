@@ -501,3 +501,40 @@ def about(request):
     context = RequestContext(request)
     return render_to_response('wzw/about.html', context)
 
+class ImpressumView(View):
+
+    @staticmethod
+    def get(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        person = Person.objects.filter(group=group)
+
+        context = {'person': person, 'group': group}
+        return render(request, 'wzw/impressum.html', context)
+
+    @staticmethod
+    def post(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        return HttpResponseRedirect('/group/' + group.token + '/impressum/')
+
+class AboutView(View):
+
+    @staticmethod
+    def get(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        person = Person.objects.filter(group=group)
+
+        context = {'person': person, 'group': group}
+        return render(request, 'wzw/about.html', context)
+
+    @staticmethod
+    def post(request, token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+
+        return HttpResponseRedirect('/group/' + group.token + '/about/')
