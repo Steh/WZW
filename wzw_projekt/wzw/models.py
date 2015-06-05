@@ -143,12 +143,11 @@ class Expense(models.Model):
                               verbose_name='Gruppe',
                               help_text="Zuordnung der Ausgabe zu einer Gruppe, kann nicht geaendert werden.")
     createDate = models.DateField(default=timezone.now,
-                                  verbose_name='Erstellungs Datum',
+                                  verbose_name='Erstellungsdatum',
                                   help_text="Gibt an wann die Ausgabe erstellt wurde.")
     debitDate = models.DateField(blank=True,
                                  default=timezone.now,
-                                 verbose_name='',
-                                 help_text="Gibt an wann die Ausgabe bezahlt wurde.")
+                                 verbose_name='Datum der Zahlung')
     costPersons = models.ManyToManyField(Person,
                                          blank=False,
                                          verbose_name='Teilhaber',

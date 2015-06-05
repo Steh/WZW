@@ -6,7 +6,7 @@
 {% block content %}
     <div class="container marketing">
         <div class="jumbotron">
-            <h3>Personen anzeigen</h3>
+            <h3>Personenübersicht</h3>
 
             {% if person %}
                 <table class="table table-striped">
@@ -24,14 +24,14 @@
                             <form method="post" action="edit">
                                 {% csrf_token %}
                                 <input type="hidden" name="person_id" value="{{ p.id }}">
-                                <input type="submit" value="bearbeiten" name="change_person"/>
+                                <input class="btn btn-lg btn-success" type="submit" value="bearbeiten" name="change_person"/>
                             </form>
                         </td>
                         <td>
                             <form method="post" action="delete">
                                 {% csrf_token %}
                                 <input type="hidden" name="person_id" value="{{ p.id }}">
-                                <input type="submit" value="löschen" name="delete_person"/>
+                                <input class="btn btn-lg btn-success" type="submit" value="löschen" name="delete_person"/>
                             </form>
                         </td>
                     </tr>
