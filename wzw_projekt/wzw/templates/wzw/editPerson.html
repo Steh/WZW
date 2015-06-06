@@ -14,7 +14,7 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="hidden" name="person_id" value="{{ person.id }}">
-                <input class="btn btn-lg btn-success" type="submit" value="aendern" name="apply_change_person"/>
+                <input class="btn btn-lg btn-success" type="submit" value="&auml;ndern" name="apply_change_person"/>
             </form>
 
             <p>{{ person.report }}</p>

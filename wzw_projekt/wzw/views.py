@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.http import HttpResponse
 from django.views.generic import View
 from django.shortcuts import render, get_object_or_404, render_to_response
@@ -303,10 +305,10 @@ class DeletePersonView(View):
             person.delete()
 
             if (Person.objects.filter(id=personid)).count() == 0:
-                messages.info(request, personname + ' wurde geloescht')
+                messages.info(request, personname + ' wurde gelöscht')
                 return HttpResponseRedirect('/group/' + group.token + '/person/')
             else:
-                messages.warning(request, 'Person konnte nicht geloescht werden')
+                messages.warning(request, 'Person konnte nicht gelöscht werden')
                 return HttpResponseRedirect('/group/' + group.token + '/person/')
 
         # default
@@ -485,7 +487,7 @@ class DeleteExpenseView(View):
 
         # bei loeschbestaetigung
         if 'apply_delete_expense' in request.POST:
-            messages.warning(request, "Ausgabe wurde erfolgreich geloescht: " + expense.name)
+            messages.warning(request, "Ausgabe wurde erfolgreich gelöscht: " + expense.name)
             expense.delete()
 
             return HttpResponseRedirect('/group/' + token + '/expense/')

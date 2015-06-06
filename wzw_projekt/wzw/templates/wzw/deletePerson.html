@@ -29,18 +29,18 @@
                     {% endif %}
                 </tr>
             </table>
-            <h3>Person loeschen</h3>
+            <h3>Person l&ouml;schen</h3>
             {% if not expenseowner %}
                 <div class="col-md-12">
                     <form id="new_person" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="person_id" value="{{ person.id }}">
-                        <input type="submit" value="Person loeschen" name="apply_delete_person"/>
+                        <input class="btn btn-lg btn-success" type="submit" value="l&ouml;schen" name="apply_delete_person"/>
                     </form>
                 </div>
             {% else %}
                 <div class="col-md-12">
-                    <p>Person kann erst geloescht werden wenn sie kein Besitzer mehr von folgenden Kosten ist</p>
+                    <p>Person kann erst gel&ouml;scht werden wenn sie kein Besitzer mehr von folgenden Kosten ist</p>
                     <ul>
                         {% for expense in expenseowner %}
                             <li>{{ expense.name }}</li>
