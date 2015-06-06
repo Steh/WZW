@@ -91,6 +91,7 @@ class GroupView(View):
             group.delete()
             return HttpResponse('Gruppe wurde geloescht ' + token)
 
+
 # TODO bisschen unglueglich gewaehlt, da man so die new group url immer aufrufen kann :)
 class NewGroupView(View):
     @staticmethod
@@ -119,7 +120,6 @@ class NewGroupView(View):
                 messages.warning(request, 'Gruppe KONNTE NICHT erstellt werden')
 
         return HttpResponseRedirect('/group/' + group.token)
-
 
 
 class EditGroupView(View):
@@ -493,48 +493,18 @@ class DeleteExpenseView(View):
         messages.warning(request, 'Es wurde keine Ausgabe gefunden')
         return HttpResponseRedirect('/group/' + token + '/expense/')
 
+
 class ImpressumView(View):
 
     @staticmethod
-    def get(request, token):
-        group = get_object_or_404(Group, token=token)
-        group.save()
+    def get(request):
+        context = RequestContext(request)
+        return render_to_response('wzw/impressum.html', context)
 
-        person = Person.objects.filter(group=group)
-
-        context = {'person': person, 'group': group}
-        return render(request, 'wzw/impressum.html', context)
-
-    @staticmethod
-    def post(request, token):
-        group = get_object_or_404(Group, token=token)
-        group.save()
-
-        return HttpResponseRedirect('/group/' + group.token + '/impressum/')
-
-def impressum(request):
-    context = RequestContext(request)
-    return render_to_response('wzw/impressum.html', context)
 
 class AboutView(View):
 
     @staticmethod
-    def get(request, token):
-        group = get_object_or_404(Group, token=token)
-        group.save()
-
-        person = Person.objects.filter(group=group)
-
-        context = {'person': person, 'group': group}
-        return render(request, 'wzw/about.html', context)
-
-    @staticmethod
-    def post(request, token):
-        group = get_object_or_404(Group, token=token)
-        group.save()
-
-        return HttpResponseRedirect('/group/' + group.token + '/about/')
-
-def about(request):
-    context = RequestContext(request)
-    return render_to_response('wzw/about.html', context)
+    def get(request):
+        context = RequestContext(request)
+        return render_to_response('wzw/about.html', context)

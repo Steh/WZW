@@ -48,9 +48,10 @@
                             <li><a href="/group/{{ group.token }}/expense/">Ausgaben anzeigen</a></li>
                         </ul>
                     </li>
+                {% else %}
+                <li><a href="/about/">&Uuml;ber uns</a></li>
+                <li><a href="/impressum/">Impressum</a></li>
                 {% endif %}
-                <li><a href="/group/{{ group.token }}/about/">&Uuml;ber uns</a></li>
-                <li><a href="/group/{{ group.token }}/impressum/">Impressum</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->

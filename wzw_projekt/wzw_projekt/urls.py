@@ -4,21 +4,17 @@ from django.contrib import admin
 from wzw.views import GroupView, GroupIndexView, NewGroupView, EditGroupView, DeleteGroupView, \
     PersonView, NewPersonView, DeletePersonView, EditPersonView, \
     ExpenseView, NewExpenseView, DeleteExpenseView, EditExpenseView, \
-    IndexView, impressum, about, ImpressumView, AboutView
+    IndexView, ImpressumView, AboutView
 
 urlpatterns = [
 
     # STARTSEITE, IMPRESSUM UND UEBER UNS  VIEW
 
     url(r'^$', IndexView.as_view()),
-    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/impressum/',
+    url(r'^impressum/',
         ImpressumView.as_view()),
-    url(r'^group//impressum/',
-        impressum, name='impressum'),
-    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/about/',
+    url(r'^about/',
         AboutView.as_view()),
-    url(r'^group//about/',
-        about, name='about'),
 
     # Group VIEWS
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/$',

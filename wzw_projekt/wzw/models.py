@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 Datenmodele
 
@@ -16,6 +18,7 @@ from django.utils import timezone
 from django.db import models
 
 from wzw.functions import create_token
+
 
 class Group(models.Model):
     name = models.CharField(max_length=32,
