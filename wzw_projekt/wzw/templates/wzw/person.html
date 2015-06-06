@@ -6,14 +6,14 @@
 {% block content %}
     <div class="container marketing">
         <div class="jumbotron">
-            <h3 class="orange">Personenübersicht</h3>
+            <h2 class="orange">Personenübersicht</h2>
 
             {% if person %}
                 <table class="table table-striped">
                 <tr>
                     <th>Name</th>
-                    <th>l&ouml;schen</th>
                     <th>bearbeiten</th>
+                    <th>l&ouml;schen</th>
                 </tr>
                 {% for p in person %}
                     <tr>
@@ -24,14 +24,14 @@
                             <form method="post" action="edit">
                                 {% csrf_token %}
                                 <input type="hidden" name="person_id" value="{{ p.id }}">
-                                <input class="btn btn-lg btn-success" type="submit" value="bearbeiten" name="change_person"/>
+                                <input class="btl btn-lg btn-success" type="submit" value="bearbeiten" name="change_person"/>
                             </form>
                         </td>
                         <td>
                             <form method="post" action="delete">
                                 {% csrf_token %}
                                 <input type="hidden" name="person_id" value="{{ p.id }}">
-                                <input class="btn btn-lg btn-success" type="submit" value="löschen" name="delete_person"/>
+                                <input class="btl btn-lg btn-success" type="submit" value="löschen" name="delete_person"/>
                             </form>
                         </td>
                     </tr>

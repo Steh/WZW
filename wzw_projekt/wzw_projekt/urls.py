@@ -1,7 +1,7 @@
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
 
-from wzw.views import GroupView, GroupIndexView, NewGroupView, EditGroupView, DeleteGroupView, \
+from wzw.views import GroupView, GroupIndexView, NewGroupView, EditGroupView, \
     PersonView, NewPersonView, DeletePersonView, EditPersonView, \
     ExpenseView, NewExpenseView, DeleteExpenseView, EditExpenseView, \
     IndexView, ImpressumView, AboutView
@@ -25,8 +25,8 @@ urlpatterns = [
         NewGroupView.as_view()),
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/group/edit$',
         EditGroupView.as_view()),
-    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/group/delete$',
-        DeleteGroupView.as_view()),
+    # url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/group/delete$',
+    #     DeleteGroupView.as_view()),
 
     # PERSONEN VIEW
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/person/$',

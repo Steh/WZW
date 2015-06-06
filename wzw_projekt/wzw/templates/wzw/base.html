@@ -29,10 +29,10 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 {% if group %}
-                    <li><a href="/group/{{ group.token }}">Kosten&uuml;bersicht</a></li>
+                    <li><a href="/group/{{ group.token }}/group">Kosten&uuml;bersicht</a></li>
                     <li><a href="/group/{{ group.token }}/group" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Gruppe<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/group/{{ group.token }}">Gruppe anzeigen</a></li>
+                            <li><a href="/group/{{ group.token }}/group">Gruppe anzeigen</a></li>
                             <li><a href="/group/{{ group.token }}/group/edit">Gruppe editieren</a></li>
                         </ul>
                     </li>
