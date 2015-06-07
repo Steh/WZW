@@ -163,7 +163,7 @@ class EditGroupView(View):
             else:
                 messages.warning(request, 'Gruppe KONNTE NICHT angepasst werden')
 
-        return HttpResponseRedirect('/group/' + group.token + '/group/')
+        return HttpResponseRedirect('/group/' + group.token)
 
 
 # Gruppe wird gelöscht

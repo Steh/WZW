@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c7d8787-72ad-49ff-a882-c3760e3bd042" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/admin.py" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/forms.py" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/functions.py" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/functions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/models.py" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw_projekt/settings.py" afterPath="$PROJECT_DIR$/wzw_projekt/wzw_projekt/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/tests.py" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw_projekt/urls.py" afterPath="$PROJECT_DIR$/wzw_projekt/wzw_projekt/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/base.html" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/db.sqlite3" afterPath="$PROJECT_DIR$/wzw_projekt/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw/views.py" afterPath="$PROJECT_DIR$/wzw_projekt/wzw/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wzw_projekt/wzw_projekt/wsgi.py" afterPath="$PROJECT_DIR$/wzw_projekt/wzw_projekt/wsgi.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WZW.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,13 +39,13 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.0222964" vertical-offset="4840" max-vertical-offset="7004">
-              <caret line="311" column="39" selection-start-line="311" selection-start-column="39" selection-end-line="311" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.7636566" vertical-offset="1117" max-vertical-offset="7004">
+              <caret line="165" column="59" selection-start-line="165" selection-start-column="59" selection-end-line="165" selection-end-column="59" />
               <folding>
                 <element signature="e#480#1674#0" expanded="false" />
                 <element signature="e#1724#2624#0" expanded="false" />
-                <element signature="e#7171#8121#0" expanded="false" />
-                <element signature="e#8169#10101#0" expanded="false" />
+                <element signature="e#7159#8109#0" expanded="false" />
+                <element signature="e#8157#10089#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -85,7 +80,6 @@
         <option value="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/expense.html" />
         <option value="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/deletePerson.html" />
         <option value="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/about.html" />
-        <option value="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/base.html" />
         <option value="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/index.html" />
         <option value="$PROJECT_DIR$/wzw_projekt/static/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/editPerson.html" />
@@ -103,6 +97,7 @@
         <option value="$PROJECT_DIR$/wzw_projekt/wzw/admin.py" />
         <option value="$PROJECT_DIR$/wzw_projekt/wzw/functions.py" />
         <option value="$PROJECT_DIR$/wzw_projekt/wzw/tests.py" />
+        <option value="$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/base.html" />
         <option value="$PROJECT_DIR$/wzw_projekt/wzw/views.py" />
       </list>
     </option>
@@ -493,8 +488,8 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39925373" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -520,9 +515,9 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18154761" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39925373" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39925373" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -770,13 +765,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.09546539" vertical-offset="0" max-vertical-offset="0">
-          <caret line="34" column="71" selection-start-line="34" selection-start-column="71" selection-end-line="34" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/editPerson.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21469575" vertical-offset="0" max-vertical-offset="871">
@@ -805,13 +793,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/group.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23421355" vertical-offset="0" max-vertical-offset="1683">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/deleteGroup.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33180252" vertical-offset="0" max-vertical-offset="871">
@@ -823,7 +804,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="459">
           <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -831,7 +811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.058553386" vertical-offset="0" max-vertical-offset="871">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -839,7 +818,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1989">
           <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -847,9 +825,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1020">
           <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-          <folding>
-            <element signature="e#25#76#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -857,7 +832,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.018952062" vertical-offset="0" max-vertical-offset="897">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -865,7 +839,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="897">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -873,7 +846,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.018952062" vertical-offset="0" max-vertical-offset="897">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -881,9 +853,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="23" />
-          <folding>
-            <element signature="e#25#49#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -891,7 +860,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.54960984" vertical-offset="0" max-vertical-offset="897">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -907,21 +875,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.018952062" vertical-offset="0" max-vertical-offset="1105">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#34#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/group.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35591274" vertical-offset="710" max-vertical-offset="1683">
+          <caret line="60" column="30" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw/templates/wzw/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3708381" vertical-offset="204" max-vertical-offset="1496">
+          <caret line="31" column="57" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wzw_projekt/wzw/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0222964" vertical-offset="4840" max-vertical-offset="7004">
-          <caret line="311" column="39" selection-start-line="311" selection-start-column="39" selection-end-line="311" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.7636566" vertical-offset="1117" max-vertical-offset="7004">
+          <caret line="165" column="59" selection-start-line="165" selection-start-column="59" selection-end-line="165" selection-end-column="59" />
           <folding>
             <element signature="e#480#1674#0" expanded="false" />
             <element signature="e#1724#2624#0" expanded="false" />
-            <element signature="e#7171#8121#0" expanded="false" />
-            <element signature="e#8169#10101#0" expanded="false" />
+            <element signature="e#7159#8109#0" expanded="false" />
+            <element signature="e#8157#10089#0" expanded="false" />
           </folding>
         </state>
       </provider>
