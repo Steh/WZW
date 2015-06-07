@@ -42,7 +42,9 @@ class Group(models.Model):
                                  blank=False,
                                  help_text="Gibt an wann die Gruppe das letzte mal aufgerufen wurde.(wird bei jedem Speichern aktualisiert)")
 
+    '''
     # Rueckgabewert bei aufruf des Objekts
+    '''
     def __str__(self):  # __unicode__ on Python 2
         return self.token
 

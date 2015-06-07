@@ -105,10 +105,10 @@ class GroupView(View):
             return HttpResponse('Gruppe wurde geloescht ' + token)
 
 
-# TODO bisschen unglueglich gewaehlt, da man so die new group url immer aufrufen kann :)
-#
+# Anzeigeaufruf für eine neue Gruppe
 class NewGroupView(View):
     @staticmethod
+    #
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -117,8 +117,8 @@ class NewGroupView(View):
         context = {'group': group, 'form': form}
         return render(request, 'wzw/newGroup.html', context)
 
-    #TODO schauen, warum hier nicht der Gruppenname und die Beschreibung uebergeben werden
     @staticmethod
+    #
     def post(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -126,10 +126,12 @@ class NewGroupView(View):
         if 'create_group' in request.POST:
             form = ChangeGroup(instance=group, data=request.POST)
 
+            # Überprüfung, ob eine Eingabe vorgenommen wurde und Rückgabe einer Bestätigung
             if form.is_valid():
                 form.save()
                 messages.info(request, 'Gruppe wurde erstellt')
 
+            # Fehlermeldung, wenn keine Gruppe erstellt werden konnte, da keine Eingabe erfolgte
             else:
                 messages.warning(request, 'Gruppe KONNTE NICHT erstellt werden')
 
@@ -244,7 +246,7 @@ class NewPersonView(View):
         return HttpResponseRedirect('/group/' + group.token + '/person/')
 
 
-# noinspection PyPep8Naming
+# Person ändern
 class EditPersonView(View):
     @staticmethod
     # Aufruf der Personen-Editieren Seite
@@ -295,8 +297,10 @@ class EditPersonView(View):
             return HttpResponseRedirect('/group/' + group.token + '/person/')
 
 
+# löschen einer Peron
 class DeletePersonView(View):
     @staticmethod
+    # Abfrage zum Löschen einer Peron
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -305,6 +309,7 @@ class DeletePersonView(View):
         return HttpResponseRedirect('/group/' + group.token + '/person/')
 
     @staticmethod
+    # Asuführung des Löschen einer Person
     def post(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
