@@ -9,7 +9,6 @@ from wzw.views import GroupView, GroupIndexView, NewGroupView, EditGroupView, \
 urlpatterns = [
 
     # STARTSEITE, IMPRESSUM UND UEBER UNS  VIEW
-
     url(r'^$', IndexView.as_view()),
     url(r'^impressum/',
         ImpressumView.as_view()),

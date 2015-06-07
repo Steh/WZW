@@ -6,16 +6,12 @@
 {% block content %}
     <div class="container marketing">
         <div class="jumbotron">
-            <h2>Gruppe</h2>
+            <h2 class="orange">Gruppen löschen</h2>
 
-            <div class="col-md-12">
-                <h3>Gruppen löschen</h3>
-
-                <form id="delete_group" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Submit" name="apply_delete_group"/>
-                </form>
-            </div>
+            <form id="delete_group" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Submit" name="apply_delete_group"/>
+            </form>
         </div>
     </div>
 
