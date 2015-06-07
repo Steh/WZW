@@ -13,13 +13,12 @@ from wzw.models import Group, Person, Expense
 # Startseitenanzeige
 class IndexView(View):
     @staticmethod
-    # Anfrage der Start-URL
+    # Aufruf der Start-URL mit gleichzeitigem Aufruf der Formulare für eine neue Gruppe und eine Gruppe öffnen
     def get(request):
 
         form_new_group = GroupForm()
         form_open_group = OpenGroupForm()
         # TODO message uebergeben
-        # Rückgabe der index.html, form_new_group und form_open_group
         return render(request, 'Wzw/index.html', {'form_new_group': form_new_group, 'form_open_group': form_open_group})
 
     @staticmethod
@@ -32,7 +31,7 @@ class IndexView(View):
             # TODO message uebergeben
             return HttpResponseRedirect('group/' + group.token + '/group/new')
 
-        # Eingabe "Token" bestehende Gruppe wird angezeigt
+        # Durch Eingabe eines Token wird eine bestehende Gruppe angezeigt
         if 'open_group' in request.POST:
             form = OpenGroupForm(request.POST)
 
@@ -48,7 +47,7 @@ class IndexView(View):
 # Kostenübersicht
 class GroupIndexView(View):
     @staticmethod
-    # Kostenübersicht, Variablen die vorhanden sind werden übergeben und angezeigt (bsp. expense)
+    # Anfrage an die Kostenübersichtseite, wobei auch die einzelnen Variablen und Formulare gesetzt werden
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -70,8 +69,10 @@ class GroupIndexView(View):
                        'person': person})
 
 
+# Gruppenanzeige
 class GroupView(View):
     @staticmethod
+    #
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -81,10 +82,12 @@ class GroupView(View):
         return render(request, 'wzw/group.html', context)
 
     @staticmethod
+    #
     def post(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
 
+        #
         if 'change_group' in request.POST:
             form = ChangeGroup(instance=group, data=request.POST)
 
@@ -96,12 +99,14 @@ class GroupView(View):
                 context = {'form': form, 'message': message, 'group': group}
                 return render(request, 'wzw/editGroup.html', context)
 
+        #
         if 'delete_group' in request.POST:
             group.delete()
             return HttpResponse('Gruppe wurde geloescht ' + token)
 
 
 # TODO bisschen unglueglich gewaehlt, da man so die new group url immer aufrufen kann :)
+#
 class NewGroupView(View):
     @staticmethod
     def get(request, token):
@@ -118,7 +123,7 @@ class NewGroupView(View):
         group = get_object_or_404(Group, token=token)
         group.save()
 
-        if 'edit_group' in request.POST:
+        if 'create_group' in request.POST:
             form = ChangeGroup(instance=group, data=request.POST)
 
             if form.is_valid():
@@ -128,7 +133,7 @@ class NewGroupView(View):
             else:
                 messages.warning(request, 'Gruppe KONNTE NICHT erstellt werden')
 
-        return HttpResponseRedirect('/group/' + group.token)
+        return HttpResponseRedirect('/group/' + group.token + '/group/')
 
 
 class EditGroupView(View):

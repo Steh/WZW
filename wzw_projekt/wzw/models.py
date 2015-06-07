@@ -21,6 +21,7 @@ from wzw.functions import create_token
 
 
 class Group(models.Model):
+    # Definition der einzelnen Eingabefelder für die Gruppen auf den Gruppenunterseiten
     name = models.CharField(max_length=32,
                             blank=True,
                             default='',
@@ -55,6 +56,7 @@ class Group(models.Model):
             self.token = create_token()
 
         super(Group, self).save(*args, **kwargs)
+
     '''
     # ueberschreibt die loeschen methode
     # dadurch werden auch alle kosten + personen geloescht
@@ -74,6 +76,7 @@ class Group(models.Model):
 
 
 class Person(models.Model):
+    # Definition der einzelnen Eingabefelder für Personen auf den Personenunterseiten
     name = models.CharField(max_length=64,
                             blank=False,
                             verbose_name='Name',
@@ -130,6 +133,7 @@ class Person(models.Model):
 
 
 class Expense(models.Model):
+    # Definition der einzelnen Eingabefelder für die Ausgaben auf den Ausgabeunterseiten
     name = models.CharField(max_length=64,
                             blank=False,
                             verbose_name='Name',
