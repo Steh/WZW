@@ -397,6 +397,7 @@ class ExpenseView(View):
 
 
 class NewExpenseView(View):
+    # bei GET Rückgabe der "neue Ausgabe anlegen"-Seite, gleichzeitige Überprüfung, ob eine Gruppe und eine Person existieren
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
@@ -411,6 +412,7 @@ class NewExpenseView(View):
         context = {'form': form, 'group': group, 'person': person}
         return render(request, 'Wzw/newExpense.html', context)
 
+    # bei POST
     @staticmethod
     def post(request, token):
         group = get_object_or_404(Group, token=token)
@@ -431,7 +433,7 @@ class NewExpenseView(View):
 
 class EditExpenseView(View):
     # Bei GET request: Auflistung aller Ausgaben
-    # Bei POST request: wenn gueltige ID uebergeben wurde, kann die Ausgabe bearbeitet werden, sonst 404
+    # Bei POST request: wenn gültige ID übergeben wurde, kann die Ausgabe bearbeitet werden, sonst 404
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
@@ -475,7 +477,7 @@ class EditExpenseView(View):
                 expense.costPersons = form.cleaned_data['costPersons']
                 expense.save()
 
-                # TODO MEssage bauen
+                # TODO Message bauen
                 # messages.INFO(request, "Ausgabe wurde geaendert: " + expense.name)
                 return HttpResponseRedirect('/group/' + group.token + '/expense')
 
@@ -492,8 +494,8 @@ class EditExpenseView(View):
 class DeleteExpenseView(View):
     @staticmethod
     def get(request, token):
-        # Gruppen koennen nur per POST request geloescht werden
-        # bei einem GET aufruf wird auf die expense seite umgeleitet und eine Nachricht ausgegeben
+        # Gruppen koennen nur per POST request gelöscht werden
+        # bei einem GET Aufruf wird auf die Ausgabenseite umgeleitet und eine Nachricht ausgegeben
         group = get_object_or_404(Group, token=token)
         group.save()
 
@@ -508,12 +510,12 @@ class DeleteExpenseView(View):
         data = request.POST.get('expense_id')
         expense = get_object_or_404(Expense, id=data)
 
-        # bei Aufruf durch loeschen Button
+        # bei Aufruf durch löschen Button
         if 'delete_expense' in request.POST:
             context = {'expense': expense, 'group': group}
             return render(request, 'wzw/deleteExpense.html', context)
 
-        # bei loeschbestaetigung
+        # bei Löschbestätigung
         if 'apply_delete_expense' in request.POST:
             messages.warning(request, "Ausgabe wurde erfolgreich gelöscht: " + expense.name)
             expense.delete()
@@ -525,7 +527,7 @@ class DeleteExpenseView(View):
 
 
 class ImpressumView(View):
-
+    # bei GET request Anzeige des Impressums
     @staticmethod
     def get(request):
         context = RequestContext(request)
@@ -533,7 +535,7 @@ class ImpressumView(View):
 
 
 class AboutView(View):
-
+    # bei GET request Anzeige der "Über Uns"-Seite
     @staticmethod
     def get(request):
         context = RequestContext(request)
