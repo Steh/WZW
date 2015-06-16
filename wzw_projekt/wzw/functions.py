@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import random
 import string
 
@@ -6,7 +8,8 @@ Funktion um einen Token zu erstellen
 :returns Token
 '''
 
-
+# Funktion, die einen eindeutigen 4x4 stelligen Token erzeugt
+# der einer Gruppe eindeutig zugeordnet werden kann
 def create_token():
     unique = True
     while unique:
@@ -26,7 +29,7 @@ Wenn Gruppe mit Token bereits vorhanden, neuen Token generieren
 :returns boolean ob Gruppe existiert
 '''
 
-
+# Funktion zur Überprüfung auf einen gültigen Token
 def token_existing(token):
     """token der getestet werden soll"""
     # TODO test ob Unique

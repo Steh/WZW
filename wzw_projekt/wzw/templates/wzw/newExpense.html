@@ -15,11 +15,11 @@
                             <form id="new_expense" method="post">
                                 {% csrf_token %}
                                 {{ form.as_p }}
-                                <input type="submit" value="Submit" name="new_expense"/>
+                                <input class="btn btn-lg btn-success" type="submit" value="Ausgabe erstellen" name="new_expense"/>
                             </form>
                         {% endif %}
                     {% else %}
-                        <p>Du musst erst eine Person erstellen um Ausgaben zu erfassen.</p>
+                        <p>Du musst erst eine Person <a href="/group/{{ group.token }}/person/new">hier</a> erstellen um Ausgaben erfassen zu können.</p>
                     {% endif %}
                 </div>
             </div>

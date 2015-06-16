@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -29,34 +29,29 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 {% if group %}
-                    <li><a href="/group/{{ group.token }}">Meine Uebersicht</a></li>
-                    <li><a href="/group/{{ group.token }}/group" class="dropdown-toggle" data-toggle="dropdown"
-                           role="button" aria-expanded="false">Gruppe<span class="caret"></span></a>
+                    <li><a href="/group/{{ group.token }}">Kosten&uuml;bersicht</a></li>
+                    <li><a href="/group/{{ group.token }}/group" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Gruppe<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/group/{{ group.token }}">Gruppe anzeigen</a></li>
+                            <li><a href="/group/{{ group.token }}/group">Gruppe anzeigen</a></li>
                             <li><a href="/group/{{ group.token }}/group/edit">Gruppe editieren</a></li>
-                            <li><a href="/group/{{ group.token }}/group/delete">Gruppe löschen</a></li>
                         </ul>
                     </li>
-                    <li><a href="/group/{{ group.token }}/person" class="dropdown-toggle" data-toggle="dropdown"
-                           role="button" aria-expanded="false">Person<span class="caret"></span></a>
+                    <li><a href="/group/{{ group.token }}/person" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Person<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/group/{{ group.token }}/person/">Person anzeigen</a></li>
                             <li><a href="/group/{{ group.token }}/person/new">Person hinzufügen</a></li>
-                            <!-- <li><a href="/group/{{ group.token }}/person/delete">Person löschen</a></li> -->
+                            <li><a href="/group/{{ group.token }}/person/">Person anzeigen</a></li>
                         </ul>
                     </li>
-                    <li><a href="/group/{{ group.token }}/expense" class="dropdown-toggle" data-toggle="dropdown"
-                           role="button" aria-expanded="false">Ausgaben<span class="caret"></span></a>
+                    <li><a href="/group/{{ group.token }}/expense" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ausgaben<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/group/{{ group.token }}/expense/">Ausgaben anzeigen</a></li>
                             <li><a href="/group/{{ group.token }}/expense/new">Ausgaben hinzufügen</a></li>
-                            <!-- <li><a href="/group/{{ group.token }}/expense/delete">Ausgaben löschen</a></li> -->
+                            <li><a href="/group/{{ group.token }}/expense/">Ausgaben anzeigen</a></li>
                         </ul>
                     </li>
+                {% else %}
+                <li><a href="/about/">&Uuml;ber uns</a></li>
+                <li><a href="/impressum/">Impressum</a></li>
                 {% endif %}
-                <li><a href="#about">&Uuml;ber uns</a></li>
-                <li><a href="#contact">Impressum</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->

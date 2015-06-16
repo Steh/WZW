@@ -6,18 +6,14 @@
 {% block content %}
     <div class="container marketing">
         <div class="jumbotron">
-            <h2>Personen</h2>
-
-            <h3>Person &auml;ndern</h3>
+            <h2 class="orange">Person &auml;ndern</h2>
 
             <form id="new_person" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="hidden" name="person_id" value="{{ person.id }}">
-                <input class="btn btn-lg btn-success" type="submit" value="aendern" name="apply_change_person"/>
+                <input class="btn btn-lg btn-success" type="submit" value="&auml;ndern" name="apply_change_person"/>
             </form>
-
-            <p>{{ person.report }}</p>
         </div>
     </div>
 

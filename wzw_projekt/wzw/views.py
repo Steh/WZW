@@ -1,14 +1,19 @@
+# -*- coding: utf-8 -*-
+
 from django.http import HttpResponse
 from django.views.generic import View
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.template import RequestContext
 
 from wzw.forms import GroupForm, OpenGroupForm, ExpenseForm, PersonForm, ChangeGroup
 from wzw.models import Group, Person, Expense
 
+# Startseitenanzeige
 class IndexView(View):
     @staticmethod
+    # Aufruf der Start-URL mit gleichzeitigem Aufruf der Formulare für eine neue Gruppe und eine Gruppe öffnen
     def get(request):
 
         form_new_group = GroupForm()
@@ -17,12 +22,16 @@ class IndexView(View):
         return render(request, 'Wzw/index.html', {'form_new_group': form_new_group, 'form_open_group': form_open_group})
 
     @staticmethod
+    # Eingabe auf der Startseite
     def post(request):
+        # Button "Los geht's" wird gedrückt, neue Gruppe wird erstellt und liefert Übersicht zurück
         if 'new_group' in request.POST:
             group = Group.objects.create()
+
             # TODO message uebergeben
             return HttpResponseRedirect('group/' + group.token + '/group/new')
 
+        # Durch Eingabe eines Token wird eine bestehende Gruppe angezeigt
         if 'open_group' in request.POST:
             form = OpenGroupForm(request.POST)
 
@@ -35,8 +44,10 @@ class IndexView(View):
         return HttpResponseRedirect('/')
 
 
+# Kostenübersicht
 class GroupIndexView(View):
     @staticmethod
+    # Anfrage an die Kostenübersichtseite, wobei auch die einzelnen Variablen und Formulare gesetzt werden
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -58,8 +69,10 @@ class GroupIndexView(View):
                        'person': person})
 
 
+# Gruppenanzeige
 class GroupView(View):
     @staticmethod
+    #
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -69,10 +82,12 @@ class GroupView(View):
         return render(request, 'wzw/group.html', context)
 
     @staticmethod
+    #
     def post(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
 
+        #
         if 'change_group' in request.POST:
             form = ChangeGroup(instance=group, data=request.POST)
 
@@ -84,14 +99,16 @@ class GroupView(View):
                 context = {'form': form, 'message': message, 'group': group}
                 return render(request, 'wzw/editGroup.html', context)
 
+        #
         if 'delete_group' in request.POST:
             group.delete()
             return HttpResponse('Gruppe wurde geloescht ' + token)
 
 
-# TODO bisschen unglueglich gewaehlt, da man so die new group url immer aufrufen kann :)
+# Anzeigeaufruf für eine neue Gruppe
 class NewGroupView(View):
     @staticmethod
+    #
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -100,23 +117,25 @@ class NewGroupView(View):
         context = {'group': group, 'form': form}
         return render(request, 'wzw/newGroup.html', context)
 
-    # TODO schauen, warum hier nicht der Gruppenname und die Beschreibung uebergeben werden
     @staticmethod
+    #
     def post(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
 
-        if 'edit_group' in request.POST:
+        if 'create_group' in request.POST:
             form = ChangeGroup(instance=group, data=request.POST)
 
+            # Überprüfung, ob eine Eingabe vorgenommen wurde und Rückgabe einer Bestätigung
             if form.is_valid():
                 form.save()
                 messages.info(request, 'Gruppe wurde erstellt')
 
+            # Fehlermeldung, wenn keine Gruppe erstellt werden konnte, da keine Eingabe erfolgte
             else:
                 messages.warning(request, 'Gruppe KONNTE NICHT erstellt werden')
 
-        return HttpResponseRedirect('/group/' + group.token)
+        return HttpResponseRedirect('/group/' + group.token + '/group/')
 
 
 class EditGroupView(View):
@@ -144,34 +163,39 @@ class EditGroupView(View):
             else:
                 messages.warning(request, 'Gruppe KONNTE NICHT angepasst werden')
 
-        return HttpResponseRedirect('/group/' + group.token + '/group/')
+        return HttpResponseRedirect('/group/' + group.token)
 
 
-class DeleteGroupView(View):
-    @staticmethod
-    def get(request, token):
-        group = get_object_or_404(Group, token=token)
-        group.save()
+# Gruppe wird gelöscht
+#class DeleteGroupView(View):
+#    @staticmethod
+    # Aufrufen der "Gruppe löschen" Seite
+#    def get(request, token):
+#        group = get_object_or_404(Group, token=token)
+#        group.save()
+#
+#        context = {'group': group}
+#        return render(request, 'wzw/deleteGroup.html', context)
+#
+#    @staticmethod
+#    # Übergabe der Gruppe an die "Lösch-Funktion", wenn Gruppe übergeben wurde sonst zurück auf Gruppenübersicht
+#    def post(request, token):
+#        group = get_object_or_404(Group, token=token)
+#        group.save()
+#
+#        if 'apply_delete_group' in request.POST:
+#            group.delete()
+#            messages.info(request, 'Gruppe wurde erfolgreich geloescht')
+#            return HttpResponseRedirect('/')
+#
+#        messages.warning(request, 'Es wurde keine Gruppe uebergeben')
+#        return HttpResponseRedirect('/group/' + group.token + '/group/')
 
-        context = {'group': group}
-        return render(request, 'wzw/deleteGroup.html', context)
 
-    @staticmethod
-    def post(request, token):
-        group = get_object_or_404(Group, token=token)
-        group.save()
-
-        if 'apply_delete_group' in request.POST:
-            group.delete()
-            messages.info(request, 'Gruppe wurde erfolgreich geloescht')
-            return HttpResponseRedirect('/')
-
-        messages.warning(request, 'Es wurde keine Gruppe uebergeben')
-        return HttpResponseRedirect('/group/' + group.token + '/group/')
-
-
+# Komplette Personenübersicht
 class PersonView(View):
     @staticmethod
+    # wird nur aufgerufen wenn Gruppe erstellt wurde
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -182,6 +206,7 @@ class PersonView(View):
         return render(request, 'wzw/person.html', context)
 
     @staticmethod
+    #
     def post(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -190,8 +215,10 @@ class PersonView(View):
         return HttpResponseRedirect('/group/' + group.token + '/person/')
 
 
+# Neue Person kann angelegt werden
 class NewPersonView(View):
     @staticmethod
+    # Aufruf der newPerson.html mit Eingabemöglichkeit für die neue Person
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -203,6 +230,7 @@ class NewPersonView(View):
         return render(request, 'wzw/newPerson.html', context)
 
     @staticmethod
+    # Übergabe und Speicherung der erstellten Person, oder Fehlermeldung
     def post(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -218,9 +246,10 @@ class NewPersonView(View):
         return HttpResponseRedirect('/group/' + group.token + '/person/')
 
 
-# noinspection PyPep8Naming
+# Person ändern
 class EditPersonView(View):
     @staticmethod
+    # Aufruf der Personen-Editieren Seite
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -235,7 +264,7 @@ class EditPersonView(View):
 
         person_id = request.POST['person_id']
         person = get_object_or_404(Person, id=person_id)
-
+        # Wunsch zur Änderung des Personnamens mit Rückgabe der Seite /editPerson.html
         if 'change_person' in request.POST:
 
             form = PersonForm(instance=person)
@@ -244,21 +273,22 @@ class EditPersonView(View):
                        'person': person}
 
             return render(request, 'wzw/editPerson.html', context)
-
+        # Umsetzung der Änderung durch Auswahl des "Bearbeiten-Buttons" von gewünschter Person
         elif 'apply_change_person' in request.POST:
 
             form = PersonForm(instance=person, data=request.POST)
 
             if form.is_valid():
                 form.save()
-
+                # Rückgabe wenn Änderung erfolgreich übernommen
                 messages.info(request, 'Person wurde angepasst')
                 return HttpResponseRedirect('/group/' + group.token + '/person/')
             else:
+                # Rückgabe wenn keine Änderungen vorgenommen wurden
                 messages.warning(request, 'Aenderungen konnten nicht durchgefuehrt werden')
                 return HttpResponseRedirect('/group/' + group.token + '/person/')
 
-        # default
+        # default, keine Person übergeben
         else:
             group = get_object_or_404(Group, token=token)
             group.save()
@@ -267,8 +297,10 @@ class EditPersonView(View):
             return HttpResponseRedirect('/group/' + group.token + '/person/')
 
 
+# löschen einer Peron
 class DeletePersonView(View):
     @staticmethod
+    # Abfrage zum Löschen einer Peron
     def get(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -277,6 +309,7 @@ class DeletePersonView(View):
         return HttpResponseRedirect('/group/' + group.token + '/person/')
 
     @staticmethod
+    # Asuführung des Löschen einer Person
     def post(request, token):
         group = get_object_or_404(Group, token=token)
         group.save()
@@ -364,6 +397,7 @@ class ExpenseView(View):
 
 
 class NewExpenseView(View):
+    # bei GET Rückgabe der "neue Ausgabe anlegen"-Seite, gleichzeitige Überprüfung, ob eine Gruppe und eine Person existieren
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
@@ -378,6 +412,7 @@ class NewExpenseView(View):
         context = {'form': form, 'group': group, 'person': person}
         return render(request, 'Wzw/newExpense.html', context)
 
+    # bei POST
     @staticmethod
     def post(request, token):
         group = get_object_or_404(Group, token=token)
@@ -397,8 +432,8 @@ class NewExpenseView(View):
 
 
 class EditExpenseView(View):
-    # Bei GET   request: Auflistung aller Ausgaben
-    #   Bei POST  request: wenn gueltige ID uebergeben wurde, kann die Ausgabe bearbeitet werden, sonst 404
+    # Bei GET request: Auflistung aller Ausgaben
+    # Bei POST request: wenn gültige ID übergeben wurde, kann die Ausgabe bearbeitet werden, sonst 404
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
@@ -442,7 +477,7 @@ class EditExpenseView(View):
                 expense.costPersons = form.cleaned_data['costPersons']
                 expense.save()
 
-                # TODO MEssage bauen
+                # TODO Message bauen
                 # messages.INFO(request, "Ausgabe wurde geaendert: " + expense.name)
                 return HttpResponseRedirect('/group/' + group.token + '/expense')
 
@@ -459,8 +494,8 @@ class EditExpenseView(View):
 class DeleteExpenseView(View):
     @staticmethod
     def get(request, token):
-        # Gruppen koennen nur per POST request geloescht werden
-        # bei einem GET aufruf wird auf die expense seite umgeleitet und eine Nachricht ausgegeben
+        # Gruppen koennen nur per POST request gelöscht werden
+        # bei einem GET Aufruf wird auf die Ausgabenseite umgeleitet und eine Nachricht ausgegeben
         group = get_object_or_404(Group, token=token)
         group.save()
 
@@ -475,17 +510,33 @@ class DeleteExpenseView(View):
         data = request.POST.get('expense_id')
         expense = get_object_or_404(Expense, id=data)
 
-        # bei Aufruf durch loeschen Button
+        # bei Aufruf durch löschen Button
         if 'delete_expense' in request.POST:
             context = {'expense': expense, 'group': group}
             return render(request, 'wzw/deleteExpense.html', context)
 
-        # bei loeschbestaetigung
+        # bei Löschbestätigung
         if 'apply_delete_expense' in request.POST:
-            messages.warning(request, "Ausgabe wurde erfolgreich geloescht: " + expense.name)
+            messages.warning(request, "Ausgabe wurde erfolgreich gelöscht: " + expense.name)
             expense.delete()
 
             return HttpResponseRedirect('/group/' + token + '/expense/')
 
         messages.warning(request, 'Es wurde keine Ausgabe gefunden')
         return HttpResponseRedirect('/group/' + token + '/expense/')
+
+
+class ImpressumView(View):
+    # bei GET request Anzeige des Impressums
+    @staticmethod
+    def get(request):
+        context = RequestContext(request)
+        return render_to_response('wzw/impressum.html', context)
+
+
+class AboutView(View):
+    # bei GET request Anzeige der "Über Uns"-Seite
+    @staticmethod
+    def get(request):
+        context = RequestContext(request)
+        return render_to_response('wzw/about.html', context)

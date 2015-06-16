@@ -1,0 +1,29 @@
+{% extends "wzw/base.html" %}
+
+{% block title %}{{ block.super }} - {{ group.name }} {% endblock %}
+{% block homeurl %} # {% endblock %}
+
+{% block content %}
+    <div class="container marketing">
+        <div class="jumbotron">
+                <h2 class="featurette-heading">Impressum</h2><br />
+                <p>Betreiber:</p>
+                Max Mustermann<br />
+                Musterstraße 12<br />
+                12345 Berlin<br />
+                <br />
+                <p>Kontakt:</p>
+                Telefon: 030/12345678<br />
+                Telefax: 030/12345679<br />
+                e-Mail: e-Mail@mustermann.de<br />
+                Website: 127.0.0.1:8000<br />
+                <br />
+                Registergericht: AG Berlin<br />
+                HRB-Nummer: 54321<br />
+                Umsatzsteueridentifikationsnummer: 123456789<br />
+                Nennung des vertretungsberechtigten Geschäftsführer einer GmbH<br />
+                Quelle: http://www.suchmaschinen-online.de/muster-impressum.htm<br />
+        </div>
+    </div>
+
+{% endblock %}

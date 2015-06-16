@@ -1,3 +1,19 @@
+# -*- coding: utf-8 -*-
+
+"""
+Datenmodele
+
+Attribute der Attribute:
+max_length:     maximale laenge
+blank:          Darf leer sein
+default:        Standart wert
+verbose_name:   Anzeige Name in Formularen
+help_text:      Hilfetext wird in Formularen angezeigt, dient als dokumentation der Felder
+auto_now:       Beim Speichern wird das aktuelle Datum gespeichert
+unique:         Muss eindeutig sein
+editable:       Bearbeitbar
+"""
+
 from django.utils import timezone
 from django.db import models
 
@@ -5,39 +21,71 @@ from wzw.functions import create_token
 
 
 class Group(models.Model):
-    name = models.CharField(max_length=32, blank=True, default='')
-    description = models.CharField(max_length=128, blank=True, default='')
-    token = models.CharField(max_length=19, editable=False, unique=True)
-    lastLogon = models.DateField('Last Logon', auto_now=True, blank=False)
+    # Definition der einzelnen Eingabefelder für die Gruppen auf den Gruppenunterseiten
+    name = models.CharField(max_length=32,
+                            blank=True,
+                            default='',
+                            verbose_name="Gruppenname",
+                            help_text="Name für die Gruppe (optional)")
+    description = models.CharField(max_length=128,
+                                   blank=True,
+                                   default='',
+                                   verbose_name="Beschreibung",
+                                   help_text="Beschreibung der Gruppe (optional)")
+    token = models.CharField(max_length=19,
+                             editable=False,
+                             unique=True,
+                             verbose_name="Gruppen Token",
+                             help_text="Gruppen Token, dient zum Aufrufen der Gruppe (Format: 1234-1234-1234-1233")
+    lastLogon = models.DateField('Last Logon',
+                                 auto_now=True,
+                                 blank=False,
+                                 help_text="Gibt an wann die Gruppe das letzte mal aufgerufen wurde.(wird bei jedem Speichern aktualisiert)")
 
+    '''
+    # Rueckgabewert bei aufruf des Objekts
+    '''
     def __str__(self):  # __unicode__ on Python 2
         return self.token
 
+    '''
+    # ueberschreibt die speichern methode
+    # wenn die Gruppe neu erstellt wurde (kein primary key vorhanden)
+    # wird ein token generiert und eingetragen
+    '''
     def save(self, *args, **kwargs):
         if not self.pk:
             self.token = create_token()
 
         super(Group, self).save(*args, **kwargs)
+
     '''
     # ueberschreibt die loeschen methode
     # dadurch werden auch alle kosten + personen geloescht
     1. loeschen aller Personen die zu dieser Gruppe gehoeren
     2. loeschen aller Personen die zu dieser Gruppe gehoeren
     3. loeschen der Gruppe
+    4. aufrufen der Original loeschen methode
     '''
     def delete(self, using=None):
-        person = Person.objects.filter(group=self)
-        person.delete()
-
         expense = Expense.objects.filter(group=self)
         expense.delete()
+
+        person = Person.objects.filter(group=self)
+        person.delete()
 
         super(Group, self).delete()
 
 
 class Person(models.Model):
-    name = models.CharField(max_length=64, blank=False)
-    group = models.ForeignKey(Group)
+    # Definition der einzelnen Eingabefelder für Personen auf den Personenunterseiten
+    name = models.CharField(max_length=64,
+                            blank=False,
+                            verbose_name='Name',
+                            help_text="Anzeigename der Person")
+    group = models.ForeignKey(Group,
+                              verbose_name='Gruppe',
+                              help_text="Zuordnung der Person zu einer Gruppe, kann nicht geaendert werden.")
 
     """
     generiert einen report, wie viel die Personen erhalten
@@ -81,19 +129,42 @@ class Person(models.Model):
 
     report = property(personcostreport)
 
+    # Rueckgabewert bei aufruf des Objekts
     def __str__(self):  # __unicode__ on Python 2
         return self.name
 
 
 class Expense(models.Model):
-    name = models.CharField(max_length=64, blank=False)
-    description = models.CharField(max_length=256, blank=True)
-    owner = models.ForeignKey(Person, related_name='costOwner')
-    group = models.ForeignKey(Group)
-    createDate = models.DateField('date published', default=timezone.now)
-    debitDate = models.DateField('date debited', blank=True, default=timezone.now)
-    costPersons = models.ManyToManyField(Person, blank=False, verbose_name='costPerson_PersonId')
-    cost = models.FloatField(blank=False)
+    # Definition der einzelnen Eingabefelder für die Ausgaben auf den Ausgabeunterseiten
+    name = models.CharField(max_length=64,
+                            blank=False,
+                            verbose_name='Name',
+                            help_text="Name der Ausgabe.")
+    description = models.CharField(max_length=256,
+                                   blank=True,
+                                   verbose_name='Beschreibung',
+                                   help_text="Beschreibung der Ausgabe (optional)")
+    owner = models.ForeignKey(Person,
+                              related_name='costOwner',
+                              verbose_name='Besitzer',
+                              help_text='Wer hat das Geld ausgelegt?')
+    group = models.ForeignKey(Group,
+                              verbose_name='Gruppe',
+                              help_text="Zuordnung der Ausgabe zu einer Gruppe, kann nicht geaendert werden.")
+    createDate = models.DateField(default=timezone.now,
+                                  verbose_name='Erstellungsdatum',
+                                  help_text="Gibt an wann die Ausgabe erstellt wurde.")
+    debitDate = models.DateField(blank=True,
+                                 default=timezone.now,
+                                 verbose_name='Datum der Zahlung')
+    costPersons = models.ManyToManyField(Person,
+                                         blank=False,
+                                         verbose_name='Teilhaber',
+                                         help_text="Personen auf die diese Ausgabe aufgeteilt wird.")
+    cost = models.FloatField(blank=False,
+                             verbose_name="Ausgabe",
+                             help_text="Wert der Ausgabe")
 
+    # Rueckgabewert bei aufruf des Objekts
     def __str__(self):  # __unicode__ on Python 2
         return self.name
