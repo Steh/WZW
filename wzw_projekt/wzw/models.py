@@ -45,6 +45,7 @@ class Group(models.Model):
     '''
     # Rueckgabewert bei aufruf des Objekts
     '''
+
     def __str__(self):  # __unicode__ on Python 2
         return self.token
 
@@ -53,6 +54,7 @@ class Group(models.Model):
     # wenn die Gruppe neu erstellt wurde (kein primary key vorhanden)
     # wird ein token generiert und eingetragen
     '''
+
     def save(self, *args, **kwargs):
         if not self.pk:
             self.token = create_token()
@@ -67,6 +69,7 @@ class Group(models.Model):
     3. loeschen der Gruppe
     4. aufrufen der Original loeschen methode
     '''
+
     def delete(self, using=None):
         expense = Expense.objects.filter(group=self)
         expense.delete()
@@ -94,6 +97,7 @@ class Person(models.Model):
 
     :returns report {name: value, name: value}
     """
+
     def personcostreport(self):
         # Kosten + Personen der Gruppe auslesen
         groupexpenses = Expense.objects.filter(group=self.group)

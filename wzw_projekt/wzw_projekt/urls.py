@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import include, url, patterns
+from django.conf.urls import include, url
 from django.contrib import admin
 
 from wzw.views import GroupView, GroupIndexView, NewGroupView, EditGroupView, \
     PersonView, NewPersonView, DeletePersonView, EditPersonView, \
     ExpenseView, NewExpenseView, DeleteExpenseView, EditExpenseView, \
     IndexView, ImpressumView, AboutView
+
 
 urlpatterns = [
 

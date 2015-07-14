@@ -10,6 +10,7 @@ from django.template import RequestContext
 from wzw.forms import GroupForm, OpenGroupForm, ExpenseForm, PersonForm, ChangeGroup
 from wzw.models import Group, Person, Expense
 
+
 # Startseitenanzeige
 class IndexView(View):
     @staticmethod
@@ -166,13 +167,15 @@ class EditGroupView(View):
         return HttpResponseRedirect('/group/' + group.token)
 
 
-# Gruppe wird gelöscht
-#class DeleteGroupView(View):
-#    @staticmethod
-    # Aufrufen der "Gruppe löschen" Seite
-#    def get(request, token):
-#        group = get_object_or_404(Group, token=token)
-#        group.save()
+        # Gruppe wird gelöscht
+        # class DeleteGroupView(View):
+        # @staticmethod
+        # Aufrufen der "Gruppe löschen" Seite
+
+
+# def get(request, token):
+# group = get_object_or_404(Group, token=token)
+# group.save()
 #
 #        context = {'group': group}
 #        return render(request, 'wzw/deleteGroup.html', context)
@@ -397,7 +400,8 @@ class ExpenseView(View):
 
 
 class NewExpenseView(View):
-    # bei GET Rückgabe der "neue Ausgabe anlegen"-Seite, gleichzeitige Überprüfung, ob eine Gruppe und eine Person existieren
+    # bei GET Rückgabe der "neue Ausgabe anlegen"-Seite,
+    # gleichzeitige Überprüfung, ob eine Gruppe und eine Person existieren
     @staticmethod
     def get(request, token):
         group = get_object_or_404(Group, token=token)
