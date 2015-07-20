@@ -14,7 +14,7 @@
                         <th>Name</th>
                         <th>Besitzer</th>
                         <th>Kosten</th>
-                        <th>angefallen</th>
+                        <th>angefallen am</th>
                         <th>bearbeiten</th>
                         <th>l&ouml;schen</th>
                     </tr>
@@ -28,14 +28,14 @@
                                 <form method="post" action="edit">
                                     {% csrf_token %}
                                     <input type="text" hidden="true" value="{{ e.id }}" name="expense_id"/>
-                                    <input type="submit" value="bearbeiten" name="edit_expense"/>
+                                    <input class="btl btn-lg btn-success" type="submit" value="bearbeiten" name="edit_expense"/>
                                 </form>
                             </td>
                             <td>
                                 <form method="post" action="delete">
                                     {% csrf_token %}
                                     <input type="text" hidden="true" value="{{ e.id }}" name="expense_id"/>
-                                    <input type="submit" value="löschen" name="delete_expense"/>
+                                    <input class="btl btn-lg btn-success" type="submit" value="löschen" name="delete_expense"/>
                                 </form>
                             </td>
                         </tr>

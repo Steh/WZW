@@ -6,87 +6,88 @@
 {% block content %}
     <div class="container marketing">
         <div class="jumbotron">
-            <h2><span class="orange">Gruppenname:</span> "{{ group.name | default:'Gruppenname' }}"</h2>
-
+            <h2><span class="orange">Gruppenname:</span> "{{ group.name | default:'Hier könnte ihr Gruppenname stehen' }}"</h2>
             <p class="left">
-                <span class="italic">Gruppenbeschreibung:</span> {{ group.description  | default:"Beschreibung" }}
+                <span class="italic">Gruppenbeschreibung:</span> {{ group.description  | default:"Hier ist Platz für ihre Gruppenbeschreiung" }}
             </p>
-
+            <hr>
             <h2 class="orange">Ausgabenübersicht</h2>
             {% if expense %}
-                <table class="table table-striped">
-                    <tr>
-                        <th>Name</th>
-                        <th>Besitzer</th>
-                        <th>Kosten</th>
-                        <th>Teilhaber</th>
-                    </tr>
-                    {% for e in expense %}
-                        <tr>
-                            <td>{{ e.name }}</td>
-                            <td>{{ e.owner }}</td>
-                            <td>{{ e.cost }}</td>
-                            <td>{{ e.costPersons.count }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>Besitzer</th>
+                    <th>Kosten</th>
+                    <th>Teilhaber</th>
+                </tr>
+                {% for e in expense %}
+                <tr>
+                    <td>{{ e.name }}</td>
+                    <td>{{ e.owner }}</td>
+                    <td>{{ e.cost }}</td>
+                    <td>{{ e.costPersons.count }}</td>
+                </tr>
+                {% endfor %}
+            </table>
             {% else %}
                 <p class="left">Sie haben noch keine Ausgabe erstellt.</p>
             {% endif %}
 
-            <h2 class="orange">Abrechung Version 0.1</h2>
+            <!--<h2 class="orange">Abrechung Version 0.1</h2>
 
             <p>Stefan {u'Jan': 15.0, u'Micha': -15.0} <br/>
-                Bedeutet das Stefan von Jan 15.00 € bekommt und er Micha 15.00 € Schuldet.</p>
+                Bedeutet das Stefan von Jan 15.00 € bekommt und er Micha 15.00 € Schuldet.</p>-->
             {% if person %}
-                <h2>Version 1</h2>
-                <table class="table table-striped">
-                    <tr>
-                        <th>Name</th>
-                        <th>Abrechung</th>
-                    </tr>
-
-                    {% for p in person %}
-                        <tr>
-                            <td>{{ p.name }}</td>
-                            <td>{{ p.report }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-                <h2>Version 2</h2>
-                <table class="table table-striped">
-                    {% for p in person %}
-                        <tr>
-                            <th>{{ p.name }}</th>
-                            <th>Erhält</th>
-                            <th>Schuldet</th>
-                        </tr>
-                        {% for k,v in p.report.items %}
-                            {% if v > 0 %}
-                            <tr>
-                                <td></td><td>{{ v }} an {{ k }}</td>
-                            </tr>
-                            {% endif %}
-                        {% endfor%}
-                    {% endfor %}
-                </table>
-                <h2>Version 3</h2>
+            <hr>
+            <h2 class="orange">Rohdaten Übersicht</h2>
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>Abrechnung</th>
+                </tr>
                 {% for p in person %}
-                    <ul>
-                        {% for k,v in p.report.items %}
-                            {% if v > 0 %}
-                                 {% ifchanged %}<h3>{{ p.name }}</h3>{% endifchanged %}
-                            {% endif %}
-                        {% endfor %}
-                        <ul>
-                            {% for k,v in p.report.items %}
-                                    {% if v > 0 %}
-                                        <li>{{ v }} Euro an {{ k }}</li>
-                                    {% endif %}
-                            {% endfor%}
-                        </ul>
-                    </ul>
+                <tr>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.report }}</td>
+                </tr>
                 {% endfor %}
+            </table>
+            <hr>
+            <h2 class="orange">Tabellarische Übersicht</h2>
+            <table class="table table-striped">
+                {% for p in person %}
+                <tr>
+                    <th>{{ p.name }}</th>
+                    <th>Erhält</th>
+                    <th>Schuldet</th>
+                </tr>
+                {% for k,v in p.report.items %}
+                {% if v > 0 %}
+                <tr>
+                    <td></td><td>{{ v }} € an {{ k }}</td>
+                </tr>
+                {% endif %}
+                {% endfor%}
+                {% endfor %}
+            </table>
+            <hr>
+            <h2 class="orange">Endgültige Schulden</h2>
+            {% for p in person %}
+            <ul>
+                {% for k,v in p.report.items %}
+                {% if v > 0 %}
+                {% ifchanged %}<h3>{{ p.name }}</h3>{% endifchanged %}
+                {% endif %}
+                {% endfor %}
+                <ul>
+                    {% for k,v in p.report.items %}
+                    {% if v > 0 %}
+                    <li>{{ v }} € an {{ k }}</li>
+                    {% endif %}
+                    {% endfor%}
+                </ul>
+            </ul>
+            {% endfor %}
             {% endif %}
         </div>
     </div>

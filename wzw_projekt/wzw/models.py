@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 Datenmodele
 
@@ -17,12 +19,14 @@ from django.db import models
 
 from wzw.functions import create_token
 
+
 class Group(models.Model):
+    # Definition der einzelnen Eingabefelder für die Gruppen auf den Gruppenunterseiten
     name = models.CharField(max_length=32,
                             blank=True,
                             default='',
                             verbose_name="Gruppenname",
-                            help_text="Name fuer die Gruppe (optional)")
+                            help_text="Name für die Gruppe (optional)")
     description = models.CharField(max_length=128,
                                    blank=True,
                                    default='',
@@ -38,7 +42,10 @@ class Group(models.Model):
                                  blank=False,
                                  help_text="Gibt an wann die Gruppe das letzte mal aufgerufen wurde.(wird bei jedem Speichern aktualisiert)")
 
+    '''
     # Rueckgabewert bei aufruf des Objekts
+    '''
+
     def __str__(self):  # __unicode__ on Python 2
         return self.token
 
@@ -47,11 +54,13 @@ class Group(models.Model):
     # wenn die Gruppe neu erstellt wurde (kein primary key vorhanden)
     # wird ein token generiert und eingetragen
     '''
+
     def save(self, *args, **kwargs):
         if not self.pk:
             self.token = create_token()
 
         super(Group, self).save(*args, **kwargs)
+
     '''
     # ueberschreibt die loeschen methode
     # dadurch werden auch alle kosten + personen geloescht
@@ -60,6 +69,7 @@ class Group(models.Model):
     3. loeschen der Gruppe
     4. aufrufen der Original loeschen methode
     '''
+
     def delete(self, using=None):
         expense = Expense.objects.filter(group=self)
         expense.delete()
@@ -71,6 +81,7 @@ class Group(models.Model):
 
 
 class Person(models.Model):
+    # Definition der einzelnen Eingabefelder für Personen auf den Personenunterseiten
     name = models.CharField(max_length=64,
                             blank=False,
                             verbose_name='Name',
@@ -86,6 +97,7 @@ class Person(models.Model):
 
     :returns report {name: value, name: value}
     """
+
     def personcostreport(self):
         # Kosten + Personen der Gruppe auslesen
         groupexpenses = Expense.objects.filter(group=self.group)
@@ -127,6 +139,7 @@ class Person(models.Model):
 
 
 class Expense(models.Model):
+    # Definition der einzelnen Eingabefelder für die Ausgaben auf den Ausgabeunterseiten
     name = models.CharField(max_length=64,
                             blank=False,
                             verbose_name='Name',
@@ -143,12 +156,11 @@ class Expense(models.Model):
                               verbose_name='Gruppe',
                               help_text="Zuordnung der Ausgabe zu einer Gruppe, kann nicht geaendert werden.")
     createDate = models.DateField(default=timezone.now,
-                                  verbose_name='Erstellungs Datum',
+                                  verbose_name='Erstellungsdatum',
                                   help_text="Gibt an wann die Ausgabe erstellt wurde.")
     debitDate = models.DateField(blank=True,
                                  default=timezone.now,
-                                 verbose_name='',
-                                 help_text="Gibt an wann die Ausgabe bezahlt wurde.")
+                                 verbose_name='Datum der Zahlung')
     costPersons = models.ManyToManyField(Person,
                                          blank=False,
                                          verbose_name='Teilhaber',
