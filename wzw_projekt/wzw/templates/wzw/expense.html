@@ -15,8 +15,7 @@
                         <th>Besitzer</th>
                         <th>Kosten</th>
                         <th>angefallen am</th>
-                        <th>bearbeiten</th>
-                        <th>l&ouml;schen</th>
+                        <th>Details</th>
                     </tr>
                     {% for e in expense %}
                         <tr>
@@ -25,18 +24,8 @@
                             <td>{{ e.cost }}</td>
                             <td>{{ e.debitDate }}</td>
                             <td>
-                                <form method="post" action="edit">
-                                    {% csrf_token %}
-                                    <input type="text" hidden="true" value="{{ e.id }}" name="expense_id"/>
-                                    <input class="btl btn-lg btn-success" type="submit" value="bearbeiten" name="edit_expense"/>
-                                </form>
+                                <a href="\group\{{ group.token }}/expense/{{ e.id }}/" class="btl btn-lg btn-success">Details</a>
                             </td>
-                            <td>
-                                <form method="post" action="delete">
-                                    {% csrf_token %}
-                                    <input type="text" hidden="true" value="{{ e.id }}" name="expense_id"/>
-                                    <input class="btl btn-lg btn-success" type="submit" value="löschen" name="delete_expense"/>
-                                </form>
                             </td>
                         </tr>
                     {% endfor %}

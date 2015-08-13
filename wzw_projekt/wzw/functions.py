@@ -31,7 +31,7 @@ Wenn Gruppe mit Token bereits vorhanden, neuen Token generieren
 '''
 
 
-# Funktion zur Überprüfung auf einen gültigen Token
+# Funktion zur ÃœberprÃ¼fung auf einen gÃ¼ltigen Token
 def token_existing(token):
     """token der getestet werden soll"""
     # TODO test ob Unique

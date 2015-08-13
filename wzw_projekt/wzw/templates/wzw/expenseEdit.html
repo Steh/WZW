@@ -1,0 +1,27 @@
+{% extends "wzw/base.html" %}
+
+{% block title %}{{ block.super }} - {{ group.name }} {% endblock %}
+{% block homeurl %} # {% endblock %}
+
+{% block content %}
+    <div class="container marketing">
+        <div class="jumbotron">
+            <h1>Ausgabe</h1>
+
+            <h2>Ausgabe erfassen</h2>
+
+            {% if expense %}
+                <form id="edit_expense" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type='text' value="{{ expense.id }}" name="expense_id" id="expense_id" hidden="true"/>
+                    <input class="btn btn-lg btn-success" type="submit" value="Ausgabe erstellen"
+                           name="apply_edit_expense"/>
+                </form>
+            {% else %}
+                <p>Du musst erst eine Personen erstellen um Ausgaben zu erfassen.</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

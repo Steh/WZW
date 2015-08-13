@@ -21,12 +21,12 @@ from wzw.functions import create_token
 
 
 class Group(models.Model):
-    # Definition der einzelnen Eingabefelder für die Gruppen auf den Gruppenunterseiten
+    # Definition der einzelnen Eingabefelder fÃ¼r die Gruppen auf den Gruppenunterseiten
     name = models.CharField(max_length=32,
                             blank=True,
                             default='',
                             verbose_name="Gruppenname",
-                            help_text="Name für die Gruppe (optional)")
+                            help_text="Name fÃ¼r die Gruppe (optional)")
     description = models.CharField(max_length=128,
                                    blank=True,
                                    default='',
@@ -79,9 +79,33 @@ class Group(models.Model):
 
         super(Group, self).delete()
 
+    '''
+    Function to generate Report for Group
+    '''
+    def generate_report(self):
+        report = Report.objects.filter(group=self)
+
+        if report.count > 0:
+            report.delete()
+
+        expenses = Expense.objects.filter(group=self)
+
+        for e in expenses:
+            cost = e.cost / (e.costPersons.count())
+            for person in e.costPersons.all():
+                if person != e.owner:
+                    report = Report(group=self, owner=e.owner, costPerson=person, expense=e, cost=cost, payed=0)
+                    report.save()
+
+    def validate_group(token):
+        group = get_object_or_404(Group, token=token)
+        group.save()
+        return group
+
+
 
 class Person(models.Model):
-    # Definition der einzelnen Eingabefelder für Personen auf den Personenunterseiten
+    # Definition der einzelnen Eingabefelder fÃ¼r Personen auf den Personenunterseiten
     name = models.CharField(max_length=64,
                             blank=False,
                             verbose_name='Name',
@@ -98,7 +122,7 @@ class Person(models.Model):
     :returns report {name: value, name: value}
     """
 
-    def personcostreport(self):
+    def person_cost_report(self):
         # Kosten + Personen der Gruppe auslesen
         groupexpenses = Expense.objects.filter(group=self.group)
         grouppersons = Person.objects.filter(group=self.group)
@@ -131,7 +155,7 @@ class Person(models.Model):
                     personsarray[expense.owner.name] += cost
         return personsarray
 
-    report = property(personcostreport)
+    report = property(person_cost_report)
 
     # Rueckgabewert bei aufruf des Objekts
     def __str__(self):  # __unicode__ on Python 2
@@ -139,7 +163,7 @@ class Person(models.Model):
 
 
 class Expense(models.Model):
-    # Definition der einzelnen Eingabefelder für die Ausgaben auf den Ausgabeunterseiten
+    id = models.IntegerField(primary_key=True, verbose_name='Eindeutige Identifikationsnummer'),
     name = models.CharField(max_length=64,
                             blank=False,
                             verbose_name='Name',
@@ -171,4 +195,21 @@ class Expense(models.Model):
 
     # Rueckgabewert bei aufruf des Objekts
     def __str__(self):  # __unicode__ on Python 2
-        return self.name
+        return self.id
+
+
+class Report(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name='Eindeutige Identifikationsnummer'),
+    owner = models.ForeignKey(Person, verbose_name='Besitzer', related_name='report_cost_owner',
+                              help_text='Wer hat das Geld ausgelegt?', blank=False)
+    costPerson = models.ForeignKey(Person, verbose_name='Schuldner', related_name='report_cost_person',
+                                   help_text='Wer ist der Schuldner?', blank=False)
+    group = models.ForeignKey(Group, verbose_name='Gruppe',
+                              help_text="Zuordnung der Ausgabe zu einer Gruppe, kann nicht geaendert werden.",
+                              related_name='report_group', blank=False)
+    expense = models.ForeignKey(Expense, blank=False)
+    cost = models.FloatField(blank=False, verbose_name="Ausgabe", help_text="Wert der Ausgabe")
+    payed = models.BooleanField(default=0, blank=False)
+
+    def __str__(self):  # __unicode__ on Python 2
+        return self.expense

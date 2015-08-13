@@ -1,0 +1,35 @@
+{% extends "wzw/base.html" %}
+
+{% block title %}{{ block.super }} - {{ group.name }} {% endblock %}
+{% block homeurl %} # {% endblock %}
+
+{% block content %}
+    <div class="container marketing">
+        <div class="jumbotron">
+
+            <h2 class="orange">Ausgabenübersicht</h2>
+            {% if report %}
+                <table class="table table-striped">
+                    <tr>
+                        <th>Schuldner</th>
+                        <th>Besitzer</th>
+                        <th>Kosten</th>
+                        <th>bezahlt</th>
+                        <th>Kosten</th>
+                    </tr>
+                    {% for r in report %}
+                        <tr>
+                            <td>{{ r.costPerson }}</td>
+                            <td>{{ r.owner }}</td>
+                            <td>{{ r.cost }}</td>
+                            <td>{{ r.payed }}</td>
+                            <td>{{ r.expense.name }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p class="left">Sie haben noch keine Ausgabe erstellt.</p>
+            {% endif %}
+        </div> <!-- End jumbotron -->
+    </div> <!-- End container marketing -->
+{% endblock %}

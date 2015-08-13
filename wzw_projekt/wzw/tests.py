@@ -23,6 +23,37 @@ class GroupTests(TestCase):
         self.assertTrue(re.match("^([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}$)", token))
 
 
+class PersonTests(TestCase):
+
+    def setUp(self):
+        Group.objects.create(name='Gruppe')
+        Group.objects.create(name='Gruppe2')
+
+    def test_createPerson(self):
+        '''
+        Person erstellen
+        testen ob Name und Gruppe richtig sind
+        '''
+        group = Group.objects.get(name='Gruppe')
+        p1 = Person.objects.create(name='Stefan', group=group)
+        self.assertEquals(p1.name, 'Stefan')
+        self.assertEquals(p1.group, group)
+
+    def test_personGroup(self):
+        '''
+        testen ob Personen den Gruppen zugeordnet werden konnten
+        '''
+        group1 = Group.objects.get(name='Gruppe')
+        group2 = Group.objects.get(name='Gruppe2')
+
+        Person.objects.create(name='Stefan', group=group1)
+        Person.objects.create(name='Stefan2', group=group1)
+        Person.objects.create(name='Stefan', group=group2)
+
+        self.assertEquals(Person.objects.filter(group=group1).count(), 2)
+        self.assertEquals(Person.objects.filter(group=group2).count(), 1)
+
+
 class ReportTests(TestCase):
     def test_Report_Even(self):
         """

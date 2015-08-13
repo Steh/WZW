@@ -12,10 +12,24 @@
             <p>Bevor es los geht, kannst du hier noch einen Gruppennamen und eine kurze Beschreibung eintragen.</p>
             <p>(geht aber auch ohne)</p>
 
-            <form id="new_expense" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input class="btn btn-lg btn-success" type="submit" value="weiter" name="create_group"/>
+            <form id="new_expense" method="post" class="form-horizontal">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                        <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+                             <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                name="{{ field.label }}"
+                                id="{{ field.name }}"
+                                value="{{ field.name }}" >
+                             {{ field }}
+                            <p class="help-text">{{ field.help_text }} </p>
+                           </div>
+                    </div>
+                    {% endfor %}
+                    <input class="btn btn-lg btn-success" type="submit" value="weiter" name="create_group"/>
+                    </div>
             </form>
         </div>
     </div>
