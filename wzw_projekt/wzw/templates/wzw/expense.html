@@ -18,14 +18,13 @@
                         <th>Details</th>
                     </tr>
                     {% for e in expense %}
-                        <tr>
+                        <tr class='clickable-row' data-href="/group/{{ group.token }}/expense/{{ e.id }}/">
                             <td>{{ e.name }}</td>
                             <td>{{ e.owner }}</td>
                             <td>{{ e.cost }}</td>
                             <td>{{ e.debitDate }}</td>
                             <td>
                                 <a href="\group\{{ group.token }}/expense/{{ e.id }}/" class="btl btn-lg btn-success">Details</a>
-                            </td>
                             </td>
                         </tr>
                     {% endfor %}

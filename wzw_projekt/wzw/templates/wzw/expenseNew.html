@@ -10,7 +10,6 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    {% if person %}
                         {% if form %}
                             <form id="new_expense" method="post">
                                 {% csrf_token %}
@@ -18,9 +17,6 @@
                                 <input class="btn btn-lg btn-success" type="submit" value="Ausgabe erstellen" name="new_expense"/>
                             </form>
                         {% endif %}
-                    {% else %}
-                        <p>Du musst erst eine Person <a href="/group/{{ group.token }}/person/new">hier</a> erstellen um Ausgaben erfassen zu können.</p>
-                    {% endif %}
                 </div>
             </div>
         </div>

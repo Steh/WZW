@@ -167,24 +167,26 @@ class Expense(models.Model):
     name = models.CharField(max_length=64,
                             blank=False,
                             verbose_name='Name',
-                            help_text="Name der Ausgabe.")
+                            help_text="Aussagekraeftiger Name")
     description = models.CharField(max_length=256,
                                    blank=True,
                                    verbose_name='Beschreibung',
-                                   help_text="Beschreibung der Ausgabe (optional)")
+                                   help_text="Beschreibung der Ausgabe")
     owner = models.ForeignKey(Person,
                               related_name='costOwner',
                               verbose_name='Besitzer',
                               help_text='Wer hat das Geld ausgelegt?')
     group = models.ForeignKey(Group,
                               verbose_name='Gruppe',
+                              blank=False,
                               help_text="Zuordnung der Ausgabe zu einer Gruppe, kann nicht geaendert werden.")
     createDate = models.DateField(default=timezone.now,
                                   verbose_name='Erstellungsdatum',
-                                  help_text="Gibt an wann die Ausgabe erstellt wurde.")
-    debitDate = models.DateField(blank=True,
-                                 default=timezone.now,
-                                 verbose_name='Datum der Zahlung')
+                                  help_text="Gibt an wann die Ausgabe erstellt wurde.",
+                                  blank=True,)
+    debitDate = models.DateField(default=timezone.now,
+                                 verbose_name='Datum der Zahlung',
+                                 blank=True,)
     costPersons = models.ManyToManyField(Person,
                                          blank=False,
                                          verbose_name='Teilhaber',
@@ -195,7 +197,7 @@ class Expense(models.Model):
 
     # Rueckgabewert bei aufruf des Objekts
     def __str__(self):  # __unicode__ on Python 2
-        return self.id
+        return self.name
 
 
 class Report(models.Model):

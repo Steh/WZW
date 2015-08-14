@@ -31,6 +31,12 @@ class ExpenseForm(forms.ModelForm):
         widgets = {'group': forms.HiddenInput()}
         exclude = {'createDate'}
 
+    # Function to set scope for expense
+    def set_person_scope(self, grouptoken):
+        person = Person.objects.filter(group=grouptoken)
+        self.fields['costPersons'].queryset = person
+        self.fields['owner'].queryset = person
+
 
 # Formular zum Anlegen einer Person
 class PersonForm(forms.ModelForm):

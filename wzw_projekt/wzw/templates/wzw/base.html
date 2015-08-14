@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     {% load staticfiles %}
+
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "css/basis.css" %}" rel="stylesheet">
 
@@ -38,14 +39,14 @@
                     </li>
                     <li><a href="/group/{{ group.token }}/person" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Person<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/group/{{ group.token }}/person/new">Person hinzufügen</a></li>
                             <li><a href="/group/{{ group.token }}/person/">Person anzeigen</a></li>
+                            <li><a href="/group/{{ group.token }}/person/new">Person hinzufügen</a></li>
                         </ul>
                     </li>
                     <li><a href="/group/{{ group.token }}/expense" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ausgaben<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/group/{{ group.token }}/expense/new">Ausgaben hinzufügen</a></li>
                             <li><a href="/group/{{ group.token }}/expense/">Ausgaben anzeigen</a></li>
+                            <li><a href="/group/{{ group.token }}/expense/new">Ausgaben hinzufügen</a></li>
                         </ul>
                     </li>
                     <li><a href="/group/{{ group.token }}/expense" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Report<span class="caret"></span></a>

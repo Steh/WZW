@@ -1,0 +1,19 @@
+{% extends "wzw/base.html" %}
+
+{% block title %}{{ block.super }} - {{ group.name }} {% endblock %}
+{% block homeurl %} # {% endblock %}
+
+{% block content %}
+    <div class="container marketing">
+        <div class="jumbotron">
+            <h1>Ausgabe</h1>
+            <h2>L&ouml;schen</h2>
+            <h3>Wirklich l&ouml;schen?</h3>
+            <form method="post">
+                {% csrf_token %}
+                <input class="btn btn-lg btn-success glyphicon glyphicon-save" type="submit" value="Ja"/>
+            </form>
+            <button class="btn btn-lg btn-success"><a href="/group/{{ group.token }}/expense/{{ expense.id }}/"> Nein</a></button>
+        </div>
+    </div>
+{% endblock %}

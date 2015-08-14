@@ -5,9 +5,7 @@ from django.contrib import admin
 
 from wzw.views import GroupView, GroupIndexView, NewGroupView, EditGroupView, \
     PersonView, NewPersonView, DeletePersonView, EditPersonView, \
-    ExpenseView, NewExpenseView, DeleteExpenseView, EditExpenseView, \
-    IndexView, ImpressumView, AboutView, ReportView, ExpenseViewDetails, ExpenseViewEdit
-
+    ExpenseView, NewExpenseView, IndexView, ImpressumView, AboutView, ReportView, ExpenseViewDetails, ExpenseViewEdit, ExpenseViewDelete
 
 urlpatterns = [
 
@@ -56,20 +54,17 @@ urlpatterns = [
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/new$',
         NewExpenseView.as_view(),
         name='expense-new',),
-    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/edit$',
-        EditExpenseView.as_view(),
-        name='expense-edit',),
-    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/delete$',
-        DeleteExpenseView.as_view(),
-        name='expense-delete',),
 
-    # AUSGABEN VIEW Details
     url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/([0-9]+)/$',
         ExpenseViewDetails.as_view(),
         name='expense-details-id',),
 
-    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/([0-9]+)/edit$',
+    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/([0-9]+)/edit/$',
         ExpenseViewEdit.as_view(),
+        name='expense-details-id',),
+
+    url(r'^group/([0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4}[-][0-9a-zA-Z]{4})/expense/([0-9]+)/delete/$',
+        ExpenseViewDelete.as_view(),
         name='expense-details-id',),
 
     # REPORT VIEW

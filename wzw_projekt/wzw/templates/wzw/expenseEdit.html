@@ -8,19 +8,14 @@
         <div class="jumbotron">
             <h1>Ausgabe</h1>
 
-            <h2>Ausgabe erfassen</h2>
-
-            {% if expense %}
+            <h2>Ausgabe bearbeiten</h2>
                 <form id="edit_expense" method="post">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {{ form.as_ul }}
                     <input type='text' value="{{ expense.id }}" name="expense_id" id="expense_id" hidden="true"/>
-                    <input class="btn btn-lg btn-success" type="submit" value="Ausgabe erstellen"
-                           name="apply_edit_expense"/>
+                    <input class="btn btn-lg btn-success glyphicon glyphicon-save" type="submit" value="Speichern" name="apply_edit_expense"/>
                 </form>
-            {% else %}
-                <p>Du musst erst eine Personen erstellen um Ausgaben zu erfassen.</p>
-            {% endif %}
+                <button class="btn btn-lg btn-success glyphicon glyphicon-arrow-left"><a href="/group/{{ group.token }}/expense/{{ expense.id }}/"> Zur&uuml;ck</a></button>
         </div>
     </div>
 
